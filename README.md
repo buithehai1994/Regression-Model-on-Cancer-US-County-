@@ -13,7 +13,7 @@ This project aims to predict cancer mortality rates in US counties using machine
   - `EXPERIMENT REPORT - Part A`
   - `EXPERIMENT REPORT - Part B`
   - `EXPERIMENT REPORT - Part C`
-- `FINAL REPORT`: Contains final report in Word format for the project.
+- `FINAL REPORT - Part D`: Contains final report in Word format for the project.
 - `README.md`: Overview of the project (this file).
 
 ## Instructions:
