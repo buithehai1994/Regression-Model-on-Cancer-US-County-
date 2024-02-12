@@ -16,7 +16,7 @@ import re
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 
-from streamlit_app import app, tab_df,tab_eda
+import tab_df,tab_eda
 from tab_eda.display import display_summary_statistics,display_info,display_missing_values
 
 # Set Python path
