@@ -15,12 +15,13 @@ import dataprep
 import re
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
-from tab_eda.display import display_summary_statistics,display_info,display_missing_values
 
 # Set Python path
 current_dir = os.path.dirname(__file__)
 parent_dir = str(Path(current_dir).resolve().parents[0])
 sys.path.append(parent_dir)
+
+from tab_eda.display import display_summary_statistics,display_info,display_missing_values
 
 from sklearn.linear_model import LinearRegression
 
