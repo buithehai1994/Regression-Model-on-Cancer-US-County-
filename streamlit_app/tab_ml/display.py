@@ -7,44 +7,31 @@ import seaborn as sns
 import pandas as pd
 from sklearn.metrics import roc_curve, roc_auc_score
 from sklearn.metrics import auc
+from sklearn.metrics import mean_squared_error as mse
+from sklearn.metrics import mean_absolute_error as mae
 
 def display_baseline_metrics(y_train):
     ml = ML()
-    baseline_accuracy = ml.calculate_baseline_metrics(y_train)
-    st.write(f"Baseline Accuracy: {baseline_accuracy}")
-
-def display_model_metrics(x,y,model,average='weighted'):
-    """
-        Display the evaluation metrics.
-
-        Parameters:
-        - y: tartet
-        - x: variable
-        - model: model name
-        """
-    y_pred=model.predict(x)
-    accuracy=accuracy_score(y,y_pred)
-    
-    st.write("Evaluation Metrics:")
-    st.write(f"Accuracy: {accuracy:.4f}")
-    scores = precision_recall_fscore_support(y, y_pred, average)
-
-    st.write("Scores (precision, recall, F1 score):", scores[:3])
+    baseline_model = ml.calculate_baseline_metrics(y_train)
+    return baseline_model
 
 
-def metric(model,X_train,X_test,X_val,y_train,y_test,y_val):
+def display_model_metrics(model, X_train, X_test, y_train, y_test):
     # Load model
-    ml=ML()
+    ml = ML()
     ml.load_model(model)
-    metrics_accuracy_training=ml.calculate_accuracy(X_train,y_train)
-    metrics_accuracy_testing=ml.calculate_accuracy(X_test,y_test)
-    metrics_accuracy_validation=ml.calculate_accuracy(X_val,y_val)
+    
+    # Calculate metrics for training, testing, and validation datasets
+    metrics_training = ml.calculate_model_metrics(X_train, y_train)
+    metrics_testing = ml.calculate_model_metrics(X_test, y_test)
 
     # Create a DataFrame with all metrics
     metrics_data = {
         'Dataset': ['Training', 'Testing'],
-        'Accuracy': [metrics_accuracy_training, metrics_accuracy_testing]
-        }
+        'MSE': [metrics_training["MSE score"], metrics_testing["MSE score"]],
+        'MAE': [metrics_training["MAE score"], metrics_testing["MAE score"]]
+    }
+
     # Display all metrics in one table
-    st.write("Metrics for Training and Testing")
+    st.write("Metrics for Training, Testing")
     st.table(pd.DataFrame(metrics_data))
