@@ -22,6 +22,10 @@ parent_dir = str(Path(current_dir).resolve().parents[0])
 sys.path.append(parent_dir)
 
 from tab_eda.display import display_summary_statistics,display_info,display_missing_values
+from tab_encoding.display import display_tab_df_encoding_explain, display_correlation_encoding_heatmap
+from tab_encoding.logics import Encoding
+from tab_ml.logics import ML
+from tab_ml.display import display_baseline_metrics,display_model_metrics,display_line_chart,display_scatter_chart,display_chart
 
 from sklearn.linear_model import LinearRegression
 
@@ -71,6 +75,16 @@ def remove_hyperlinks(html_content):
 
 data_from_tab_df = dataset
 
+
+def perform_encoding():
+    encoding = Encoding(data=data_from_tab_df)
+    data_for_ml = encoding.label_encoding()
+    return data_for_ml
+    
+data_for_ml = perform_encoding()
+
+y=data_for_ml['TARGET_deathRate'].values
+
   # Display content based on selected sidebar tab
 if selected_tab =="Introduction":
     pass
@@ -102,7 +116,56 @@ elif selected_tab == "EDA":
         st.write(f'<iframe src="{external_url}" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>', unsafe_allow_html=True)
         
 elif selected_tab == "Machine Learning Model":
-    pass
+    sub_tab_titles=["Univariate", "Multvariate", "Multivariate with Feature Enginnering"]
+    
+    selected_sub_tab = st.sidebar.radio("Dataset", sub_tab_titles)
+    
+    if selected_sub_tab ==sub_tab_titles[0]:
+        sub_sub_tab_titles=["povertyPercent", "medIncome"]
+        selected_sub_tab = st.sidebar.radio("Dataset", sub_tab_titles)
+        
+        if selected_sub_tab ==sub_sub_tab_titles[0]:
+            X=data_for_ml['povertyPercent'].values
+            y=data_for_ml['TARGET_deathRate'].values
+
+            ml_instance = ML()
+            # Call the split_data method to split your data into training and testing sets
+            X_train, X_test, y_train, y_test = ml_instance.split_data(X, y)
+
+            #calculate baseline
+            y_base = np.full(y_train.shape, y_mean)
+            mse_score=mse(y_train, y_base, squared=True)
+            mae_score=mae(y_train, y_base)
+            st.write("MSE of Baseline: ", mse_score)
+            st.write("MAE of Baseline: ", mae_score)
+
+            reg = LinearRegression()
+            reg.fit(X_train.reshape(-1, 1), y_train)
+            y_train_preds = reg.predict(X_train.reshape(-1, 1))
+            y_test_preds = reg.predict(X_test.reshape(-1, 1))
+            
+            st.write("Training chart")
+            display_chart(X_train,y_train_preds)
+
+            st.write("Testing chart")
+            display_chart(X_test,y_test_preds)
+            
+        if selected_sub_tab ==sub_sub_tab_titles[1]:
+            X=data_for_ml['medIncome'].values
+            y=data_for_ml['TARGET_deathRate'].values
+            
+            ml_instance = ML()
+            # Call the split_data method to split your data into training and testing sets
+            X_train, X_test, y_train, y_test = ml_instance.split_data(X, y)
+
+            #calculate baseline
+            y_base = np.full(y_train.shape, y_mean)
+            mse_score=mse(y_train, y_base, squared=True)
+            mae_score=mae(y_train, y_base)
+            st.write("MSE of Baseline: ", mse_score)
+            st.write("MAE of Baseline: ", mae_score)
+            
+            
 elif selected_tab == "Ethical Consideration":
     pass
 elif selected_tab == "References":
