@@ -83,19 +83,19 @@ eda = EDA(data_from_tab_df)
 
   # Display content based on selected sidebar tab
 if selected_tab =="Introduction":
-  pass
+    pass
 elif selected_tab == "Data":
-  pass
+    pass
 elif selected_tab == "EDA":
-  pass
+    pass
 elif selected_tab == "Machine Learning Model":
     pass
 elif selected_tab == "Ethical Consideration":
-  pass
+    pass
 elif selected_tab == "References":
-  pass
+    pass
 elif selected_tab == "GitHub":
-  pass
+    pass
 
 
 
