@@ -38,21 +38,22 @@ class ML:
 
     def calculate_model_metrics(self, X, y):
 
-         # Ensure X is a DataFrame and y is a Series
+        # Ensure X is a DataFrame and y is a Series
         if isinstance(X, pd.DataFrame):
             X = X.values  # Convert X to a NumPy array
         if isinstance(y, pd.DataFrame):
             y = y.squeeze()
-
+    
         if self.trained_model is None:
             raise ValueError("Model not loaded. Please load the model first.")
-
+    
         # Use the loaded model for predictions and evaluation
         predictions = self.trained_model.predict(X)
-
-        scores = precision_recall_fscore_support(y, predictions, average='weighted')
-
-        return "precision, recall, F1 score:", scores
+    
+        mse_score = mse(y, predictions, squared=True)
+        mae_score = mae(y, predictions)
+    
+        return {"MSE score": mse_score, "MAE score": mae_score}
 
     def calculate_baseline_metrics(self, y):
         # Convert y to a Pandas Series if it's a DataFrame
