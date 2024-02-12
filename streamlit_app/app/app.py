@@ -67,7 +67,7 @@ def remove_hyperlinks(html_content):
     # Remove anchor tags (<a>) from the HTML content
     return re.sub(r'<a\s+(?:[^>]*?\s+)?href="([^"]*)"[^>]*>', r'<span>\1</span>', html_content)
 
-data_from_tab_df = pd.DataFrame(dataset.data)
+data_from_tab_df = dataset
 
 eda = EDA(data_from_tab_df)
 
