@@ -75,7 +75,8 @@ eda = EDA(data_from_tab_df)
 if selected_tab =="Introduction":
     pass
 elif selected_tab == "Data":
-    pass
+    st.sidebar.header("Data")
+    st.write(dataset.head_df())
 elif selected_tab == "EDA":
     pass
 elif selected_tab == "Machine Learning Model":
