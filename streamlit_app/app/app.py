@@ -69,8 +69,6 @@ def remove_hyperlinks(html_content):
 
 data_from_tab_df = dataset
 
-eda = EDA(data_from_tab_df)
-
   # Display content based on selected sidebar tab
 if selected_tab =="Introduction":
     pass
