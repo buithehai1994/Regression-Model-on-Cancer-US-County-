@@ -16,6 +16,8 @@ import re
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 
+from tab_eda.display import display_summary_statistics,display_info,display_missing_values
+
 # Set Python path
 current_dir = os.path.dirname(__file__)
 parent_dir = str(Path(current_dir).resolve().parents[0])
@@ -76,7 +78,29 @@ elif selected_tab == "Data":
     st.sidebar.header("Data")
     st.write(dataset.head())
 elif selected_tab == "EDA":
-    pass
+    st.sidebar.header("EDA")
+ 
+    # Create sub-tabs for EDA section
+    tab_titles = ["Summary Statistics", "Plots"]
+    selected_sub_tab = st.sidebar.radio("Sub-navigation",tab_titles)
+
+    if selected_sub_tab == tab_titles[0]:
+        st.header(f"Summary Statistics")
+        # Create sub-sub-tabs for Correlation
+        sub_tab_titles=["Summary", "Info", "Missing Values"]
+        selected_sub_sub_tab = st.sidebar.radio("Dataset", sub_tab_titles)
+        if selected_sub_sub_tab ==sub_tab_titles[0]:
+            display_summary_statistics(data_from_tab_df)
+        elif selected_sub_sub_tab== sub_tab_titles[1]:
+            display_info(data_from_tab_df) 
+        else:
+            display_missing_values(data_from_tab_df)
+    if selected_sub_tab == tab_titles[1]:
+        # https://buithehaiuts.github.io/repurchase-car/report.html
+        external_url="https://htmlpreview.github.io/?https://github.com/buithehai1994/Regression-Model-on-Cancer-US-County-/streamlit_app/app/eda_report.html"
+        # Render the external content in an iframe
+        st.write(f'<iframe src="{external_url}" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>', unsafe_allow_html=True)
+        
 elif selected_tab == "Machine Learning Model":
     pass
 elif selected_tab == "Ethical Consideration":
