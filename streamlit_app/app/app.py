@@ -55,8 +55,8 @@ selected_tab = st.sidebar.radio("Navigation", ["Introduction", "Data", "EDA","En
 # Get the current directory of the script
 current_dir = os.path.dirname(__file__)
 
-training_set_path=Path(__file__).resolve().parent.parent / "Dataset" / "cancer_us_county-training.csv"
-testing_set_path=Path(__file__).resolve().parent.parent / "Dataset" / "cancer_us_county-testing.csv"
+training_set_path=Path(__file__).resolve().parent.parent.parent  / "Dataset" / "cancer_us_county-training.csv"
+testing_set_path=Path(__file__).resolve().parent.parent.parent  / "Dataset" / "cancer_us_county-testing.csv"
 
 df_train=pd.read_csv(training_set_path)
 df_test=pd.read_csv(testing_set_path)
