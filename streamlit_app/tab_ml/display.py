@@ -35,3 +35,30 @@ def display_model_metrics(model, X_train, X_test, y_train, y_test):
     # Display all metrics in one table
     st.write("Metrics for Training, Testing")
     st.table(pd.DataFrame(metrics_data))
+
+def display_line_chart(X,y_preds):
+    line_chart = alt.Chart(pd.DataFrame({'x':X, 'y': y_preds})).mark_line(opacity=1, color='blue').encode(
+    x='x',
+    y='y'
+  )
+    return line_chart
+
+def display_scatter_chart(X,y_preds):
+    scatter_chart = alt.Chart(pd.DataFrame({'x':X, 'y': y_preds})).mark_circle(opacity=1, color='red').encode(
+        x='x',
+        y='y'
+      )
+    return scatter_chart
+
+def display_chart(X,y_preds):
+    line_chart = alt.Chart(pd.DataFrame({'x':X, 'y': y_preds})).mark_line(opacity=1, color='blue').encode(
+    x='x',
+    y='y')
+
+    scatter_chart = alt.Chart(pd.DataFrame({'x':X, 'y': y_preds})).mark_circle(opacity=1, color='red').encode(
+        x='x',
+        y='y'
+      )
+
+    chart= line_chart+scatter_chart
+    return chart
