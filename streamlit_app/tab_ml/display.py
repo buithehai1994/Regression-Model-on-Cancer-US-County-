@@ -78,6 +78,7 @@ def display_chart(X,y,y_preds):
     st.altair_chart(chart, use_container_width=True)
 
 def display_multi_variate_chart(X, y, y_preds):
+    y_preds = y_preds.values.ravel()
     # Create DataFrame for line chart
     line_df = pd.DataFrame({'x': X, 'y': y_preds})
 
