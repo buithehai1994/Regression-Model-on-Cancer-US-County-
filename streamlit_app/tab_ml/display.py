@@ -9,6 +9,7 @@ from sklearn.metrics import roc_curve, roc_auc_score
 from sklearn.metrics import auc
 from sklearn.metrics import mean_squared_error as mse
 from sklearn.metrics import mean_absolute_error as mae
+import altair as alt
 
 def display_baseline_metrics(y_train):
     ml = ML()
