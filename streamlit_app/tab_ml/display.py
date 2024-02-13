@@ -41,8 +41,8 @@ def display_line_chart(X,y_preds):
     line_chart = alt.Chart(pd.DataFrame({'x':X, 'y': y_preds})).mark_line(opacity=1, color='blue').encode(
     x='x',
     y='y').properties(
-        height=300,  # Adjust the height as desired
-        width=500    # Adjust the width as desired
+        height=500,  # Adjust the height as desired
+        width=300    # Adjust the width as desired
     )
 
     st.altair_chart(line_chart, use_container_width=True)
@@ -52,8 +52,8 @@ def display_scatter_chart(X,y):
         x='x',
         y='y'
       ).properties(
-        height=300,  # Adjust the height as desired
-        width=500    # Adjust the width as desired
+        height=500,  # Adjust the height as desired
+        width=300    # Adjust the width as desired
     )
 
     st.altair_chart(scatter_chart, use_container_width=True)
@@ -62,16 +62,16 @@ def display_chart(X,y,y_preds):
     line_chart = alt.Chart(pd.DataFrame({'x':X, 'y': y_preds})).mark_line(opacity=1, color='blue').encode(
     x='x',
     y='y').properties(
-        height=300,  # Adjust the height as desired
-        width=500    # Adjust the width as desired
+        height=500,  # Adjust the height as desired
+        width=300    # Adjust the width as desired
     )
 
     scatter_chart = alt.Chart(pd.DataFrame({'x':X, 'y': y})).mark_circle(opacity=1, color='red').encode(
         x='x',
         y='y'
       ).properties(
-        height=300,  # Adjust the height as desired
-        width=500    # Adjust the width as desired
+        height=500,  # Adjust the height as desired
+        width=300    # Adjust the width as desired
     )
 
     chart= line_chart+scatter_chart
