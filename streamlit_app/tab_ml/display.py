@@ -60,8 +60,8 @@ def display_scatter_chart(X,y):
 
 
 def display_chart(X, y, y_preds):
-    X = X.reshape(-1)
-    y = y.reshape(-1)
+    X = X.reshape(-1,1)
+    y = y.reshape(-1,1)
     y_preds = y_preds.reshape(-1)
     data = pd.DataFrame({'x': X, 'y': y, 'y_preds': y_preds})
     
