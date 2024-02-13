@@ -44,8 +44,8 @@ def display_line_chart(X,y_preds):
   )
     return line_chart
 
-def display_scatter_chart(X,y_preds):
-    scatter_chart = alt.Chart(pd.DataFrame({'x':X, 'y': y_preds})).mark_circle(opacity=1, color='red').encode(
+def display_scatter_chart(X,y):
+    scatter_chart = alt.Chart(pd.DataFrame({'x':X, 'y': y})).mark_circle(opacity=1, color='red').encode(
         x='x',
         y='y'
       )
@@ -56,7 +56,7 @@ def display_chart(X,y_preds):
     x='x',
     y='y')
 
-    scatter_chart = alt.Chart(pd.DataFrame({'x':X, 'y': y_preds})).mark_circle(opacity=1, color='red').encode(
+    scatter_chart = alt.Chart(pd.DataFrame({'x':X, 'y': y})).mark_circle(opacity=1, color='red').encode(
         x='x',
         y='y'
       )
