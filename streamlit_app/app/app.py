@@ -171,29 +171,47 @@ elif selected_tab == "Machine Learning Model":
             X = data_for_ml['medIncome'].values
             y = data_for_ml['TARGET_deathRate'].values
 
+
             ml_instance = ML()
             # Call the split_data method to split your data into training and testing sets
             X_train, X_test, y_train, y_test = ml_instance.split_data(X, y)
             
             # calculate baseline
             y_mean = y_train.mean()
-            y_base = np.full(y_train.reshape(-1,1), y_mean)
+            y_base = np.full(y_train.shape, y_mean)
             mse_score = mse(y_train, y_base, squared=True)
             mae_score = mae(y_train, y_base)
             st.write("MSE of Baseline: ", mse_score)
             st.write("MAE of Baseline: ", mae_score)
 
+            st.write("    ")
+            st.write("    ")
+        
             reg = LinearRegression()
             reg.fit(X_train.reshape(-1,1), y_train)
             y_train_preds = reg.predict(X_train.reshape(-1,1))
-            y_test_preds = reg.predict(X_tes.reshape(-1,1))
+            y_test_preds = reg.predict(X_test.reshape(-1,1))
+
+            mse_train_score = mse(y_train, y_train_preds, squared=True)
+            mae_train_score = mae(y_train, y_train_preds)
+
+            mse_test_score = mse(y_test, y_test_preds, squared=True)
+            mae_test_score = mae(y_test, y_test_preds)
 
             st.write("Training chart")
             display_chart(y_train,y_train_preds)
 
+            st.write("MSE of Training: ", mse_train_score)
+            st.write("MAE of Training: ", mae_train_score)
+            st.write("    ")
+            st.write("    ")
+            
             st.write("Testing chart")
             display_chart(y_test,y_test_preds)
-            
+
+            st.write("MSE of Testing: ", mse_test_score)
+            st.write("MAE of Testing: ", mae_test_score)
+
     if selected_sub_tab == tab_titles[1]:
         encoding_2 = Encoding(data=data_for_ml)
         data_for_multivarate=encoding_2.multivarate_process()
