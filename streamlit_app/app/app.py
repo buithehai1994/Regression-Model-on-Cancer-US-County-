@@ -54,7 +54,7 @@ st.set_page_config(
 
 
 # Sidebar navigation for different sections
-selected_tab = st.sidebar.radio("Navigation", ["Introduction", "Data", "EDA", "Encoding", "Machine Learning Model", "Feature Importance", "Deployment", "Ethical Consideration", "References", "GitHub"], key="navigation")
+selected_tab = st.sidebar.radio("Navigation", ["Introduction", "Data", "EDA", "Encoding", "Machine Learning Model", "Feature Importance", "Deployment", "Ethical Consideration", "References", "GitHub"])
 
 # Load data from "Data" tab
 # Get the current directory of the script
