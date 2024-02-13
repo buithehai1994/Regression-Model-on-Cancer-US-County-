@@ -129,8 +129,9 @@ elif selected_tab == "Machine Learning Model":
             ml_instance = ML()
             # Call the split_data method to split your data into training and testing sets
             X_train, X_test, y_train, y_test = ml_instance.split_data(X, y)
-
+            
             # calculate baseline
+            y_mean = y_train.mean()
             y_base = np.full(y_train.shape, y_mean)
             mse_score = mse(y_train, y_base, squared=True)
             mae_score = mae(y_train, y_base)
