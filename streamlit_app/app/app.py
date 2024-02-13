@@ -54,8 +54,7 @@ st.set_page_config(
 
 
 # Sidebar navigation for different sections
-
-selected_tab = st.sidebar.radio("Navigation", ["Introduction", "Data", "EDA","Encoding", "Machine Learning Model","Feature Importance","Deployment","Ethical Consideration", "References","GitHub"])
+selected_tab = st.sidebar.radio("Navigation", ["Introduction", "Data", "EDA", "Encoding", "Machine Learning Model", "Feature Importance", "Deployment", "Ethical Consideration", "References", "GitHub"], key="navigation")
 
 # Load data from "Data" tab
 # Get the current directory of the script
@@ -85,7 +84,10 @@ data_for_ml = perform_encoding()
 
 y=data_for_ml['TARGET_deathRate'].values
 
-  # Display content based on selected sidebar tab
+selected_tab = st.sidebar.radio("Navigation", ["Introduction", "Data", "EDA", "Encoding", "Machine Learning Model", "Feature Importance", "Deployment", "Ethical Consideration", "References", "GitHub"], key="navigation")
+
+# Display content based on selected sidebar tab
+
 if selected_tab =="Introduction":
     pass
 elif selected_tab == "Data":
@@ -93,49 +95,49 @@ elif selected_tab == "Data":
     st.write(dataset.head())
 elif selected_tab == "EDA":
     st.sidebar.header("EDA")
- 
+
     # Create sub-tabs for EDA section
     tab_titles = ["Summary Statistics", "Plots"]
-    selected_sub_tab = st.sidebar.radio("Sub-navigation",tab_titles)
+    selected_sub_tab = st.sidebar.radio("Sub-navigation", tab_titles)
 
     if selected_sub_tab == tab_titles[0]:
         st.header(f"Summary Statistics")
         # Create sub-sub-tabs for Correlation
-        sub_tab_titles=["Summary", "Info", "Missing Values"]
+        sub_tab_titles = ["Summary", "Info", "Missing Values"]
         selected_sub_sub_tab = st.sidebar.radio("Dataset", sub_tab_titles)
-        if selected_sub_sub_tab ==sub_tab_titles[0]:
+        if selected_sub_sub_tab == sub_tab_titles[0]:
             display_summary_statistics(data_from_tab_df)
-        elif selected_sub_sub_tab== sub_tab_titles[1]:
-            display_info(data_from_tab_df) 
+        elif selected_sub_sub_tab == sub_tab_titles[1]:
+            display_info(data_from_tab_df)
         else:
             display_missing_values(data_from_tab_df)
     if selected_sub_tab == tab_titles[1]:
         # https://buithehaiuts.github.io/repurchase-car/report.html
-        external_url="https://htmlpreview.github.io/?https://github.com/buithehai1994/Regression-Model-on-Cancer-US-County-/blob/main/github_page/eda_report.html"
+        external_url = "https://htmlpreview.github.io/?https://github.com/buithehai1994/Regression-Model-on-Cancer-US-County-/blob/main/github_page/eda_report.html"
         # Render the external content in an iframe
         st.write(f'<iframe src="{external_url}" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>', unsafe_allow_html=True)
-        
+
 elif selected_tab == "Machine Learning Model":
-    sub_tab_titles=["Univariate", "Multvariate", "Multivariate with Feature Enginnering"]
-    
-    selected_sub_tab = st.sidebar.radio("Dataset", sub_tab_titles)
-    
-    if selected_sub_tab ==sub_tab_titles[0]:
-        sub_sub_tab_titles=["povertyPercent", "medIncome"]
-        selected_sub_tab = st.sidebar.radio("Dataset", sub_tab_titles)
-        
-        if selected_sub_tab ==sub_sub_tab_titles[0]:
-            X=data_for_ml['povertyPercent'].values
-            y=data_for_ml['TARGET_deathRate'].values
+    sub_tab_titles = ["Univariate", "Multvariate", "Multivariate with Feature Enginnering"]
+
+    selected_sub_tab = st.sidebar.radio("Dataset", sub_tab_titles, key="ml_sub_navigation")
+
+    if selected_sub_tab == sub_tab_titles[0]:
+        sub_sub_tab_titles = ["povertyPercent", "medIncome"]
+        selected_sub_tab = st.sidebar.radio("Dataset", sub_tab_titles, key="ml_sub_sub_navigation")
+
+        if selected_sub_tab == sub_sub_tab_titles[0]:
+            X = data_for_ml['povertyPercent'].values
+            y = data_for_ml['TARGET_deathRate'].values
 
             ml_instance = ML()
             # Call the split_data method to split your data into training and testing sets
             X_train, X_test, y_train, y_test = ml_instance.split_data(X, y)
 
-            #calculate baseline
+            # calculate baseline
             y_base = np.full(y_train.shape, y_mean)
-            mse_score=mse(y_train, y_base, squared=True)
-            mae_score=mae(y_train, y_base)
+            mse_score = mse(y_train, y_base, squared=True)
+            mae_score = mae(y_train, y_base)
             st.write("MSE of Baseline: ", mse_score)
             st.write("MAE of Baseline: ", mae_score)
 
@@ -143,35 +145,31 @@ elif selected_tab == "Machine Learning Model":
             reg.fit(X_train.reshape(-1, 1), y_train)
             y_train_preds = reg.predict(X_train.reshape(-1, 1))
             y_test_preds = reg.predict(X_test.reshape(-1, 1))
-            
+
             st.write("Training chart")
-            display_chart(X_train,y_train_preds)
+            display_chart(X_train, y_train_preds)
 
             st.write("Testing chart")
-            display_chart(X_test,y_test_preds)
-            
-        if selected_sub_tab ==sub_sub_tab_titles[1]:
-            X=data_for_ml['medIncome'].values
-            y=data_for_ml['TARGET_deathRate'].values
-            
+            display_chart(X_test, y_test_preds)
+
+        if selected_sub_tab == sub_sub_tab_titles[1]:
+            X = data_for_ml['medIncome'].values
+            y = data_for_ml['TARGET_deathRate'].values
+
             ml_instance = ML()
             # Call the split_data method to split your data into training and testing sets
             X_train, X_test, y_train, y_test = ml_instance.split_data(X, y)
 
-            #calculate baseline
+            # calculate baseline
             y_base = np.full(y_train.shape, y_mean)
-            mse_score=mse(y_train, y_base, squared=True)
-            mae_score=mae(y_train, y_base)
+            mse_score = mse(y_train, y_base, squared=True)
+            mae_score = mae(y_train, y_base)
             st.write("MSE of Baseline: ", mse_score)
             st.write("MAE of Baseline: ", mae_score)
-            
-            
+
 elif selected_tab == "Ethical Consideration":
     pass
 elif selected_tab == "References":
     pass
 elif selected_tab == "GitHub":
     pass
-
-
-
