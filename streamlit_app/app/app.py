@@ -268,14 +268,12 @@ elif selected_tab == "Machine Learning Model":
         mse_test_score = mse(y_test, y_test_preds, squared=True)
         mae_test_score = mae(y_test, y_test_preds)
 
-        y_train_preds=pd.DataFrame(y_train_preds)
-        y_train_preds=y_train_preds.rename(columns={0:"TARGET_deathRate_pred"})
-        y_train_preds = y_train_preds.reset_index(drop=True)
-        y_train=pd.DataFrame(y_train)
-        y_train = y_train.reset_index(drop=True)
+        y_train_preds = pd.Series(y_train_preds.flatten(), name='TARGET_deathRate_pred')
+        y_train = pd.Series(y_train.flatten(), name='TARGET_deathRate')
+        X_train_series = pd.Series(range(len(X_train)), name='index')
         
         st.write("Training chart")
-        display_multiple_chart(X_train,y_train,y_train_preds)
+        display_multiple_chart(X_train_series, y_train, y_train_preds)
 
         st.write("MSE of Training: ", mse_train_score)
         st.write("MAE of Training: ", mae_train_score)
@@ -283,14 +281,12 @@ elif selected_tab == "Machine Learning Model":
         st.write("    ")
 
 
-        y_test_preds=pd.DataFrame(y_test_preds)
-        y_test_preds=y_test_preds.rename(columns={0:"TARGET_deathRate_pred"})
-        y_test_preds = y_test_preds.reset_index(drop=True)
-        y_test=pd.DataFrame(y_test)
-        y_test = y_test.reset_index(drop=True)
+        y_test_preds = pd.Series(y_test_preds.flatten(), name='TARGET_deathRate_pred')
+        y_test = pd.Series(y_test.flatten(), name='TARGET_deathRate')
+        X_test_series = pd.Series(range(len(X_test)), name='index')
         
-        st.write("Testing chart")
-        display_multiple_chart(X_test,y_test,y_test_preds)
+        st.write("Training chart")
+        display_multiple_chart(X_test_series, y_test, y_test_preds)
 
         st.write("MSE of Testing: ", mse_test_score)
         st.write("MAE of Testing: ", mae_test_score)       
