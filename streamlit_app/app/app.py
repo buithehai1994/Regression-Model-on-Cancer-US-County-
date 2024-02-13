@@ -143,7 +143,7 @@ elif selected_tab == "Machine Learning Model":
             st.write("    ")
         
             reg = LinearRegression()
-            reg.fit(X_train.reshape(-1, 1), y_train)
+            reg.fit(X_train, y_train)
 
             y_train_preds = reg.predict(X_train)
             y_test_preds = reg.predict(X_test)
