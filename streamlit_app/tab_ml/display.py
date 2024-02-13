@@ -61,9 +61,9 @@ def display_scatter_chart(X,y):
 
 def display_chart(X, y, y_preds):
     X = X.reshape(-1,1)
-    y = y.reshape(-1,1)
-    y_preds = y_preds.reshape(-1)
-    data = pd.DataFrame({'x': X, 'y': y, 'y_preds': y_preds})
+    y = y.flatten()  # Flatten y to ensure it's 1D
+    y_preds = y_preds.flatten()  # Flatten y_preds to ensure it's 1D
+    data = pd.DataFrame({'x': X.flatten(), 'y': y, 'y_preds': y_preds})
     
     scatter_chart = alt.Chart(data).mark_circle(opacity=1, color='red').encode(
         x='x',
