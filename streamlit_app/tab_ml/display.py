@@ -59,7 +59,7 @@ def display_scatter_chart(X,y):
     st.altair_chart(scatter_chart, use_container_width=True)
 
 
-def display_chart(x,y,y_preds):
+def display_chart(X,y,y_preds):
     scatter_chart = alt.Chart(pd.DataFrame({'x':X, 'y': y})).mark_circle(opacity=1, color='red').encode(
     x='x',
     y='y')
