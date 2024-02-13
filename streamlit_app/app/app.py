@@ -264,7 +264,7 @@ elif selected_tab == "Machine Learning Model":
         y_test_preds = y_test_preds.reset_index(drop=True)
     
         st.write("Testing chart")
-        display_chart(X_test,y_test,y_test_preds)
+        display_multi_variate_chart(X_test,y_test,y_test_preds)
 
         st.write("MSE of Testing: ", mse_test_score)
         st.write("MAE of Testing: ", mae_test_score)       
