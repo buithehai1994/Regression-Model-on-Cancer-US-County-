@@ -31,8 +31,8 @@ class Encoding:
 
         self.data = self.data.copy()
         self.data=self.data.drop('PctSomeCol18_24',axis=1)
-        self.data['PctEmployed16_Over'] = self.data['PctEmployed16_Over'].fillna(data['PctEmployed16_Over'].mean())
-        self.data['PctPrivateCoverageAlone'] = self.data['PctPrivateCoverageAlone'].fillna(df['PctPrivateCoverageAlone'].mean())
+        self.data['PctEmployed16_Over'] = self.data['PctEmployed16_Over'].fillna(self.data['PctEmployed16_Over'].mean())
+        self.data['PctPrivateCoverageAlone'] = self.data['PctPrivateCoverageAlone'].fillna(self.data['PctPrivateCoverageAlone'].mean())
         return self.data
         
     @st.cache
