@@ -59,24 +59,16 @@ def display_scatter_chart(X,y):
     st.altair_chart(scatter_chart, use_container_width=True)
 
 
-def display_chart(y,y_preds):
-    perfect_test = alt.Chart(pd.DataFrame({'target': y, 'preds': y})).mark_line(color='green').encode(
-    x='target',
-    y='preds').properties(
-        height=600,  # Adjust the height as desired
-        width=400    # Adjust the width as desired
-    )
+def display_chart(x,y,y_preds):
+    scatter_chart = alt.Chart(pd.DataFrame({'x':X, 'y': y})).mark_circle(opacity=1, color='red').encode(
+    x='x',
+    y='y')
 
-
-    pred_chart_test = alt.Chart(pd.DataFrame({'target': y, 'preds': y_preds})).mark_circle(opacity=1, color='red').encode(
-        x='target',
-        y='preds'
-      ).properties(
-        height=600,  # Adjust the height as desired
-        width=400    # Adjust the width as desired
-    )
+    line_chart = alt.Chart(pd.DataFrame({'x':X, 'y': y_preds})).mark_line(opacity=1, color='blue').encode(
+        x='x',
+        y='y')
     
-    chart=pred_chart_test + perfect_test
+    chart=scatter_chart + line_chart
     st.altair_chart(chart, use_container_width=True)
 
 
