@@ -118,7 +118,7 @@ elif selected_tab == "Machine Learning Model":
     tab_titles = ["Univariate", "Multvariate", "Multivariate with Feature Enginnering"]
 
     selected_sub_tab = st.sidebar.radio("Dataset", tab_titles)
-
+    
     if selected_sub_tab == tab_titles[0]:
         sub_sub_tab_titles = ["povertyPercent", "medIncome"]
         selected_sub_sub_tab = st.sidebar.radio("Dataset", sub_sub_tab_titles)
@@ -193,6 +193,56 @@ elif selected_tab == "Machine Learning Model":
 
             st.write("Testing chart")
             display_chart(X_test,y_test,y_test_preds)
+            
+    if selected_sub_tab == tab_titles[1]:
+        X = data_for_ml.drop(['TARGET_deathRate','avgDeathsPerYear','avgAnnCount','popEst2015','povertyPercent','MedianAgeMale',
+'MedianAgeFemale','PctPrivateCoverage','PctPrivateCoverageAlone',
+'PctEmpPrivCoverage','PctPublicCoverage','PctPublicCoverageAlone','PctOtherRace','PctWhite','PctHS25_Over','PctEmployed16_Over',
+'PctBachDeg18_24','PctBlack','PctAsian','Id','PctBachDeg25_Over','PctMarriedHouseholds',
+           'PctUnemployed16_Over','PercentMarried','binnedInc','Geography'],axis=1)
+        y = data_for_ml['TARGET_deathRate'].values
+
+        ml_instance = ML()
+        # Call the split_data method to split your data into training and testing sets
+        X_train, X_test, y_train, y_test = ml_instance.split_data(X, y)
+        
+        # calculate baseline
+        y_mean = y_train.mean()
+        y_base = np.full(y_train.shape, y_mean)
+        mse_score = mse(y_train, y_base, squared=True)
+        mae_score = mae(y_train, y_base)
+        st.write("MSE of Baseline: ", mse_score)
+        st.write("MAE of Baseline: ", mae_score)
+
+        st.write("    ")
+        st.write("    ")
+    
+        reg = LinearRegression()
+        reg.fit(X_train.reshape(-1, 1), y_train)
+        y_train_preds = reg.predict(X_train.reshape(-1, 1))
+        y_test_preds = reg.predict(X_test.reshape(-1, 1))
+
+        mse_train_score = mse(y_train, y_train_preds, squared=True)
+        mae_train_score = mae(y_train, y_train_preds)
+
+        mse_test_score = mse(y_test, y_test_preds, squared=True)
+        mae_test_score = mae(y_test, y_test_preds)
+
+        st.write("Training chart")
+        display_chart(X_train,y_train,y_train_preds)
+
+        st.write("MSE of Training: ", mse_train_score)
+        st.write("MAE of Training: ", mae_train_score)
+        st.write("    ")
+        st.write("    ")
+        
+        st.write("Testing chart")
+        display_chart(X_test,y_test,y_test_preds)
+
+        st.write("MSE of Testing: ", mse_test_score)
+        st.write("MAE of Testing: ", mae_test_score)
+
+        
 
 elif selected_tab == "Ethical Consideration":
     pass
