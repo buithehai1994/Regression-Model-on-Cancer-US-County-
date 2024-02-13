@@ -139,6 +139,9 @@ elif selected_tab == "Machine Learning Model":
             st.write("MSE of Baseline: ", mse_score)
             st.write("MAE of Baseline: ", mae_score)
 
+            st.write("    ")
+            st.write("    ")
+        
             reg = LinearRegression()
             reg.fit(X_train.reshape(-1, 1), y_train)
             y_train_preds = reg.predict(X_train.reshape(-1, 1))
@@ -155,7 +158,9 @@ elif selected_tab == "Machine Learning Model":
 
             st.write("MSE of Training: ", mse_train_score)
             st.write("MAE of Training: ", mae_train_score)
-
+            st.write("    ")
+            st.write("    ")
+            
             st.write("Testing chart")
             display_chart(X_test,y_test,y_test_preds)
 
