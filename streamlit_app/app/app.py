@@ -195,16 +195,25 @@ elif selected_tab == "Machine Learning Model":
             display_chart(X_test,y_test,y_test_preds)
             
     if selected_sub_tab == tab_titles[1]:
-        X = data_for_ml.drop(['TARGET_deathRate','avgDeathsPerYear','avgAnnCount','popEst2015','povertyPercent','MedianAgeMale',
-'MedianAgeFemale','PctPrivateCoverage','PctPrivateCoverageAlone',
-'PctEmpPrivCoverage','PctPublicCoverage','PctPublicCoverageAlone','PctOtherRace','PctWhite','PctHS25_Over','PctEmployed16_Over',
-'PctBachDeg18_24','PctBlack','PctAsian','Id','PctBachDeg25_Over','PctMarriedHouseholds',
-           'PctUnemployed16_Over','PercentMarried','binnedInc','Geography'],axis=1)
-        y = data_for_ml['TARGET_deathRate'].values
-
+        encode=Encoding()
+        data=encode.multivarate_process()
+        
+        X = data.drop(['TARGET_deathRate'],axis=1)
+        y = data['TARGET_deathRate']
+        
         ml_instance = ML()
+        
         # Call the split_data method to split your data into training and testing sets
         X_train, X_test, y_train, y_test = ml_instance.split_data(X, y)
+
+        from sklearn.preprocessing import StandardScaler
+
+        # Initialize the scaler
+        scaler = StandardScaler()
+        
+        # Fit the scaler on the training data and transform both the training and testing data
+        X_train = scaler.fit_transform(X_train)
+        X_test = scaler.transform(X_test)
         
         # calculate baseline
         y_mean = y_train.mean()
