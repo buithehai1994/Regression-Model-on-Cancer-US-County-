@@ -118,15 +118,15 @@ elif selected_tab == "EDA":
         st.write(f'<iframe src="{external_url}" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>', unsafe_allow_html=True)
 
 elif selected_tab == "Machine Learning Model":
-    sub_tab_titles = ["Univariate", "Multvariate", "Multivariate with Feature Enginnering"]
+    tab_titles = ["Univariate", "Multvariate", "Multivariate with Feature Enginnering"]
 
-    selected_sub_tab = st.sidebar.radio("Dataset", sub_tab_titles, key="ml_sub_navigation")
+    selected_sub_tab = st.sidebar.radio("Dataset", tab_titles)
 
-    if selected_sub_tab == sub_tab_titles[0]:
-        sub_sub_tab_titles = ["povertyPercent", "medIncome"]
-        selected_sub_tab = st.sidebar.radio("Dataset", sub_tab_titles, key="ml_sub_sub_navigation")
+    if selected_sub_tab == tab_titles[0]:
+        sub_tab_titles = ["povertyPercent", "medIncome"]
+        selected_sub_tab = st.sidebar.radio("Dataset", sub_tab_titles)
 
-        if selected_sub_tab == sub_sub_tab_titles[0]:
+        if selected_sub_tab == sub_tab_titles[0]:
             X = data_for_ml['povertyPercent'].values
             y = data_for_ml['TARGET_deathRate'].values
 
@@ -152,7 +152,7 @@ elif selected_tab == "Machine Learning Model":
             st.write("Testing chart")
             display_chart(X_test, y_test_preds)
 
-        if selected_sub_tab == sub_sub_tab_titles[1]:
+        if selected_sub_tab == sub_tab_titles[1]:
             X = data_for_ml['medIncome'].values
             y = data_for_ml['TARGET_deathRate'].values
 
