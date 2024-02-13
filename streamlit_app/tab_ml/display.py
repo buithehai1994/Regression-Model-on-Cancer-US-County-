@@ -68,7 +68,7 @@ def display_chart(y,y_preds):
     )
 
 
-    pred_chart_test = alt.Chart(pd.DataFrame({'target': y, 'preds': y_preds})).mark_line().encode(
+    pred_chart_test = alt.Chart(pd.DataFrame({'target': y, 'preds': y_preds})).mark_circle(opacity=1, color='red').encode(
         x='target',
         y='preds'
       ).properties(
