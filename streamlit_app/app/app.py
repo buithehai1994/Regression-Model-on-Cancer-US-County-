@@ -171,7 +171,6 @@ elif selected_tab == "Machine Learning Model":
             X = data_for_ml['medIncome'].values
             y = data_for_ml['TARGET_deathRate'].values
 
-
             ml_instance = ML()
             # Call the split_data method to split your data into training and testing sets
             X_train, X_test, y_train, y_test = ml_instance.split_data(X, y)
