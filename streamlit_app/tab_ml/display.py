@@ -51,7 +51,7 @@ def display_scatter_chart(X,y):
       )
     return scatter_chart
 
-def display_chart(X,y_preds):
+def display_chart(X,y,y_preds):
     line_chart = alt.Chart(pd.DataFrame({'x':X, 'y': y_preds})).mark_line(opacity=1, color='blue').encode(
     x='x',
     y='y')
