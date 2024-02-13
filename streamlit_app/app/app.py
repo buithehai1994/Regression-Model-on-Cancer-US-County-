@@ -195,11 +195,15 @@ elif selected_tab == "Machine Learning Model":
             display_chart(X_test,y_test,y_test_preds)
             
     if selected_sub_tab == tab_titles[1]:
-        encode=Encoding(data)
-        data=encode.multivarate_process()
+        encoding_2 = Encoding(data=data_for_ml)
+        data_for_multivarate=encoding_2.multivarate_process()
         
-        X = data.drop(['TARGET_deathRate'],axis=1)
-        y = data['TARGET_deathRate']
+        X = data_for_multivarate.drop(['TARGET_deathRate','avgDeathsPerYear','avgAnnCount','popEst2015','povertyPercent','MedianAgeMale',
+            'MedianAgeFemale','PctPrivateCoverage','PctPrivateCoverageAlone',
+            'PctEmpPrivCoverage','PctPublicCoverage','PctPublicCoverageAlone','PctOtherRace','PctWhite','PctHS25_Over','PctEmployed16_Over',
+            'PctBachDeg18_24','PctBlack','PctAsian','Id','PctBachDeg25_Over','PctMarriedHouseholds',
+            'PctUnemployed16_Over','PercentMarried','binnedInc','Geography'],axis=1)
+        y = data_for_multivarate['TARGET_deathRate']
         
         ml_instance = ML()
         
