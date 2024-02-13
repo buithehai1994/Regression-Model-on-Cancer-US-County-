@@ -77,38 +77,3 @@ def display_chart(X,y,y_preds):
     chart= line_chart+scatter_chart
     st.altair_chart(chart, use_container_width=True)
 
-def display_multi_variate_chart(X, y, y_preds):
-    # Convert arrays to one-dimensional if they're not already
-    X = np.ravel(X)
-    y_preds = np.ravel(y_preds)
-    
-    # Create DataFrame for line chart
-    line_df = pd.DataFrame({'x': X, 'y': y_preds})
-
-    # Create DataFrame for scatter chart
-    scatter_df = pd.DataFrame({'x': X, 'y': y})
-
-    # Create line chart
-    line_chart = alt.Chart(line_df).mark_line(opacity=1, color='blue').encode(
-        x='x',
-        y='y'
-    ).properties(
-        height=600,
-        width=400
-    )
-
-    # Create scatter chart
-    scatter_chart = alt.Chart(scatter_df).mark_circle(opacity=1, color='red').encode(
-        x='x',
-        y='y'
-    ).properties(
-        height=600,
-        width=400
-    )
-
-    # Combine charts
-    chart = line_chart + scatter_chart
-
-    # Display combined chart
-    st.altair_chart(chart, use_container_width=True)
-
