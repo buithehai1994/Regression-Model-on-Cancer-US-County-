@@ -112,4 +112,3 @@ def display_multi_variate_chart(X, y, y_preds):
     # Display combined chart
     st.altair_chart(chart, use_container_width=True)
 
-
