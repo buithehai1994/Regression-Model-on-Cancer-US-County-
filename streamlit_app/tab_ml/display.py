@@ -41,7 +41,7 @@ def display_line_chart(X,y_preds):
     line_chart = alt.Chart(pd.DataFrame({'x':X, 'y': y_preds})).mark_line(opacity=1, color='blue').encode(
     x='x',
     y='y').properties(
-        height=500,  # Adjust the height as desired
+        height=600,  # Adjust the height as desired
         width=300    # Adjust the width as desired
     )
 
@@ -52,7 +52,7 @@ def display_scatter_chart(X,y):
         x='x',
         y='y'
       ).properties(
-        height=500,  # Adjust the height as desired
+        height=600,  # Adjust the height as desired
         width=300    # Adjust the width as desired
     )
 
@@ -62,7 +62,7 @@ def display_chart(X,y,y_preds):
     line_chart = alt.Chart(pd.DataFrame({'x':X, 'y': y_preds})).mark_line(opacity=1, color='blue').encode(
     x='x',
     y='y').properties(
-        height=500,  # Adjust the height as desired
+        height=600,  # Adjust the height as desired
         width=300    # Adjust the width as desired
     )
 
@@ -70,7 +70,7 @@ def display_chart(X,y,y_preds):
         x='x',
         y='y'
       ).properties(
-        height=500,  # Adjust the height as desired
+        height=600,  # Adjust the height as desired
         width=300    # Adjust the width as desired
     )
 
