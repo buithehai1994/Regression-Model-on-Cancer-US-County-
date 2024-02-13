@@ -78,4 +78,29 @@ def display_chart(X, y, y_preds):
     chart = scatter_chart + line_chart
     st.altair_chart(chart, use_container_width=True)
 
+def display_multiple_chart(X, y, y_preds):
+    # Flatten if X is 2D
+    if len(X.shape) > 1:
+        X = X.flatten()
+    
+    # Extract values from DataFrame if it's a DataFrame
+    if isinstance(y, pd.DataFrame):
+        y = y.values.flatten()
+    if isinstance(y_preds, pd.DataFrame):
+        y_preds = y_preds.values.flatten()
+    
+    data = pd.DataFrame({'x': X, 'y': y, 'y_preds': y_preds})
+    
+    scatter_chart = alt.Chart(data).mark_circle(opacity=1, color='red').encode(
+        x='x',
+        y='y'
+    )
+
+    line_chart = alt.Chart(data).mark_line(opacity=1, color='blue').encode(
+        x='x',
+        y='y_preds'
+    )
+    
+    chart = scatter_chart + line_chart
+    st.altair_chart(chart, use_container_width=True)
 
