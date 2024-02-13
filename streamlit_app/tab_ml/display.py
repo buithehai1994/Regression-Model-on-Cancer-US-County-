@@ -83,7 +83,7 @@ def display_multiple_chart(X, y, y_preds):
     if len(X) != len(y) or len(X) != len(y_preds):
         raise ValueError("Lengths of X, y, and y_preds must be the same")
     
-    data = pd.DataFrame({'x': X, 'y': y, 'y_preds': y_preds})
+    data = pd.DataFrame({'x': X[:, 0], 'y': y, 'y_preds': y_preds})  # Considering only the first feature for visualization
     
     scatter_chart = alt.Chart(data).mark_circle(opacity=1, color='red').encode(
         x='x',
@@ -95,5 +95,7 @@ def display_multiple_chart(X, y, y_preds):
         y='y_preds'
     )
     
+    chart = scatter_chart + line_chart
+    st.altair_chart(chart, use_container_width=True)
     chart = scatter_chart + line_chart
     st.altair_chart(chart, use_container_width=True)
