@@ -26,7 +26,7 @@ from tab_eda.display import display_summary_statistics,display_info,display_miss
 from tab_encoding.display import display_tab_df_encoding_explain, display_correlation_encoding_heatmap
 from tab_encoding.logics import Encoding
 from tab_ml.logics import ML
-from tab_ml.display import display_baseline_metrics,display_model_metrics,display_line_chart,display_scatter_chart,display_chart
+from tab_ml.display import display_baseline_metrics,display_model_metrics,display_line_chart,display_scatter_chart,display_chart,display_multi_variate_chart
 
 from sklearn.linear_model import LinearRegression
 
@@ -249,7 +249,7 @@ elif selected_tab == "Machine Learning Model":
         y_train_preds = y_train_preds.reset_index(drop=True)
         
         st.write("Training chart")
-        display_chart(X_train,y_train,y_train_preds)
+        display_multi_variate_chart(X_train,y_train,y_train_preds)
 
         st.write("MSE of Training: ", mse_train_score)
         st.write("MAE of Training: ", mae_train_score)
@@ -267,9 +267,7 @@ elif selected_tab == "Machine Learning Model":
         display_chart(X_test,y_test,y_test_preds)
 
         st.write("MSE of Testing: ", mse_test_score)
-        st.write("MAE of Testing: ", mae_test_score)
-
-        
+        st.write("MAE of Testing: ", mae_test_score)       
 
 elif selected_tab == "Ethical Consideration":
     pass
