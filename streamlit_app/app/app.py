@@ -123,10 +123,10 @@ elif selected_tab == "Machine Learning Model":
     selected_sub_tab = st.sidebar.radio("Dataset", tab_titles)
 
     if selected_sub_tab == tab_titles[0]:
-        sub_tab_titles = ["povertyPercent", "medIncome"]
-        selected_sub_tab = st.sidebar.radio("Dataset", sub_tab_titles)
+        sub_sub_tab_titles = ["povertyPercent", "medIncome"]
+        selected_sub_sub_tab = st.sidebar.radio("Dataset", sub_sub_tab_titles)
 
-        if selected_sub_tab == sub_tab_titles[0]:
+        if selected_sub_sub_tab == sub_sub_tab_titles[0]:
             X = data_for_ml['povertyPercent'].values
             y = data_for_ml['TARGET_deathRate'].values
 
@@ -152,7 +152,7 @@ elif selected_tab == "Machine Learning Model":
             st.write("Testing chart")
             display_chart(X_test, y_test_preds)
 
-        if selected_sub_tab == sub_tab_titles[1]:
+        if selected_sub_sub_tab == sub_sub_tab_titles[1]:
             X = data_for_ml['medIncome'].values
             y = data_for_ml['TARGET_deathRate'].values
 
