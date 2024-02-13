@@ -195,7 +195,7 @@ elif selected_tab == "Machine Learning Model":
             display_chart(X_test,y_test,y_test_preds)
             
     if selected_sub_tab == tab_titles[1]:
-        encode=Encoding()
+        encode=Encoding(data)
         data=encode.multivarate_process()
         
         X = data.drop(['TARGET_deathRate'],axis=1)
