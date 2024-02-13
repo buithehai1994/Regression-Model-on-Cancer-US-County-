@@ -26,7 +26,7 @@ from tab_eda.display import display_summary_statistics,display_info,display_miss
 from tab_encoding.display import display_tab_df_encoding_explain, display_correlation_encoding_heatmap
 from tab_encoding.logics import Encoding
 from tab_ml.logics import ML
-from tab_ml.display import display_baseline_metrics,display_model_metrics,display_line_chart,display_scatter_chart,display_chart,display_multi_variate_chart
+from tab_ml.display import display_baseline_metrics,display_model_metrics,display_line_chart,display_scatter_chart,display_chart,display_multi_variate_chart,display_chart
 
 from sklearn.linear_model import LinearRegression
 
@@ -154,7 +154,7 @@ elif selected_tab == "Machine Learning Model":
             mae_test_score = mae(y_test, y_test_preds)
 
             st.write("Training chart")
-            display_chart(X_train,y_train,y_train_preds)
+            display_chart(y_train,y_train_preds)
 
             st.write("MSE of Training: ", mse_train_score)
             st.write("MAE of Training: ", mae_train_score)
@@ -162,7 +162,7 @@ elif selected_tab == "Machine Learning Model":
             st.write("    ")
             
             st.write("Testing chart")
-            display_chart(X_test,y_test,y_test_preds)
+            display_chart(y_test,y_test_preds)
 
             st.write("MSE of Testing: ", mse_test_score)
             st.write("MAE of Testing: ", mae_test_score)
@@ -189,10 +189,10 @@ elif selected_tab == "Machine Learning Model":
             y_test_preds = reg.predict(X_tes.reshape(-1,1))
 
             st.write("Training chart")
-            display_chart(X_train,y_train,y_train_preds)
+            display_chart(y_train,y_train_preds)
 
             st.write("Testing chart")
-            display_chart(X_test,y_test,y_test_preds)
+            display_chart(y_test,y_test_preds)
             
     if selected_sub_tab == tab_titles[1]:
         encoding_2 = Encoding(data=data_for_ml)
@@ -242,7 +242,7 @@ elif selected_tab == "Machine Learning Model":
         mae_test_score = mae(y_test, y_test_preds)
         
         st.write("Training chart")
-        display_multi_variate_chart(y_train,y_train_preds)
+        display_chart(y_train,y_train_preds)
 
         st.write("MSE of Training: ", mse_train_score)
         st.write("MAE of Training: ", mae_train_score)
@@ -251,7 +251,7 @@ elif selected_tab == "Machine Learning Model":
 
     
         st.write("Testing chart")
-        display_multi_variate_chart(y_test,y_test_preds)
+        display_chart(y_test,y_test_preds)
 
         st.write("MSE of Testing: ", mse_test_score)
         st.write("MAE of Testing: ", mae_test_score)       
