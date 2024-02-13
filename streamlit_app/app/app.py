@@ -145,10 +145,10 @@ elif selected_tab == "Machine Learning Model":
             y_test_preds = reg.predict(X_test.reshape(-1, 1))
 
             st.write("Training chart")
-            display_chart(X_train,y_train, y_train_preds)
+            display_chart(X_train,y_train_preds)
 
             st.write("Testing chart")
-            display_chart(X_test,y_test, y_test_preds)
+            display_chart(X_test,y_test_preds)
 
         if selected_sub_sub_tab == sub_sub_tab_titles[1]:
             X = data_for_ml['medIncome'].values
