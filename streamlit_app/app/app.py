@@ -15,6 +15,7 @@ import dataprep
 import re
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
+import altair as alt
 
 # Set Python path
 current_dir = os.path.dirname(__file__)
