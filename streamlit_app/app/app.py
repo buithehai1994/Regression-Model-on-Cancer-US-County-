@@ -144,11 +144,23 @@ elif selected_tab == "Machine Learning Model":
             y_train_preds = reg.predict(X_train.reshape(-1, 1))
             y_test_preds = reg.predict(X_test.reshape(-1, 1))
 
+            mse_train_score = mse(y_train, y_train_preds, squared=True)
+            mae_train_score = mae(y_train, y_train_preds)
+
+            mse_test_score = mse(y_test, y_test_preds, squared=True)
+            mae_test_score = mae(y_test, y_test_preds)
+
             st.write("Training chart")
             display_chart(X_train,y_train,y_train_preds)
 
+            st.write("MSE of Training: ", mse_train_score)
+            st.write("MAE of Training: ", mae_train_score)
+
             st.write("Testing chart")
             display_chart(X_test,y_test,y_test_preds)
+
+            st.write("MSE of Testing: ", mse_test_score)
+            st.write("MAE of Testing: ", mae_test_score)
 
         if selected_sub_sub_tab == sub_sub_tab_titles[1]:
             X = data_for_ml['medIncome'].values
