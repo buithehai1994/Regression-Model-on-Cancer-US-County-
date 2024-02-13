@@ -141,9 +141,6 @@ elif selected_tab == "Machine Learning Model":
 
             st.write("    ")
             st.write("    ")
-
-            X_train = X_train.reshape(-1, 1)
-            X_test = X_test.reshape(-1, 1)
         
             reg = LinearRegression()
             reg.fit(X_train, y_train)
@@ -190,9 +187,6 @@ elif selected_tab == "Machine Learning Model":
             st.write("    ")
             st.write("    ")
 
-            X_train = X_train.reshape(-1, 1)
-            X_test = X_test.reshape(-1, 1)
-            
             reg = LinearRegression()
             reg.fit(X_train, y_train)
 
@@ -256,9 +250,6 @@ elif selected_tab == "Machine Learning Model":
         st.write("    ")
     
         reg = LinearRegression()
-        
-        X_train = X_train.reshape(-1, 1)
-        X_test = X_test.reshape(-1, 1)
         
         reg.fit(X_train, y_train)
         y_train_preds = reg.predict(X_train)
