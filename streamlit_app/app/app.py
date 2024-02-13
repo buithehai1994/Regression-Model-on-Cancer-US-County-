@@ -245,8 +245,8 @@ elif selected_tab == "Machine Learning Model":
         y_train_preds=y_train_preds.rename(columns={0:"TARGET_deathRate_pred"})
         y_train=pd.DataFrame(y_train)
         # Resetting the index of y_train and y_train_preds DataFrames
-        y_train = y_train.reset_index(drop=True)
-        y_train_preds = y_train_preds.reset_index(drop=True)
+        # y_train = y_train.reset_index(drop=True)
+        # y_train_preds = y_train_preds.reset_index(drop=True)
         
         st.write("Training chart")
         display_multi_variate_chart(X_train,y_train,y_train_preds)
@@ -260,8 +260,8 @@ elif selected_tab == "Machine Learning Model":
         y_test_preds=y_test_preds.rename(columns={0:"TARGET_deathRate_pred"})
         y_test=pd.DataFrame(y_test)
         # Resetting the index of y_train and y_train_preds DataFrames
-        y_test = y_test.reset_index(drop=True)
-        y_test_preds = y_test_preds.reset_index(drop=True)
+        # y_test = y_test.reset_index(drop=True)
+        # y_test_preds = y_test_preds.reset_index(drop=True)
     
         st.write("Testing chart")
         display_multi_variate_chart(X_test,y_test,y_test_preds)
