@@ -103,4 +103,3 @@ def display_multiple_chart(X, y, y_preds):
     
     chart = scatter_chart + line_chart
     st.altair_chart(chart, use_container_width=True)
-
