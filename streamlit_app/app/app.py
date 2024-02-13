@@ -143,9 +143,9 @@ elif selected_tab == "Machine Learning Model":
             st.write("    ")
         
             reg = LinearRegression()
-            reg.fit(X_train, y_train)
-            y_train_preds = reg.predict(X_train)
-            y_test_preds = reg.predict(X_test)
+            reg.fit(X_train.reshape(-1,1), y_train)
+            y_train_preds = reg.predict(X_train.reshape(-1,1))
+            y_test_preds = reg.predict(X_test.reshape(-1,1))
 
             mse_train_score = mse(y_train, y_train_preds, squared=True)
             mae_train_score = mae(y_train, y_train_preds)
@@ -177,16 +177,16 @@ elif selected_tab == "Machine Learning Model":
             
             # calculate baseline
             y_mean = y_train.mean()
-            y_base = np.full(y_train.shape, y_mean)
+            y_base = np.full(y_train.reshape(-1,1), y_mean)
             mse_score = mse(y_train, y_base, squared=True)
             mae_score = mae(y_train, y_base)
             st.write("MSE of Baseline: ", mse_score)
             st.write("MAE of Baseline: ", mae_score)
 
             reg = LinearRegression()
-            reg.fit(X_train, y_train)
-            y_train_preds = reg.predict(X_train)
-            y_test_preds = reg.predict(X_test)
+            reg.fit(X_train.reshape(-1,1), y_train)
+            y_train_preds = reg.predict(X_train.reshape(-1,1))
+            y_test_preds = reg.predict(X_tes.reshape(-1,1))
 
             st.write("Training chart")
             display_chart(X_train,y_train,y_train_preds)
