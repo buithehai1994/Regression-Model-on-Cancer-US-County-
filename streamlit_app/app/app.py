@@ -280,16 +280,16 @@ elif selected_tab == "Machine Learning Model":
         st.write("    ")
         
         reg.fit(X_test_scaled, y_test)
-        y_train_preds = reg.predict(X_test_scaled)
+        y_test_preds = reg.predict(X_test_scaled)
         
-        mse_train_score = mse(y_test, y_test_preds, squared=True)
-        mae_train_score = mae(y_test, y_test_preds)
+        mse_test_score = mse(y_test, y_test_preds, squared=True)
+        mae_test_score = mae(y_test, y_test_preds)
         
-        y_train_preds = pd.Series(y_test_preds, name='TARGET_deathRate_pred')
-        y_train = pd.Series(y_test, name='TARGET_deathRate')
-        X_train_series = pd.Series(range(len(X_test_scaled)), name='index')
+        y_test_preds = pd.Series(y_test_preds, name='TARGET_deathRate_pred')
+        y_test = pd.Series(y_test, name='TARGET_deathRate')
+        X_test_series = pd.Series(range(len(X_test_scaled)), name='index')
                 
-        st.write("Training chart")
+        st.write("Testing chart")
         display_multiple_chart(X_test_series, y_test, y_test_preds)
         
         st.write("MSE of Testing: ", mse_test_score)
