@@ -567,8 +567,7 @@ elif selected_tab == "Machine Learning Model":
             labelFontSize=12,
             titleFontSize=14
         )
-
-        st.write("Training chart")
+        st.markdown("<h1 style='font-size: 32px; font-weight: bold;margin-right: 100px;'>Training Set</h1>", unsafe_allow_html=True)
         st.write("MSE of Training: ", mse_train_score)
         st.write("MAE of Training: ", mae_train_score)
         st.write("    ")
@@ -622,7 +621,6 @@ elif selected_tab == "Machine Learning Model":
         
         st.write("MSE of Testing: ", mse_test_score)
         st.write("MAE of Testing: ", mae_test_score)       
-        st.markdown("<h1 style='font-size: 32px; font-weight: bold;margin-right: 100px;'>Training Set</h1>", unsafe_allow_html=True)
         st.altair_chart(final_chart, use_container_width=True)
         
 elif selected_tab == "Ethical Consideration":
