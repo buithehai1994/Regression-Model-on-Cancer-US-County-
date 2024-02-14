@@ -230,21 +230,21 @@ elif selected_tab == "Machine Learning Model":
             'PctBachDeg18_24','PctBlack','PctAsian','Id','PctBachDeg25_Over','PctMarriedHouseholds',
             'PctUnemployed16_Over','PercentMarried','binnedInc','Geography'],axis=1)
         y = data_for_multivarate['TARGET_deathRate']
-        
+                
         ml_instance = ML()
-        
+                
         # Call the split_data method to split your data into training and testing sets
         X_train, X_test, y_train, y_test = ml_instance.split_data(X, y)
-
+        
         from sklearn.preprocessing import StandardScaler
-
+        
         # Initialize the scaler
         scaler = StandardScaler()
-        
+                
         # Fit the scaler on the training data and transform both the training and testing data
-        X_train = scaler.fit_transform(X_train)
-        X_test = scaler.transform(X_test)
-        
+        X_train_scaled = scaler.fit_transform(X_train)
+        X_test_scaled = scaler.transform(X_test)
+                
         # calculate baseline
         y_mean = y_train.mean()
         y_base = np.full(y_train.shape, y_mean)
@@ -252,44 +252,45 @@ elif selected_tab == "Machine Learning Model":
         mae_score = mae(y_train, y_base)
         st.write("MSE of Baseline: ", mse_score)
         st.write("MAE of Baseline: ", mae_score)
-
-        st.write("    ")
-        st.write("    ")
-    
-        reg = LinearRegression()
         
-        reg.fit(X_train, y_train)
-        y_train_preds = reg.predict(X_train)
-        y_test_preds = reg.predict(X_test)
-
+        st.write("    ")
+        st.write("    ")
+            
+        reg = LinearRegression()
+                
+        reg.fit(X_train_scaled, y_train)
+        y_train_preds = reg.predict(X_train_scaled)
+        y_test_preds = reg.predict(X_test_scaled)
+        
         mse_train_score = mse(y_train, y_train_preds, squared=True)
         mae_train_score = mae(y_train, y_train_preds)
-
+        
         mse_test_score = mse(y_test, y_test_preds, squared=True)
         mae_test_score = mae(y_test, y_test_preds)
-
-        y_train_preds = pd.Series(y_train_preds.flatten(), name='TARGET_deathRate_pred')
-        y_train = pd.Series(y_train.flatten(), name='TARGET_deathRate')
-        X_train_series = pd.Series(range(len(X_train)), name='index')
         
+        y_train_preds = pd.Series(y_train_preds, name='TARGET_deathRate_pred')
+        y_train = pd.Series(y_train, name='TARGET_deathRate')
+        X_train_series = pd.Series(range(len(X_train)), name='index')
+                
         st.write("Training chart")
         display_multiple_chart(X_train_series, y_train, y_train_preds)
-
+        
         st.write("MSE of Training: ", mse_train_score)
         st.write("MAE of Training: ", mae_train_score)
         st.write("    ")
         st.write("    ")
-
-
-        y_test_preds = pd.Series(y_test_preds.flatten(), name='TARGET_deathRate_pred')
-        y_test = pd.Series(y_test.flatten(), name='TARGET_deathRate')
-        X_test_series = pd.Series(range(len(X_test)), name='index')
         
-        st.write("Training chart")
+        
+        y_test_preds = pd.Series(y_test_preds, name='TARGET_deathRate_pred')
+        y_test = pd.Series(y_test, name='TARGET_deathRate')
+        X_test_series = pd.Series(range(len(X_test)), name='index')
+                
+        st.write("Testing chart")
         display_multiple_chart(X_test_series, y_test, y_test_preds)
-
+        
         st.write("MSE of Testing: ", mse_test_score)
-        st.write("MAE of Testing: ", mae_test_score)       
+        st.write("MAE of Testing: ", mae_test_score)  
+
 
 elif selected_tab == "Ethical Consideration":
     pass
