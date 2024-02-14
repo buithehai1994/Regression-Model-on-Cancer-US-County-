@@ -255,18 +255,17 @@ elif selected_tab == "Machine Learning Model":
         
         st.write("    ")
         st.write("    ")
+
+        X_train_scaled = X_train_scaled.reshape(-1, 1)
+        X_test_scaled = X_test_scaled.reshape(-1, 1)
             
         reg = LinearRegression()
                 
         reg.fit(X_train_scaled, y_train)
         y_train_preds = reg.predict(X_train_scaled)
-        y_test_preds = reg.predict(X_test_scaled)
         
         mse_train_score = mse(y_train, y_train_preds, squared=True)
         mae_train_score = mae(y_train, y_train_preds)
-        
-        mse_test_score = mse(y_test, y_test_preds, squared=True)
-        mae_test_score = mae(y_test, y_test_preds)
         
         y_train_preds = pd.Series(y_train_preds, name='TARGET_deathRate_pred')
         y_train = pd.Series(y_train, name='TARGET_deathRate')
@@ -280,17 +279,24 @@ elif selected_tab == "Machine Learning Model":
         st.write("    ")
         st.write("    ")
         
+        reg.fit(X_test_scaled, y_test)
+        y_train_preds = reg.predict(X_test_scaled)
         
-        y_test_preds = pd.Series(y_test_preds, name='TARGET_deathRate_pred')
-        y_test = pd.Series(y_test, name='TARGET_deathRate')
-        X_test_series = pd.Series(range(len(X_test)), name='index')
+        mse_train_score = mse(y_test, y_test_preds, squared=True)
+        mae_train_score = mae(y_test, y_test_preds)
+        
+        y_train_preds = pd.Series(y_test_preds, name='TARGET_deathRate_pred')
+        y_train = pd.Series(y_test, name='TARGET_deathRate')
+        X_train_series = pd.Series(range(len(X_test)), name='index')
                 
-        st.write("Testing chart")
+        st.write("Training chart")
         display_multiple_chart(X_test_series, y_test, y_test_preds)
         
         st.write("MSE of Testing: ", mse_test_score)
-        st.write("MAE of Testing: ", mae_test_score)  
-
+        st.write("MAE of Testing: ", mae_test_score)
+        st.write("    ")
+        st.write("    ")
+        
 
 elif selected_tab == "Ethical Consideration":
     pass
