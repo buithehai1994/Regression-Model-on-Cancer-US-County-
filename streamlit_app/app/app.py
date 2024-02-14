@@ -16,6 +16,7 @@ import re
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 import altair as alt
+from sklearn.preprocessing import StandardScaler
 
 # Set Python path
 current_dir = os.path.dirname(__file__)
@@ -243,6 +244,8 @@ elif selected_tab == "Machine Learning Model":
         X_train, X_test, y_train, y_test = ml_instance.split_data(X, y)
         
         from sklearn.preprocessing import StandardScaler
+
+        scaler=StandardScaler()
         
         # Fit the scaler on the training data and transform both the training and testing data
         X_train_scaled = scaler.fit_transform(X_train)
