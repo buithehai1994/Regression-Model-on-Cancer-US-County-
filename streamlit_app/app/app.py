@@ -167,7 +167,7 @@ elif selected_tab == "Machine Learning Model":
 
             final_chart_train=(line_chart_train+scatter_chart_train).properties(
                                         title='Training Set',
-                                        width=600,
+                                        width=400,
                                         height=800
                                     ).configure_title(
                                         anchor='middle'
@@ -191,7 +191,7 @@ elif selected_tab == "Machine Learning Model":
 
             final_chart_test=(line_chart_test+scatter_chart_test).properties(
                                 title='Testing Set',
-                                width=600,
+                                width=400,
                                 height=800
                             ).configure_title(
                                 anchor='middle'
@@ -262,7 +262,7 @@ elif selected_tab == "Machine Learning Model":
 
             final_chart_train=(line_chart_train+scatter_chart_train).properties(
                                         title='Training Set',
-                                        width=600,
+                                        width=400,
                                         height=800
                                     ).configure_title(
                                         anchor='middle'
@@ -286,7 +286,7 @@ elif selected_tab == "Machine Learning Model":
 
             final_chart_test=(line_chart_test+scatter_chart_test).properties(
                                 title='Testing Set',
-                                width=600,
+                                width=400,
                                 height=800
                             ).configure_title(
                                 anchor='middle'
@@ -403,7 +403,7 @@ elif selected_tab == "Machine Learning Model":
             y=alt.Y('Actual Target', scale=alt.Scale(domain=[100, data['Actual Target'].max()], nice=True)),
             tooltip=['Actual Target', 'Predicted Values']
         ).properties(
-            width=600,
+            width=400,
             height=800
         )
         
