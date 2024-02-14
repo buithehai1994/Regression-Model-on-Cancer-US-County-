@@ -206,7 +206,6 @@ elif selected_tab == "Machine Learning Model":
             mse_test_score = mse(y_test, y_test_preds, squared=True)
             mae_test_score = mae(y_test, y_test_preds)
 
-            st.write("Training chart")
             # Display the chart
             st.write("## Training Set")
             st.altair_chart(final_chart_train, use_container_width=True)
