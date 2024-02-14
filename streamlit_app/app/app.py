@@ -256,8 +256,8 @@ elif selected_tab == "Machine Learning Model":
         st.write("    ")
         st.write("    ")
 
-        # X_train_array = X_train_scaled.values
-        # X_test_array = X_test_scaled.values
+        X_train_scaled = X_train_scaled.values
+        X_test_scaled = X_test_scaled.values
     
         reg = LinearRegression()
                 
