@@ -76,6 +76,7 @@ def perform_encoding():
     encoding = Encoding(data=data_from_tab_df)
     data_for_ml = encoding.label_encoding()
     return data_for_ml
+    
 def perform_encoding_and_multivariate():
     encoding = Encoding(data=data_from_tab_df)
     data_for_ml = encoding.label_encoding()
