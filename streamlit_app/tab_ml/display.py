@@ -78,27 +78,31 @@ def display_chart(X, y, y_preds):
     chart = scatter_chart + line_chart
     st.altair_chart(chart, use_container_width=True)
 
-
-def display_multiple_chart(X, y, y_preds):
-    # Ensure X is 2-dimensional
-    if len(X.shape) != 2:
-        raise ValueError("X must be a 2-dimensional array")
+def display_multiple_chart(X, y_true, y_preds):
+    # Combine features and true/predicted target values into a DataFrame
+    df = pd.DataFrame({'Feature': X.flatten(), 'True': y_true, 'Predicted': y_pred})
     
-    # Ensure lengths are consistent
-    if len(X) != len(y) or len(X) != len(y_preds):
-        raise ValueError("Lengths of X, y, and y_preds must be the same")
-
-    data = pd.DataFrame({'index': range(len(X)), 'y': y, 'y_preds': y_preds})
-    
-    scatter_chart = alt.Chart(data).mark_circle(opacity=1, color='red').encode(
-        x='index',
-        y='y'
-    )
-
-    line_chart = alt.Chart(data).mark_line(opacity=1, color='blue').encode(
-        x='index',
-        y='y_preds'
+    # Scatter plot of True vs. Predicted values
+    scatter_plot = alt.Chart(df).mark_circle(size=60).encode(
+        x='True',
+        y='Predicted',
+        color=alt.Color('Feature', scale=alt.Scale(scheme='category20')),
+        tooltip=['Feature', 'True', 'Predicted']
+    ).properties(
+        title='True vs. Predicted values'
     )
     
-    chart = scatter_chart + line_chart
-    st.altair_chart(chart, use_container_width=True)
+    # Line chart of True vs. Predicted values
+    line_chart = alt.Chart(df).mark_line().encode(
+        x='Feature',
+        y=alt.Y('value', title='Value'),
+        color=alt.Color('variable', scale=alt.Scale(range=['blue', 'orange']), legend=alt.Legend(title="Type")),
+        tooltip=['Feature', alt.Tooltip('value', title='Value'), 'variable']
+    ).transform_fold(
+        ['True', 'Predicted'],
+        as_=['variable', 'value']
+    ).properties(
+        title='True vs. Predicted values by Feature'
+    )
+    chart=scatter_plot + line_chart
+    return chart
