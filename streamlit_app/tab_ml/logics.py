@@ -86,3 +86,13 @@ class ML:
         fpr, tpr, _ = roc_curve(y, y_scores)
         roc_auc = auc(fpr, tpr)
         return fpr, tpr, roc_auc
+
+    def train_linear_regression(self, X_train, y_train):
+        # Initialize and train a Linear Regression model
+        self.trained_model = LinearRegression()
+        self.trained_model.fit(X_train, y_train)
+
+    def predict(self, X):
+        if self.trained_model is None:
+            raise ValueError("Model not trained. Please train the model first.")
+        return self.trained_model.predict(X)
