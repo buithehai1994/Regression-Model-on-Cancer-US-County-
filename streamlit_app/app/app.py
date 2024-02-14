@@ -286,15 +286,18 @@ elif selected_tab == "Machine Learning Model":
         y_train_preds=reg.predict(X_train)
         mse_train_score = mse(y_train, y_train_preds, squared=True)
         mae_train_score = mae(y_train, y_train_preds)
-
-        # Predict on the training set
-        y_train_preds = reg.predict(X_train)
         
         # Predict on the testing set
         y_test_preds = reg.predict(X_test)
 
+        y_train_preds=pd.DataFrame(y_train_preds)
+        y_train_preds=y_train_preds.rename(columns={0:"TARGET_deathRate_pred"})
+        y_train=pd.DataFrame(y_train)
+        y_train = y_train.reset_index(drop=True)
+        y_train_preds = y_train_preds.reset_index(drop=True)
+        
         st.write("Training chart")
-        # display_multiple_chart(X_train, y_train, y_train_preds)
+        display_multiple_chart(X_train, y_train, y_train_preds)
         
         st.write("MSE of Training: ", mse_train_score)
         st.write("MAE of Training: ", mae_train_score)
