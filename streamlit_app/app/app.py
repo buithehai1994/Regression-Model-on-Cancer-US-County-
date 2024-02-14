@@ -86,7 +86,7 @@ def perform_encoding_and_multivariate():
     
 def perform_feature_engineering():
     encoding = Encoding(data=data_from_tab_df)
-    data_from_ml =encoding.feature_engineering_process()
+    data_for_ml =encoding.feature_engineering_process()
     return data_for_ml
     
 data_for_ml_univariate = perform_encoding()
