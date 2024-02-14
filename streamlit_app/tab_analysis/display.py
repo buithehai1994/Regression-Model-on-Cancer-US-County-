@@ -11,6 +11,7 @@ def display_univariate_analysis():
     2. Analysis:
 
     a. Univariate models (TARGET_deathRate and medIncome, TARGET_deathRate and povertyPercent):
+    
     This experience will use Mean Square Error for assessing the performances of linear regression models. The mean of variables serves as a baseline for evaluating. First, MSE of the two modes are smaller than that of baseline. It means that two models achieve improvement compared to the baseline. Second, Model 2 (using medIncome) has a lower testing MSE compared to Model 1 (using povertyPercent).  This suggests that Model 2 might be performing slightly better in terms of prediction accuracy on unseen data.
     Based on the Coefficient, the model shows the exact result as we predicted.  medIncome has a negative impact on TargetDeathRate while povertyPercent and TargetDeathRate show a positive correlation.
     Therefore, it is evident that the wealth of households and cancer death rate are negatively correlated.
