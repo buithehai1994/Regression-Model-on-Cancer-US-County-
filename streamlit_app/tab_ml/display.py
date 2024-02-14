@@ -87,10 +87,7 @@ def display_multiple_chart(X, y, y_preds):
     # Ensure lengths are consistent
     if len(X) != len(y) or len(X) != len(y_preds):
         raise ValueError("Lengths of X, y, and y_preds must be the same")
-    
-    # We can't directly use X as x-values for visualization as it's multidimensional.
-    # You may want to plot against a single feature or apply dimensionality reduction for visualization.
-    # For now, let's plot against the index.
+
     data = pd.DataFrame({'index': range(len(X)), 'y': y, 'y_preds': y_preds})
     
     scatter_chart = alt.Chart(data).mark_circle(opacity=1, color='red').encode(
