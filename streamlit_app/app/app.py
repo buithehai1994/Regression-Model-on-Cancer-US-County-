@@ -215,10 +215,10 @@ elif selected_tab == "Machine Learning Model":
             st.write("    ")
             st.write("    ")            
 
-            st.write("Testing chart")
+           
             
             # Display the chart
-            st.write("## Testing Set")
+            st.write("Testing chart")
             st.altair_chart(final_chart_test, use_container_width=True)
 
             st.write("MSE of Testing: ", mse_test_score)
