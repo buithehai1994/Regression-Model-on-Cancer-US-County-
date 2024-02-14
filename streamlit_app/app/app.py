@@ -291,7 +291,7 @@ elif selected_tab == "Machine Learning Model":
               )
 
             final_chart_test=(line_chart_test+scatter_chart_test).properties(
-                                title='Testing Set',
+                                title='medIncome',
                                 width=400,
                                 height=800
                             ).configure_title(
@@ -406,7 +406,7 @@ elif selected_tab == "Machine Learning Model":
 
         # Combine the charts
         final_chart = (perfect_prediction_line + scatter_plot).properties(
-            title='Training Set',
+            title='Training set',
             width=200,
             height=800
         ).configure_title(
