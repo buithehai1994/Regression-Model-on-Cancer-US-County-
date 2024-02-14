@@ -9,6 +9,7 @@ from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error as mse
 from sklearn.metrics import mean_absolute_error as mae
+from sklearn.linear_model import LinearRegression
 
 class ML:
     def __init__(self):
