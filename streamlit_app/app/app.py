@@ -139,7 +139,7 @@ elif selected_tab == "Machine Learning Model":
             
             ml_instance.train_linear_regression(X_train.reshape(-1, 1), y_train)
 
-            st.write("# Baseline Model")
+            st.write("<h1 style='font-size: 32px; font-weight: bold;'>Baseline Model</h1>", unsafe_allow_html=True)
             # calculate baseline
             y_mean = y_train.mean()
             y_base = np.full(y_train.shape, y_mean)
