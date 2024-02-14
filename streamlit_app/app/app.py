@@ -244,13 +244,10 @@ elif selected_tab == "Machine Learning Model":
         
         from sklearn.preprocessing import StandardScaler
         
-        # Initialize the scaler
-        scaler = StandardScaler()
-                
         # Fit the scaler on the training data and transform both the training and testing data
-        X_train= scaler.fit_transform(X_train)
-        X_test = scaler.transform(X_test)
-                
+        X_train_scaled = scaler.fit_transform(X_train)
+        X_test_scaled = scaler.transform(X_test)
+                        
         # calculate baseline
         y_mean = y_train.mean()
         y_base = np.full(y_train.shape, y_mean)
@@ -262,13 +259,19 @@ elif selected_tab == "Machine Learning Model":
         st.write("    ")
         st.write("    ")
     
-        # Train the multilinear regression model
-        ml_instance.train_linear_regression(X_train, y_train)
-        y_train_preds = ml_instance.predict(X_train)
+        # Train the linear regression model
+        reg = LinearRegression()
+        reg.fit(X_train_scaled, y_train)
         
         mse_train_score = mse(y_train, y_train_preds, squared=True)
         mae_train_score = mae(y_train, y_train_preds)
+
+        # Predict on the training set
+        y_train_preds = reg.predict(X_train_scaled)
         
+        # Predict on the testing set
+        y_test_preds = reg.predict(X_test_scaled)
+
         st.write("Training chart")
         display_multiple_chart(X_train, y_train, y_train_preds)
         
@@ -276,14 +279,12 @@ elif selected_tab == "Machine Learning Model":
         st.write("MAE of Training: ", mae_train_score)
         st.write("    ")
         st.write("    ")
-
-        y_test_preds = ml_instance.predict(X_test)
         
         mse_test_score = mse(y_test, y_test_preds, squared=True)
         mae_test_score = mae(y_test, y_test_preds)
         
         st.write("Testing chart")
-        # display_multiple_chart(X_test_scaled, y_test, y_test_preds)
+        display_multiple_chart(X_test_scaled, y_test, y_test_preds)
         
         st.write("MSE of Testing: ", mse_test_score)
         st.write("MAE of Testing: ", mae_test_score)
