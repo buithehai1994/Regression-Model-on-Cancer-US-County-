@@ -84,8 +84,13 @@ def perform_encoding_and_multivariate():
     data_for_ml =encoding.multivariate_process()
     return data_for_ml
     
+def perform_encoding_and_feature_engineering():
+    data_from_ml =data_from_tab_df.feature_engineering_process()
+    return data_for_ml
+    
 data_for_ml_univariate = perform_encoding()
 data_for_ml_multivariate= perform_encoding_and_multivariate()
+data_for_ml_feature_engineering= perform_encoding_and_feature_engineering()
 
 selected_tab = st.sidebar.radio("Navigation", ["Introduction", "Data", "EDA", "Encoding", "Machine Learning Model", "Feature Importance", "Deployment", "Ethical Consideration", "References", "GitHub"], key="navigation")
 
@@ -472,156 +477,154 @@ elif selected_tab == "Machine Learning Model":
         st.altair_chart(final_chart, use_container_width=True)
 
     if selected_sub_tab == tab_titles[2]:
-        pass
-        # X =data_for_ml_multivariate.drop(['TARGET_deathRate','avgDeathsPerYear','avgAnnCount','popEst2015','povertyPercent','MedianAgeMale',
-        #     'MedianAgeFemale','PctPrivateCoverage','PctPrivateCoverageAlone','PctUnemployed16_Over',
-        #     'PctEmpPrivCoverage','PctPublicCoverage','PctOtherRace','PctWhite','PctHS25_Over','PctEmployed16_Over',
-        #     'PctBachDeg18_24','PctBlack','PctAsian','Id','PctBachDeg25_Over','PctMarriedHouseholds','MedianAge','binnedInc','PctPublicCoverageAlone',
-        #    'PercentMarried'],axis=1)
+        X =data_for_ml_feature_engineering.drop(['TARGET_deathRate','avgDeathsPerYear','avgAnnCount','popEst2015','povertyPercent','MedianAgeMale',
+            'MedianAgeFemale','PctPrivateCoverage','PctPrivateCoverageAlone','PctUnemployed16_Over',
+            'PctEmpPrivCoverage','PctPublicCoverage','PctOtherRace','PctWhite','PctHS25_Over','PctEmployed16_Over',
+            'PctBachDeg18_24','PctBlack','PctAsian','Id','PctBachDeg25_Over','PctMarriedHouseholds','MedianAge','binnedInc','PctPublicCoverageAlone',
+           'PercentMarried'],axis=1)
         
-        # y = data_for_ml_multivariate['TARGET_deathRate']
+        y = data_for_ml_feature_engineering['TARGET_deathRate']
 
-        # # st.write(X)
-        # # st.write(y)
+        from sklearn.model_selection import train_test_split
+        # Split the data into training and testing sets (60% training, 40% testing)
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
 
-        # from sklearn.model_selection import train_test_split
-        # # Split the data into training and testing sets (60% training, 40% testing)
-        # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
-
-        # from sklearn.preprocessing import StandardScaler
+        from sklearn.preprocessing import StandardScaler
         
-        # # Initialize the scaler
-        # scaler = StandardScaler()
+        # Initialize the scaler
+        scaler = StandardScaler()
         
-        # # Fit the scaler on the training data and transform both the training and testing data
-        # X_train = scaler.fit_transform(X_train)
-        # X_test = scaler.transform(X_test)
+        # Fit the scaler on the training data and transform both the training and testing data
+        X_train = scaler.fit_transform(X_train)
+        X_test = scaler.transform(X_test)
                         
-        # # calculate baseline
-        # y_mean = y_train.mean()
-        # y_base = np.full(y_train.shape, y_mean)
-        # mse_score = mse(y_train, y_base, squared=True)
-        # mae_score = mae(y_train, y_base)
-        # st.write("MSE of Baseline: ", mse_score)
-        # st.write("MAE of Baseline: ", mae_score)
+        # calculate baseline
+        y_mean = y_train.mean()
+        y_base = np.full(y_train.shape, y_mean)
+        mse_score = mse(y_train, y_base, squared=True)
+        mae_score = mae(y_train, y_base)
+        st.write("MSE of Baseline: ", mse_score)
+        st.write("MAE of Baseline: ", mae_score)
         
-        # st.write("    ")
-        # st.write("    ")
+        st.write("    ")
+        st.write("    ")
     
-        # # Train the linear regression model
-        # reg = LinearRegression()
-        # reg.fit(X_train, y_train)
+        # Train the linear regression model
+        reg = LinearRegression()
+        reg.fit(X_train, y_train)
 
-        # y_train_preds=reg.predict(X_train)
-        # mse_train_score = mse(y_train, y_train_preds, squared=True)
-        # mae_train_score = mae(y_train, y_train_preds)
+        y_train_preds=reg.predict(X_train)
+        mse_train_score = mse(y_train, y_train_preds, squared=True)
+        mae_train_score = mae(y_train, y_train_preds)
 
-        # # Predict on the testing set
-        # y_test_preds = reg.predict(X_test)
-        # mse_test_score = mse(y_test, y_test_preds, squared=True)
-        # mae_test_score = mae(y_test, y_test_preds)
+        # Predict on the testing set
+        y_test_preds = reg.predict(X_test)
+        mse_test_score = mse(y_test, y_test_preds, squared=True)
+        mae_test_score = mae(y_test, y_test_preds)
 
-        # # Training chart
-        # y_train_preds=pd.DataFrame(y_train_preds)
-        # y_train_preds=y_train_preds.rename(columns={0:"TARGET_deathRate_pred"})
-        # y_train=pd.DataFrame(y_train)
-        # y_train = y_train.reset_index(drop=True)
-        # y_train_preds = y_train_preds.reset_index(drop=True)
+        # Training chart
+        y_train_preds=pd.DataFrame(y_train_preds)
+        y_train_preds=y_train_preds.rename(columns={0:"TARGET_deathRate_pred"})
+        y_train=pd.DataFrame(y_train)
+        y_train = y_train.reset_index(drop=True)
+        y_train_preds = y_train_preds.reset_index(drop=True)
 
-        # # Combine the actual and predicted values into a single DataFrame
-        # data = pd.DataFrame({
-        #     'Actual Target': y_train['TARGET_deathRate'],
-        #     'Predicted Values': y_train_preds['TARGET_deathRate_pred']
-        # })
+        # Combine the actual and predicted values into a single DataFrame
+        data = pd.DataFrame({
+            'Actual Target': y_train['TARGET_deathRate'],
+            'Predicted Values': y_train_preds['TARGET_deathRate_pred']
+        })
 
-        # # Create a perfect prediction line
-        # perfect_prediction_line = alt.Chart(data).mark_line(color='green', point=True).encode(
-        #     x='Actual Target',
-        #     y=alt.Y('Actual Target', scale=alt.Scale(domain=[100, data['Actual Target'].max()], nice=True)),
-        #     tooltip=['Actual Target', 'Predicted Values']
-        # ).properties(
-        #     width=200,
-        #     height=800
-        # )
+        # Create a perfect prediction line
+        perfect_prediction_line = alt.Chart(data).mark_line(color='green', point=True).encode(
+            x='Actual Target',
+            y=alt.Y('Actual Target', scale=alt.Scale(domain=[100, data['Actual Target'].max()], nice=True)),
+            tooltip=['Actual Target', 'Predicted Values']
+        ).properties(
+            width=200,
+            height=800
+        )
         
-        # # Create scatter plot for predicted values
-        # scatter_plot = alt.Chart(data).mark_circle(color='red', opacity=0.7).encode(
-        #     x='Actual Target',
-        #     y=alt.Y('Predicted Values', scale=alt.Scale(domain=[100, data['Predicted Values'].max()], nice=True)),
-        #     tooltip=['Actual Target', 'Predicted Values']
-        # )
+        # Create scatter plot for predicted values
+        scatter_plot = alt.Chart(data).mark_circle(color='red', opacity=0.7).encode(
+            x='Actual Target',
+            y=alt.Y('Predicted Values', scale=alt.Scale(domain=[100, data['Predicted Values'].max()], nice=True)),
+            tooltip=['Actual Target', 'Predicted Values']
+        )
 
-        # # Combine the charts
-        # final_chart = (perfect_prediction_line + scatter_plot).properties(
-        #     title='Training Set',
-        #     width=200,
-        #     height=800
-        # ).configure_title(
-        #     anchor='middle'
-        # ).configure_legend(
-        #     orient='top'
-        # ).configure_axis(
-        #     labelFontSize=12,
-        #     titleFontSize=14
-        # )
+        # Combine the charts
+        final_chart = (perfect_prediction_line + scatter_plot).properties(
+            title='Training Set',
+            width=200,
+            height=800
+        ).configure_title(
+            anchor='middle'
+        ).configure_legend(
+            orient='top'
+        ).configure_axis(
+            labelFontSize=12,
+            titleFontSize=14
+        )
 
-        # st.write("Training chart")
-        # st.write("MSE of Training: ", mse_train_score)
-        # st.write("MAE of Training: ", mae_train_score)
-        # st.write("    ")
-        # st.write("    ")
+        st.write("Training chart")
+        st.write("MSE of Training: ", mse_train_score)
+        st.write("MAE of Training: ", mae_train_score)
+        st.write("    ")
+        st.write("    ")
 
-        # st.altair_chart(final_chart, use_container_width=True)
-        # # Test chart
-        # y_test_preds=pd.DataFrame(y_test_preds)
-        # y_test_preds=y_test_preds.rename(columns={0:"TARGET_deathRate_pred"})
-        # y_test=pd.DataFrame(y_test)
-        # y_test = y_test.reset_index(drop=True)
-        # y_test_preds = y_test_preds.reset_index(drop=True)
+        st.altair_chart(final_chart, use_container_width=True)
+        # Test chart
+        y_test_preds=pd.DataFrame(y_test_preds)
+        y_test_preds=y_test_preds.rename(columns={0:"TARGET_deathRate_pred"})
+        y_test=pd.DataFrame(y_test)
+        y_test = y_test.reset_index(drop=True)
+        y_test_preds = y_test_preds.reset_index(drop=True)
 
-        # # Combine the actual and predicted values into a single DataFrame
-        # data = pd.DataFrame({
-        #     'Actual Target': y_test['TARGET_deathRate'],
-        #     'Predicted Values': y_test_preds['TARGET_deathRate_pred']
-        # })
+        # Combine the actual and predicted values into a single DataFrame
+        data = pd.DataFrame({
+            'Actual Target': y_test['TARGET_deathRate'],
+            'Predicted Values': y_test_preds['TARGET_deathRate_pred']
+        })
 
-        # # Create a perfect prediction line
-        # perfect_prediction_line = alt.Chart(data).mark_line(color='green', point=True).encode(
-        #     x='Actual Target',
-        #     y=alt.Y('Actual Target', scale=alt.Scale(domain=[100, data['Actual Target'].max()], nice=True)),
-        #     tooltip=['Actual Target', 'Predicted Values']
-        # ).properties(
-        #     width=200,
-        #     height=800
-        # )
+        # Create a perfect prediction line
+        perfect_prediction_line = alt.Chart(data).mark_line(color='green', point=True).encode(
+            x='Actual Target',
+            y=alt.Y('Actual Target', scale=alt.Scale(domain=[100, data['Actual Target'].max()], nice=True)),
+            tooltip=['Actual Target', 'Predicted Values']
+        ).properties(
+            width=200,
+            height=800
+        )
         
-        # # Create scatter plot for predicted values
-        # scatter_plot = alt.Chart(data).mark_circle(color='red', opacity=0.7).encode(
-        #     x='Actual Target',
-        #     y=alt.Y('Predicted Values', scale=alt.Scale(domain=[100, data['Predicted Values'].max()], nice=True)),
-        #     tooltip=['Actual Target', 'Predicted Values']
-        # )
+        # Create scatter plot for predicted values
+        scatter_plot = alt.Chart(data).mark_circle(color='red', opacity=0.7).encode(
+            x='Actual Target',
+            y=alt.Y('Predicted Values', scale=alt.Scale(domain=[100, data['Predicted Values'].max()], nice=True)),
+            tooltip=['Actual Target', 'Predicted Values']
+        )
 
-        # # Combine the charts
-        # final_chart = (perfect_prediction_line + scatter_plot).properties(
-        #     title='Testing Set',
-        #     width=200,
-        #     height=800
-        # ).configure_title(
-        #     anchor='middle'
-        # ).configure_legend(
-        #     orient='top'
-        # ).configure_axis(
-        #     labelFontSize=12,
-        #     titleFontSize=14
-        # )
+        # Combine the charts
+        final_chart = (perfect_prediction_line + scatter_plot).properties(
+            title='Testing Set',
+            width=200,
+            height=800
+        ).configure_title(
+            anchor='middle'
+        ).configure_legend(
+            orient='top'
+        ).configure_axis(
+            labelFontSize=12,
+            titleFontSize=14
+        )
 
-        # st.write("Testing chart")
+        st.write("Testing chart")
         
-        # st.write("MSE of Testing: ", mse_test_score)
-        # st.write("MAE of Testing: ", mae_test_score)       
+        st.write("MSE of Testing: ", mse_test_score)
+        st.write("MAE of Testing: ", mae_test_score)       
 
-        # st.altair_chart(final_chart, use_container_width=True)
+        st.altair_chart(final_chart, use_container_width=True)
+
+        
 elif selected_tab == "Ethical Consideration":
     pass
 elif selected_tab == "References":
