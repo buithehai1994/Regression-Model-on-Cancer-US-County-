@@ -270,7 +270,7 @@ elif selected_tab == "Machine Learning Model":
         mae_train_score = mae(y_train, y_train_preds)
         
         st.write("Training chart")
-        display_multiple_chart(X_train, y_train, y_train_preds)
+        display_chart(X_train, y_train, y_train_preds)
         
         st.write("MSE of Training: ", mse_train_score)
         st.write("MAE of Training: ", mae_train_score)
