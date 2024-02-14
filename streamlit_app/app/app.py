@@ -136,11 +136,8 @@ elif selected_tab == "Machine Learning Model":
             ml_instance = ML()
             # Call the split_data method to split your data into training and testing sets
             X_train, X_test, y_train, y_test = ml_instance.split_data(X, y)
-
-            X_train = X_train.reshape(-1, 1)
-            X_test = X_test.reshape(-1, 1)
             
-            ml_instance.train_linear_regression(X_train, y_train)
+            ml_instance.train_linear_regression(X_train.reshape(-1, 1), y_train)
             
             # calculate baseline
             y_mean = y_train.mean()
@@ -153,8 +150,8 @@ elif selected_tab == "Machine Learning Model":
             st.write("    ")
             st.write("    ")
 
-            y_train_preds = ml_instance.predict(X_train)
-            y_test_preds = ml_instance.predict(X_test)
+            y_train_preds = ml_instance.predict(X_train.reshape(-1, 1))
+            y_test_preds = ml_instance.predict(X_test.reshape(-1, 1))
 
             line_chart_train = alt.Chart(pd.DataFrame({'x':X_train, 'y': y_train_preds})).mark_line(opacity=1, color='blue').encode(
                     x='x',
