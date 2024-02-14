@@ -256,6 +256,9 @@ elif selected_tab == "Machine Learning Model":
         st.write("    ")
         st.write("    ")
 
+        print("Shape of X_train_scaled:", X_train_scaled.shape)
+        print("Shape of y_train:", y_train.shape)
+
         # Get the number of features in X_train_scaled
         num_features = X_train_scaled.shape[1]
 
