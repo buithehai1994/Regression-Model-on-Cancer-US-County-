@@ -294,7 +294,7 @@ elif selected_tab == "Machine Learning Model":
         y_test_preds = reg.predict(X_test)
 
         st.write("Training chart")
-        display_multiple_chart(X_train, y_train, y_train_preds)
+        # display_multiple_chart(X_train, y_train, y_train_preds)
         
         st.write("MSE of Training: ", mse_train_score)
         st.write("MAE of Training: ", mae_train_score)
@@ -305,7 +305,7 @@ elif selected_tab == "Machine Learning Model":
         mae_test_score = mae(y_test, y_test_preds)
         
         st.write("Testing chart")
-        display_multiple_chart(X_test, y_test, y_test_preds)
+        # display_multiple_chart(X_test, y_test, y_test_preds)
         
         st.write("MSE of Testing: ", mse_test_score)
         st.write("MAE of Testing: ", mae_test_score)
