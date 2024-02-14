@@ -259,8 +259,8 @@ elif selected_tab == "Machine Learning Model":
         # Get the number of features in X_train_scaled
         num_features = X_train_scaled.shape[1]
 
-        X_train_scaled = X_train_scaled.reshape(-1, num_features)
-        X_test_scaled = X_test_scaled.reshape(-1, num_features)
+        X_train_scaled = X_train_scaled.reshape(-1, 1)
+        X_test_scaled = X_test_scaled.reshape(-1, 1)
             
         reg = LinearRegression()
                 
