@@ -421,7 +421,6 @@ elif selected_tab == "Machine Learning Model":
             titleFontSize=14
         )
 
-        st.write("Training chart")
         st.write("MSE of Training: ", mse_train_score)
         st.write("MAE of Training: ", mae_train_score)
         st.write("    ")
