@@ -132,6 +132,7 @@ elif selected_tab == "Machine Learning Model":
             y = data_for_ml_univariate['TARGET_deathRate'].values
 
             ml_instance = ML()
+            ml_instance.train_linear_regression(X_train, y_train)
             # Call the split_data method to split your data into training and testing sets
             X_train, X_test, y_train, y_test = ml_instance.split_data(X, y)
             
@@ -194,14 +195,14 @@ elif selected_tab == "Machine Learning Model":
             st.write("    ")
             st.write("    ")
 
-            reg = LinearRegression()
-            reg.fit(X_train, y_train)
+            # Train the multilinear regression model
+            ml_instance.train_linear_regression(X_train, y_train)
 
-            y_train_preds = reg.predict(X_train)
+            y_train_preds = ml_instance.predict(X_train)
             mse_train_score = mse(y_train, y_train_preds, squared=True)
             mae_train_score = mae(y_train, y_train_preds)
             
-            y_test_preds = reg.predict(X_test)
+            y_test_preds = ml_instance.predict(X_test)
             mse_test_score = mse(y_test, y_test_preds, squared=True)
             mae_test_score = mae(y_test, y_test_preds)
 
