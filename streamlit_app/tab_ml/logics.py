@@ -89,7 +89,6 @@ class ML:
         return fpr, tpr, roc_auc
 
     def train_linear_regression(self, X_train, y_train):
-        # Initialize and train a Linear Regression model
         self.trained_model = LinearRegression()
         self.trained_model.fit(X_train, y_train)
 
