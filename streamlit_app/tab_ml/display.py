@@ -80,11 +80,11 @@ def display_chart(X, y, y_preds):
 
 def display_multiple_chart(X, y_true, y_preds):
     # Combine features and true/predicted target values into a DataFrame
-    y_preds=pd.DataFrame(y_preds)
-    y_preds=y_preds.rename(columns={0:"TARGET_deathRate_pred"})
+    y_preds = pd.DataFrame(y_preds)
+    y_preds = y_preds.rename(columns={0: "TARGET_deathRate_pred"})
 
-    y_true=pd.DataFrame(y_true)
-    y_true=y_true.rename(columns={0:"TARGET_deathRate"})
+    y_true = pd.DataFrame(y_true)
+    y_true = y_true.rename(columns={0: "TARGET_deathRate"})
 
     # Resetting the index of y_train and y_train_preds DataFrames
     y_true = y_true.reset_index(drop=True)
@@ -95,34 +95,32 @@ def display_multiple_chart(X, y_true, y_preds):
         'Actual Target': y_true['TARGET_deathRate'],
         'Predicted Values': y_preds['TARGET_deathRate_pred']
     })
-            
+
     # Scatter plot of True vs. Predicted values
     scatter_plot = alt.Chart(data).mark_circle(size=60).encode(
-        x='True',
-        y='Predicted',
-        color=alt.Color('Feature', scale=alt.Scale(scheme='category20')),
-        tooltip=['Feature', 'True', 'Predicted']
+        x='Actual Target',
+        y='Predicted Values',
+        color=alt.Color('Actual Target', scale=alt.Scale(scheme='category20')),
+        tooltip=['Actual Target', 'Predicted Values']
     ).properties(
         title='True vs. Predicted values'
     )
-    
+
     # Line chart of True vs. Predicted values
     line_chart = alt.Chart(data).mark_line().encode(
-        x='Feature',
+        x='Actual Target',
         y=alt.Y('value', title='Value'),
         color=alt.Color('variable', scale=alt.Scale(range=['blue', 'orange']), legend=alt.Legend(title="Type")),
-        tooltip=['Feature', alt.Tooltip('value', title='Value'), 'variable']
+        tooltip=['Actual Target', alt.Tooltip('value', title='Value'), 'variable']
     ).transform_fold(
-        ['True', 'Predicted'],
+        ['Actual Target', 'Predicted Values'],
         as_=['variable', 'value']
     ).properties(
         title='True vs. Predicted values by Feature'
     )
-    
+
     # Combine scatter plot and line chart
     combined_chart = scatter_plot | line_chart
-    
+
     # Display the chart using Streamlit
     st.altair_chart(combined_chart, use_container_width=True)
-
-
