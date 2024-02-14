@@ -313,19 +313,19 @@ elif selected_tab == "Machine Learning Model":
             
             # Display the chart
             st.markdown("<h1 style='font-size: 32px; font-weight: bold;margin-right: 50px;'>Training set</h1>", unsafe_allow_html=True)
-            st.altair_chart(final_chart_train, use_container_width=True)
-            
             st.write("MSE of Training: ", mse_train_score)
             st.write("MAE of Training: ", mae_train_score)
+            st.altair_chart(final_chart_train, use_container_width=True)
+            
             st.write("    ")
             st.write("    ")            
 
             # Display the chart
             st.markdown("<h1 style='font-size: 32px; font-weight: bold;margin-right: 100px;'>Testing set</h1>", unsafe_allow_html=True)
-            st.altair_chart(final_chart_test, use_container_width=True)
-
             st.write("MSE of Testing: ", mse_test_score)
             st.write("MAE of Testing: ", mae_test_score)
+            st.altair_chart(final_chart_test, use_container_width=True)
+
     if selected_sub_tab == tab_titles[1]:
         X =data_for_ml_multivariate.drop(['TARGET_deathRate','avgDeathsPerYear','avgAnnCount','popEst2015','povertyPercent','MedianAgeMale',
             'MedianAgeFemale','PctPrivateCoverage','PctPrivateCoverageAlone',
