@@ -220,6 +220,7 @@ elif selected_tab == "Machine Learning Model":
            
             
             # Display the chart
+            st.write("<h1 style='font-size: 32px; font-weight: bold;'>Testing set</h1>", unsafe_allow_html=True)
             st.altair_chart(final_chart_test, use_container_width=True)
 
             st.write("MSE of Testing: ", mse_test_score)
