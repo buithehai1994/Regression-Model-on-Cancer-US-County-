@@ -156,48 +156,30 @@ elif selected_tab == "Machine Learning Model":
             y_train_preds = ml_instance.predict(X_train)
             y_test_preds = ml_instance.predict(X_test)
 
-            # Combine the actual and predicted values into a single DataFrame
-            train_data = pd.DataFrame({
-                'Actual Target': y_train,
-                'Predicted Values': y_train_preds
-            })
-            
-            test_data = pd.DataFrame({
-                'Actual Target': y_test,
-                'Predicted Values': y_test_preds
-            })
+            line_chart_train = alt.Chart(pd.DataFrame({'x':X_train, 'y': y_train_preds})).mark_line(opacity=1, color='blue').encode(
+                    x='x',
+                    y='y'
+                  )
 
-            # Create a perfect prediction line
-            perfect_prediction_line = alt.Chart(train_data).mark_line(color='green', point=True).encode(
-                x='Actual Target',
-                y=alt.Y('Actual Target', scale=alt.Scale(domain=[100, train_data['Actual Target'].max()], nice=True)),
-                tooltip=['Actual Target', 'Predicted Values']
-            ).properties(
-                width=600,
-                height=400
-            )
+            scatter_chart_train = alt.Chart(pd.DataFrame({'x':X_train, 'y': y_train})).mark_circle(opacity=1, color='red').encode(
+                x='x',
+                y='y'
+              )
 
-            # Create scatter plot for predicted values
-            scatter_plot = alt.Chart(train_data).mark_circle(color='red', opacity=0.7).encode(
-                x='Actual Target',
-                y=alt.Y('Predicted Values', scale=alt.Scale(domain=[100, train_data['Predicted Values'].max()], nice=True)),
-                tooltip=['Actual Target', 'Predicted Values']
-            )
-            
-            # Combine the charts
-            final_chart_train = (perfect_prediction_line + scatter_plot).properties(
-                title='Training Set',
-                width=600,
-                height=400
-            ).configure_title(
-                anchor='middle'
-            ).configure_legend(
-                orient='top'
-            ).configure_axis(
-                labelFontSize=12,
-                titleFontSize=14
-            )
+            final_chart_train=line_chart_train+scatter_chart_train
 
+
+            line_chart_test = alt.Chart(pd.DataFrame({'x':X_test, 'y': y_test_preds})).mark_line(opacity=1, color='blue').encode(
+                    x='x',
+                    y='y'
+                  )
+
+            scatter_chart_test = alt.Chart(pd.DataFrame({'x':X_test, 'y': y_test})).mark_circle(opacity=1, color='red').encode(
+                x='x',
+                y='y'
+              )
+
+            final_chart_test=line_chart_test+scatter_chart_test
             
             mse_train_score = mse(y_train, y_train_preds, squared=True)
             mae_train_score = mae(y_train, y_train_preds)
@@ -210,42 +192,10 @@ elif selected_tab == "Machine Learning Model":
             st.write("## Training Set")
             st.altair_chart(final_chart_train, use_container_width=True)
             
-
             st.write("MSE of Training: ", mse_train_score)
             st.write("MAE of Training: ", mae_train_score)
             st.write("    ")
             st.write("    ")            
-
-            # Create a perfect prediction line
-            perfect_prediction_line = alt.Chart(test_data).mark_line(color='green', point=True).encode(
-                x='Actual Target',
-                y=alt.Y('Actual Target', scale=alt.Scale(domain=[100, test_data['Actual Target'].max()], nice=True)),
-                tooltip=['Actual Target', 'Predicted Values']
-            ).properties(
-                width=600,
-                height=400
-            )
-
-            # Create scatter plot for predicted values
-            scatter_plot = alt.Chart(test_data).mark_circle(color='red', opacity=0.7).encode(
-                x='Actual Target',
-                y=alt.Y('Predicted Values', scale=alt.Scale(domain=[100, test_data['Predicted Values'].max()], nice=True)),
-                tooltip=['Actual Target', 'Predicted Values']
-            )
-            
-            # Combine the charts
-            final_chart_test = (perfect_prediction_line + scatter_plot).properties(
-                title='Testing Set',
-                width=600,
-                height=400
-            ).configure_title(
-                anchor='middle'
-            ).configure_legend(
-                orient='top'
-            ).configure_axis(
-                labelFontSize=12,
-                titleFontSize=14
-            )
 
             st.write("Testing chart")
             
