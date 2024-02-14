@@ -80,7 +80,7 @@ def display_chart(X, y, y_preds):
 
 def display_multiple_chart(X, y_true, y_preds):
     # Combine features and true/predicted target values into a DataFrame
-    df = pd.DataFrame({'Feature': X.flatten(), 'True': y_true, 'Predicted': y_pred})
+    df = pd.DataFrame({'Feature': X.flatten(), 'True': y_true, 'Predicted': y_preds})
     
     # Scatter plot of True vs. Predicted values
     scatter_plot = alt.Chart(df).mark_circle(size=60).encode(
