@@ -28,7 +28,7 @@ from tab_encoding.display import display_tab_df_encoding_explain, display_correl
 from tab_encoding.logics import Encoding
 from tab_ml.logics import ML
 from tab_ml.display import display_baseline_metrics,display_model_metrics,display_line_chart,display_scatter_chart,display_chart,display_multiple_chart
-
+from tab_analysis.display import display_univariate_analysis
 from sklearn.linear_model import LinearRegression
 
 from sklearn.metrics import mean_squared_error as mse
@@ -622,7 +622,9 @@ elif selected_tab == "Machine Learning Model":
         st.write("MSE of Testing: ", mse_test_score)
         st.write("MAE of Testing: ", mae_test_score)       
         st.altair_chart(final_chart, use_container_width=True)
-        
+
+elif selected_tab == "Analysis":
+    display_univariate_analysis()
 elif selected_tab == "Ethical Consideration":
     pass
 elif selected_tab == "References":
