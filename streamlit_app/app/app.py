@@ -269,7 +269,7 @@ elif selected_tab == "Machine Learning Model":
         
         y_train_preds = pd.Series(y_train_preds, name='TARGET_deathRate_pred')
         y_train = pd.Series(y_train, name='TARGET_deathRate')
-        X_train_series = pd.Series(range(len(X_train)), name='index')
+        X_train_series = pd.Series(range(len(X_train_scaled)), name='index')
                 
         st.write("Training chart")
         display_multiple_chart(X_train_series, y_train, y_train_preds)
@@ -287,7 +287,7 @@ elif selected_tab == "Machine Learning Model":
         
         y_train_preds = pd.Series(y_test_preds, name='TARGET_deathRate_pred')
         y_train = pd.Series(y_test, name='TARGET_deathRate')
-        X_train_series = pd.Series(range(len(X_test)), name='index')
+        X_train_series = pd.Series(range(len(X_test_scaled)), name='index')
                 
         st.write("Training chart")
         display_multiple_chart(X_test_series, y_test, y_test_preds)
