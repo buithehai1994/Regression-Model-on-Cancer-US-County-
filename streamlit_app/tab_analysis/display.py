@@ -17,5 +17,9 @@ def display_univariate_analysis():
     Therefore, it is evident that the wealth of households and cancer death rate are negatively correlated.
 
     Experimental results prove the relationship between wealth and risk of dying from cancer. As mentioned above, this relationship may have many profound and different meanings in many areas of our society. For example, from the government view point, this experiment emphasizes the bad influence of income parity in US society and they need to find a way to tackle these problems. However, dealing with cancer needs the joint efforts of everyone in our society. The participation of entrepreneurs is a good solution when they can balance social responsibility and profit maximization. For example, they can get an edge on their rivalry in business areas like insurance.
+    
+    In my view, this experiment should be carried out globally to obtain a broader picture. When the investigation is conducted in American society, we cannot give an overall conclusion and recommendation from the global perspective.
+
+    However, it is good evidence of a link between wealth and cancer mortality. Many experts suggest that early diagnosis is essential in cancer treatment. As suggested above, this is an excellent opportunity for insurance companies. The cost of routine screening and insurance is much cheaper than cancer treatment. Their next step is to conduct more thorough surveys to obtain a broader picture of demography. Insurance companies should evaluate each specific class of customers and offer appropriate product packages.
     """
     st.markdown(explanation_text)
