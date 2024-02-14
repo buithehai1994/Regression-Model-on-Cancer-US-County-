@@ -256,33 +256,33 @@ elif selected_tab == "Machine Learning Model":
         st.write("    ")
         st.write("    ")
 
-        X_train_array = X_train_scaled.values
-        X_test_array = X_test_scaled.values
+        # X_train_array = X_train_scaled.values
+        # X_test_array = X_test_scaled.values
     
         reg = LinearRegression()
                 
         reg.fit(X_train_scaled, y_train)
-        y_train_preds = reg.predict(X_train_array)
+        y_train_preds = reg.predict(X_train_scaled)
         
         mse_train_score = mse(y_train, y_train_preds, squared=True)
         mae_train_score = mae(y_train, y_train_preds)
         
         st.write("Training chart")
-        display_multiple_chart(X_train_array, y_train, y_train_preds)
+        display_multiple_chart(X_train_scaled, y_train, y_train_preds)
         
         st.write("MSE of Training: ", mse_train_score)
         st.write("MAE of Training: ", mae_train_score)
         st.write("    ")
         st.write("    ")
         
-        reg.fit(X_test_array, y_test)
-        y_test_preds = reg.predict(X_test_array)
+        reg.fit(X_test_scaled, y_test)
+        y_test_preds = reg.predict(X_test_scaled)
         
         mse_test_score = mse(y_test, y_test_preds, squared=True)
         mae_test_score = mae(y_test, y_test_preds)
         
         st.write("Testing chart")
-        display_multiple_chart(X_test_array, y_test, y_test_preds)
+        display_multiple_chart(X_test_scaled, y_test, y_test_preds)
         
         st.write("MSE of Testing: ", mse_test_score)
         st.write("MAE of Testing: ", mae_test_score)
