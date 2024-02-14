@@ -152,7 +152,6 @@ elif selected_tab == "Machine Learning Model":
             y_base = np.full(y_train.shape, y_mean)
             mse_score = mse(y_train, y_base, squared=True)
             mae_score = mae(y_train, y_base)
-            st.write("<h1 style='font-size: 32px; font-weight: bold;'>Baseline Model</h1>", unsafe_allow_html=True)
             st.write("MSE of Baseline: ", mse_score)
             st.write("MAE of Baseline: ", mae_score)
 
