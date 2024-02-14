@@ -190,22 +190,23 @@ elif selected_tab == "Machine Learning Model":
             st.write("    ")
             st.write("    ")
 
-            # Reshape X_train and X_test
-            X_train = X_train.reshape(-1, 1)
-            X_test = X_test.reshape(-1, 1)
-
             reg = LinearRegression()
             reg.fit(X_train, y_train)
 
             y_train_preds = reg.predict(X_train)
-            y_test_preds = reg.predict(X_test)
-
             mse_train_score = mse(y_train, y_train_preds, squared=True)
             mae_train_score = mae(y_train, y_train_preds)
-
+            
+            y_test_preds = reg.predict(X_test)
             mse_test_score = mse(y_test, y_test_preds, squared=True)
             mae_test_score = mae(y_test, y_test_preds)
 
+            y_train_preds=pd.DataFrame(y_train_preds)
+            y_train_preds=y_train_preds.rename(columns={0:"TARGET_deathRate_pred"})
+            y_train=pd.DataFrame(y_train)
+            # Resetting the index of y_train and y_train_preds DataFrames
+            y_train = y_train.reset_index(drop=True)
+            y_train_preds = y_train_preds.reset_index(drop=True)
             st.write("Training chart")
             display_chart(X_train,y_train,y_train_preds)
 
@@ -213,7 +214,11 @@ elif selected_tab == "Machine Learning Model":
             st.write("MAE of Training: ", mae_train_score)
             st.write("    ")
             st.write("    ")
-            
+            y_test_preds=pd.DataFrame(y_test_preds)
+            y_test_preds=y_test_preds.rename(columns={0:"TARGET_deathRate_pred"})
+            y_test=pd.DataFrame(y_test)
+            y_test = y_test.reset_index(drop=True)
+            y_test_preds = y_test_preds.reset_index(drop=True)
             st.write("Testing chart")
             display_chart(X_test,y_test,y_test_preds)
 
