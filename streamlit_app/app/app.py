@@ -76,10 +76,14 @@ def perform_encoding():
     encoding = Encoding(data=data_from_tab_df)
     data_for_ml = encoding.label_encoding()
     return data_for_ml
+def perform_encoding_and_multivariate():
+    encoding = Encoding(data=data_from_tab_df)
+    data_for_ml = encoding.label_encoding()
+    data_for_ml =encoding.multivarate_process
+    return data_for_ml
     
-data_for_ml = perform_encoding()
-
-y=data_for_ml['TARGET_deathRate'].values
+data_for_ml_univariate = perform_encoding()
+data_for_ml_multivariate= perform_encoding_and_multivariate()
 
 selected_tab = st.sidebar.radio("Navigation", ["Introduction", "Data", "EDA", "Encoding", "Machine Learning Model", "Feature Importance", "Deployment", "Ethical Consideration", "References", "GitHub"], key="navigation")
 
@@ -124,8 +128,8 @@ elif selected_tab == "Machine Learning Model":
         selected_sub_sub_tab = st.sidebar.radio("Dataset", sub_sub_tab_titles)
 
         if selected_sub_sub_tab == sub_sub_tab_titles[0]:
-            X = data_for_ml['povertyPercent'].values
-            y = data_for_ml['TARGET_deathRate'].values
+            X = data_for_ml_univariate['povertyPercent'].values
+            y = data_for_ml_univariate['TARGET_deathRate'].values
 
             ml_instance = ML()
             # Call the split_data method to split your data into training and testing sets
@@ -172,8 +176,8 @@ elif selected_tab == "Machine Learning Model":
             st.write("MAE of Testing: ", mae_test_score)
 
         if selected_sub_sub_tab == sub_sub_tab_titles[1]:
-            X = data_for_ml['medIncome'].values
-            y = data_for_ml['TARGET_deathRate'].values
+            X = data_for_ml_univariate['medIncome'].values
+            y = data_for_ml_univariate['TARGET_deathRate'].values
 
             ml_instance = ML()
             # Call the split_data method to split your data into training and testing sets
@@ -226,15 +230,12 @@ elif selected_tab == "Machine Learning Model":
             st.write("MAE of Testing: ", mae_test_score)
 
     if selected_sub_tab == tab_titles[1]:
-        encoding_2 = Encoding(data=data_for_ml)
-        data_for_multivarate=encoding_2.multivarate_process()
-        
-        X = data_for_multivarate.drop(['TARGET_deathRate','avgDeathsPerYear','avgAnnCount','popEst2015','povertyPercent','MedianAgeMale',
+        X =data_for_ml_multivariate.drop(['TARGET_deathRate','avgDeathsPerYear','avgAnnCount','popEst2015','povertyPercent','MedianAgeMale',
             'MedianAgeFemale','PctPrivateCoverage','PctPrivateCoverageAlone',
             'PctEmpPrivCoverage','PctPublicCoverage','PctPublicCoverageAlone','PctOtherRace','PctWhite','PctHS25_Over','PctEmployed16_Over',
             'PctBachDeg18_24','PctBlack','PctAsian','Id','PctBachDeg25_Over','PctMarriedHouseholds',
             'PctUnemployed16_Over','PercentMarried','binnedInc','Geography'],axis=1)
-        y = data_for_multivarate['TARGET_deathRate']
+        y = data_for_ml_multivariate['TARGET_deathRate']
                 
         ml_instance = ML()
                 
