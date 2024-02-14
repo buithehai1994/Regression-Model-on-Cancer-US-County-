@@ -215,11 +215,9 @@ elif selected_tab == "Machine Learning Model":
             st.write("MAE of Training: ", mae_train_score)
             st.write("    ")
             st.write("    ")            
-            
-            st.write("Testing chart")
 
-            # Create another chart for the testing set
-            perfect_prediction_line_test = alt.Chart(test_data).mark_line(color='green', point=True).encode(
+            # Create a perfect prediction line
+            perfect_prediction_line = alt.Chart(test_data).mark_line(color='green', point=True).encode(
                 x='Actual Target',
                 y=alt.Y('Actual Target', scale=alt.Scale(domain=[100, test_data['Actual Target'].max()], nice=True)),
                 tooltip=['Actual Target', 'Predicted Values']
@@ -227,14 +225,16 @@ elif selected_tab == "Machine Learning Model":
                 width=600,
                 height=400
             )
-            
-            scatter_plot_test = alt.Chart(test_data).mark_circle(color='red', opacity=0.7).encode(
+
+            # Create scatter plot for predicted values
+            scatter_plot = alt.Chart(test_data).mark_circle(color='red', opacity=0.7).encode(
                 x='Actual Target',
                 y=alt.Y('Predicted Values', scale=alt.Scale(domain=[100, test_data['Predicted Values'].max()], nice=True)),
                 tooltip=['Actual Target', 'Predicted Values']
             )
             
-            final_chart_test = (perfect_prediction_line_test + scatter_plot_test).properties(
+            # Combine the charts
+            final_chart_test = (perfect_prediction_line + scatter_plot).properties(
                 title='Testing Set',
                 width=600,
                 height=400
@@ -246,6 +246,10 @@ elif selected_tab == "Machine Learning Model":
                 labelFontSize=12,
                 titleFontSize=14
             )
+
+            st.write("Testing chart")
+
+            
             # Display the chart
             st.write("## Testing Set")
             st.altair_chart(final_chart_test, use_container_width=True)
