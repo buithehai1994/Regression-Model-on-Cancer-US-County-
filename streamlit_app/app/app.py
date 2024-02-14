@@ -403,7 +403,7 @@ elif selected_tab == "Machine Learning Model":
             y=alt.Y('Actual Target', scale=alt.Scale(domain=[100, data['Actual Target'].max()], nice=True)),
             tooltip=['Actual Target', 'Predicted Values']
         ).properties(
-            width=400,
+            width=300,
             height=800
         )
         
@@ -417,7 +417,7 @@ elif selected_tab == "Machine Learning Model":
         # Combine the charts
         final_chart = (perfect_prediction_line + scatter_plot).properties(
             title='Training Set',
-            width=400,
+            width=300,
             height=800
         ).configure_title(
             anchor='middle'
@@ -454,7 +454,7 @@ elif selected_tab == "Machine Learning Model":
             y=alt.Y('Actual Target', scale=alt.Scale(domain=[100, data['Actual Target'].max()], nice=True)),
             tooltip=['Actual Target', 'Predicted Values']
         ).properties(
-            width=400,
+            width=300,
             height=800
         )
         
@@ -468,7 +468,7 @@ elif selected_tab == "Machine Learning Model":
         # Combine the charts
         final_chart = (perfect_prediction_line + scatter_plot).properties(
             title='Testing Set',
-            width=400,
+            width=300,
             height=800
         ).configure_title(
             anchor='middle'
