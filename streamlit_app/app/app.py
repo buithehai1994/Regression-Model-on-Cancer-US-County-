@@ -303,9 +303,9 @@ elif selected_tab == "Machine Learning Model":
             mse_test_score = mse(y_test, y_test_preds, squared=True)
             mae_test_score = mae(y_test, y_test_preds)
 
-            st.write("Training chart")
+            
             # Display the chart
-            st.write("## Training Set")
+            st.write("<h1 style='font-size: 32px; font-weight: bold;'>Training set</h1>", unsafe_allow_html=True)
             st.altair_chart(final_chart_train, use_container_width=True)
             
             st.write("MSE of Training: ", mse_train_score)
@@ -313,7 +313,7 @@ elif selected_tab == "Machine Learning Model":
             st.write("    ")
             st.write("    ")            
 
-            st.write("Testing chart")
+            st.write("<h1 style='font-size: 32px; font-weight: bold;'>Testing set</h1>", unsafe_allow_html=True)
             
             # Display the chart
             st.write("## Testing Set")
