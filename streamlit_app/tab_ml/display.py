@@ -80,10 +80,24 @@ def display_chart(X, y, y_preds):
 
 def display_multiple_chart(X, y_true, y_preds):
     # Combine features and true/predicted target values into a DataFrame
-    df = pd.DataFrame({'Feature': X.flatten(), 'True': y_true, 'Predicted': y_preds})
-    
+    y_preds=pd.DataFrame(y_preds)
+    y_preds=y_preds.rename(columns={0:"TARGET_deathRate_pred"})
+
+    y_true=pd.DataFrame(y_true)
+    y_true=y_true.rename(columns={0:"TARGET_deathRate"})
+
+    # Resetting the index of y_train and y_train_preds DataFrames
+    y_true = y_true.reset_index(drop=True)
+    y_preds = y_preds.reset_index(drop=True)
+
+    # Combine the actual and predicted values into a single DataFrame
+    data = pd.DataFrame({
+        'Actual Target': y_true['TARGET_deathRate'],
+        'Predicted Values': y_preds['TARGET_deathRate_pred']
+    })
+            
     # Scatter plot of True vs. Predicted values
-    scatter_plot = alt.Chart(df).mark_circle(size=60).encode(
+    scatter_plot = alt.Chart(data).mark_circle(size=60).encode(
         x='True',
         y='Predicted',
         color=alt.Color('Feature', scale=alt.Scale(scheme='category20')),
@@ -93,7 +107,7 @@ def display_multiple_chart(X, y_true, y_preds):
     )
     
     # Line chart of True vs. Predicted values
-    line_chart = alt.Chart(df).mark_line().encode(
+    line_chart = alt.Chart(data).mark_line().encode(
         x='Feature',
         y=alt.Y('value', title='Value'),
         color=alt.Color('variable', scale=alt.Scale(range=['blue', 'orange']), legend=alt.Legend(title="Type")),
