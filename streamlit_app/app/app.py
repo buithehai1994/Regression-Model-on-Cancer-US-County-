@@ -239,8 +239,21 @@ elif selected_tab == "Machine Learning Model":
         
         y = data_for_ml_multivariate['TARGET_deathRate']
 
-        st.write(data_for_ml_multivariate)
-                
+        # st.write(data_for_ml_multivariate)
+
+        from sklearn.model_selection import train_test_split
+        # Split the data into training and testing sets (60% training, 40% testing)
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
+
+        from sklearn.preprocessing import StandardScaler
+        
+        # Initialize the scaler
+        scaler = StandardScaler()
+        
+        # Fit the scaler on the training data and transform both the training and testing data
+        X_train = scaler.fit_transform(X_train)
+        X_test = scaler.transform(X_test)
+         
         # ml_instance = ML()
                 
         # # Call the split_data method to split your data into training and testing sets
@@ -254,49 +267,49 @@ elif selected_tab == "Machine Learning Model":
         # X_train_scaled = scaler.fit_transform(X_train)
         # X_test_scaled = scaler.transform(X_test)
                         
-        # # calculate baseline
-        # y_mean = y_train.mean()
-        # y_base = np.full(y_train.shape, y_mean)
-        # mse_score = mse(y_train, y_base, squared=True)
-        # mae_score = mae(y_train, y_base)
-        # st.write("MSE of Baseline: ", mse_score)
-        # st.write("MAE of Baseline: ", mae_score)
+        # calculate baseline
+        y_mean = y_train.mean()
+        y_base = np.full(y_train.shape, y_mean)
+        mse_score = mse(y_train, y_base, squared=True)
+        mae_score = mae(y_train, y_base)
+        st.write("MSE of Baseline: ", mse_score)
+        st.write("MAE of Baseline: ", mae_score)
         
-        # st.write("    ")
-        # st.write("    ")
+        st.write("    ")
+        st.write("    ")
     
-        # # Train the linear regression model
-        # reg = LinearRegression()
-        # reg.fit(X_train_scaled, y_train)
+        # Train the linear regression model
+        reg = LinearRegression()
+        reg.fit(X_train, y_train)
 
-        # y_train_preds=reg.predict(X_train_scaled)
-        # mse_train_score = mse(y_train, y_train_preds, squared=True)
-        # mae_train_score = mae(y_train, y_train_preds)
+        y_train_preds=reg.predict(X_train)
+        mse_train_score = mse(y_train, y_train_preds, squared=True)
+        mae_train_score = mae(y_train, y_train_preds)
 
-        # # Predict on the training set
-        # y_train_preds = reg.predict(X_train_scaled)
+        # Predict on the training set
+        y_train_preds = reg.predict(X_train)
         
-        # # Predict on the testing set
-        # y_test_preds = reg.predict(X_test_scaled)
+        # Predict on the testing set
+        y_test_preds = reg.predict(X_test)
 
-        # st.write("Training chart")
-        # display_multiple_chart(X_train_scaled, y_train, y_train_preds)
+        st.write("Training chart")
+        display_multiple_chart(X_train, y_train, y_train_preds)
         
-        # st.write("MSE of Training: ", mse_train_score)
-        # st.write("MAE of Training: ", mae_train_score)
-        # st.write("    ")
-        # st.write("    ")
+        st.write("MSE of Training: ", mse_train_score)
+        st.write("MAE of Training: ", mae_train_score)
+        st.write("    ")
+        st.write("    ")
         
-        # mse_test_score = mse(y_test, y_test_preds, squared=True)
-        # mae_test_score = mae(y_test, y_test_preds)
+        mse_test_score = mse(y_test, y_test_preds, squared=True)
+        mae_test_score = mae(y_test, y_test_preds)
         
-        # st.write("Testing chart")
-        # display_multiple_chart(X_test_scaled, y_test, y_test_preds)
+        st.write("Testing chart")
+        display_multiple_chart(X_test, y_test, y_test_preds)
         
-        # st.write("MSE of Testing: ", mse_test_score)
-        # st.write("MAE of Testing: ", mae_test_score)
-        # st.write("    ")
-        # st.write("    ")
+        st.write("MSE of Testing: ", mse_test_score)
+        st.write("MAE of Testing: ", mae_test_score)
+        st.write("    ")
+        st.write("    ")
         
 elif selected_tab == "Ethical Consideration":
     pass
