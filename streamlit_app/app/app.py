@@ -130,11 +130,11 @@ elif selected_tab == "Machine Learning Model":
         if selected_sub_sub_tab == sub_sub_tab_titles[0]:
             X = data_for_ml_univariate['povertyPercent'].values
             y = data_for_ml_univariate['TARGET_deathRate'].values
-
+            
+            ml_instance = ML()
             # Call the split_data method to split your data into training and testing sets
             X_train, X_test, y_train, y_test = ml_instance.split_data(X, y)
-
-            ml_instance = ML()
+            
             ml_instance.train_linear_regression(X_train, y_train)
             
             # calculate baseline
