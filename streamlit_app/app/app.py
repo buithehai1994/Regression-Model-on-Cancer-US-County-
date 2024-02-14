@@ -208,7 +208,7 @@ elif selected_tab == "Machine Learning Model":
             mae_test_score = mae(y_test, y_test_preds)
 
             # Display the chart
-            st.write("## Training Set")
+            st.write("<h1 style='font-size: 32px; font-weight: bold;'>Training set</h1>", unsafe_allow_html=True)
             st.altair_chart(final_chart_train, use_container_width=True)
             
             st.write("MSE of Training: ", mse_train_score)
