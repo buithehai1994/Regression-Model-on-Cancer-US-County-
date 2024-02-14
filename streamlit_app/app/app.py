@@ -238,63 +238,65 @@ elif selected_tab == "Machine Learning Model":
            'PctUnemployed16_Over','PercentMarried','binnedInc','Geography'],axis=1).values
         
         y = data_for_ml_multivariate['TARGET_deathRate']
-                
-        ml_instance = ML()
-                
-        # Call the split_data method to split your data into training and testing sets
-        X_train, X_test, y_train, y_test = ml_instance.split_data(X, y)
-        
-        from sklearn.preprocessing import StandardScaler
 
-        scaler=StandardScaler()
+        st.write(data_for_ml_multivariate)
+                
+        # ml_instance = ML()
+                
+        # # Call the split_data method to split your data into training and testing sets
+        # X_train, X_test, y_train, y_test = ml_instance.split_data(X, y)
         
-        # Fit the scaler on the training data and transform both the training and testing data
-        X_train_scaled = scaler.fit_transform(X_train)
-        X_test_scaled = scaler.transform(X_test)
+        # from sklearn.preprocessing import StandardScaler
+
+        # scaler=StandardScaler()
+        
+        # # Fit the scaler on the training data and transform both the training and testing data
+        # X_train_scaled = scaler.fit_transform(X_train)
+        # X_test_scaled = scaler.transform(X_test)
                         
-        # calculate baseline
-        y_mean = y_train.mean()
-        y_base = np.full(y_train.shape, y_mean)
-        mse_score = mse(y_train, y_base, squared=True)
-        mae_score = mae(y_train, y_base)
-        st.write("MSE of Baseline: ", mse_score)
-        st.write("MAE of Baseline: ", mae_score)
+        # # calculate baseline
+        # y_mean = y_train.mean()
+        # y_base = np.full(y_train.shape, y_mean)
+        # mse_score = mse(y_train, y_base, squared=True)
+        # mae_score = mae(y_train, y_base)
+        # st.write("MSE of Baseline: ", mse_score)
+        # st.write("MAE of Baseline: ", mae_score)
         
-        st.write("    ")
-        st.write("    ")
+        # st.write("    ")
+        # st.write("    ")
     
-        # Train the linear regression model
-        reg = LinearRegression()
-        reg.fit(X_train_scaled, y_train)
+        # # Train the linear regression model
+        # reg = LinearRegression()
+        # reg.fit(X_train_scaled, y_train)
 
-        y_train_preds=reg.predict(X_train_scaled)
-        mse_train_score = mse(y_train, y_train_preds, squared=True)
-        mae_train_score = mae(y_train, y_train_preds)
+        # y_train_preds=reg.predict(X_train_scaled)
+        # mse_train_score = mse(y_train, y_train_preds, squared=True)
+        # mae_train_score = mae(y_train, y_train_preds)
 
-        # Predict on the training set
-        y_train_preds = reg.predict(X_train_scaled)
+        # # Predict on the training set
+        # y_train_preds = reg.predict(X_train_scaled)
         
-        # Predict on the testing set
-        y_test_preds = reg.predict(X_test_scaled)
+        # # Predict on the testing set
+        # y_test_preds = reg.predict(X_test_scaled)
 
-        st.write("Training chart")
-        display_multiple_chart(X_train_scaled, y_train, y_train_preds)
+        # st.write("Training chart")
+        # display_multiple_chart(X_train_scaled, y_train, y_train_preds)
         
-        st.write("MSE of Training: ", mse_train_score)
-        st.write("MAE of Training: ", mae_train_score)
-        st.write("    ")
-        st.write("    ")
+        # st.write("MSE of Training: ", mse_train_score)
+        # st.write("MAE of Training: ", mae_train_score)
+        # st.write("    ")
+        # st.write("    ")
         
-        mse_test_score = mse(y_test, y_test_preds, squared=True)
-        mae_test_score = mae(y_test, y_test_preds)
+        # mse_test_score = mse(y_test, y_test_preds, squared=True)
+        # mae_test_score = mae(y_test, y_test_preds)
         
-        st.write("Testing chart")
-        display_multiple_chart(X_test_scaled, y_test, y_test_preds)
+        # st.write("Testing chart")
+        # display_multiple_chart(X_test_scaled, y_test, y_test_preds)
         
-        st.write("MSE of Testing: ", mse_test_score)
-        st.write("MAE of Testing: ", mae_test_score)
-        st.write("    ")
-        st.write("    ")
+        # st.write("MSE of Testing: ", mse_test_score)
+        # st.write("MAE of Testing: ", mae_test_score)
+        # st.write("    ")
+        # st.write("    ")
         
 elif selected_tab == "Ethical Consideration":
     pass
