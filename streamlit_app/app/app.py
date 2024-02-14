@@ -372,9 +372,44 @@ elif selected_tab == "Machine Learning Model":
         y_train=pd.DataFrame(y_train)
         y_train = y_train.reset_index(drop=True)
         y_train_preds = y_train_preds.reset_index(drop=True)
-        
+
+        # Combine the actual and predicted values into a single DataFrame
+        data = pd.DataFrame({
+            'Actual Target': y_train['TARGET_deathRate'],
+            'Predicted Values': y_train_preds['TARGET_deathRate_pred']
+        })
         st.write("Training chart")
-        display_multiple_chart(X_train, y_train, y_train_preds)
+        # display_multiple_chart(X_train, y_train, y_train_preds)
+        # Create a perfect prediction line
+        perfect_prediction_line = alt.Chart(data).mark_line(color='green', point=True).encode(
+            x='Actual Target',
+            y=alt.Y('Actual Target', scale=alt.Scale(domain=[100, data['Actual Target'].max()], nice=True)),
+            tooltip=['Actual Target', 'Predicted Values']
+        ).properties(
+            width=600,
+            height=800
+        )
+        
+        # Create scatter plot for predicted values
+        scatter_plot = alt.Chart(data).mark_circle(color='red', opacity=0.7).encode(
+            x='Actual Target',
+            y=alt.Y('Predicted Values', scale=alt.Scale(domain=[100, data['Predicted Values'].max()], nice=True)),
+            tooltip=['Actual Target', 'Predicted Values']
+        )
+
+        # Combine the charts
+        final_chart = (perfect_prediction_line + scatter_plot).properties(
+            title='Training Set',
+            width=600,
+            height=800
+        ).configure_title(
+            anchor='middle'
+        ).configure_legend(
+            orient='top'
+        ).configure_axis(
+            labelFontSize=12,
+            titleFontSize=14
+        )
         
         st.write("MSE of Training: ", mse_train_score)
         st.write("MAE of Training: ", mae_train_score)
@@ -384,9 +419,11 @@ elif selected_tab == "Machine Learning Model":
         mse_test_score = mse(y_test, y_test_preds, squared=True)
         mae_test_score = mae(y_test, y_test_preds)
         
-        st.write("Testing chart")
+        st.write("Training chart")
         # display_multiple_chart(X_test, y_test, y_test_preds)
-        
+
+        st.altair_chart(final_chart, use_container_width=True)
+
         st.write("MSE of Testing: ", mse_test_score)
         st.write("MAE of Testing: ", mae_test_score)
         st.write("    ")
