@@ -239,7 +239,8 @@ elif selected_tab == "Machine Learning Model":
         
         y = data_for_ml_multivariate['TARGET_deathRate']
 
-        # st.write(data_for_ml_multivariate)
+        st.write(X)
+        st.write(y)
 
         from sklearn.model_selection import train_test_split
         # Split the data into training and testing sets (60% training, 40% testing)
