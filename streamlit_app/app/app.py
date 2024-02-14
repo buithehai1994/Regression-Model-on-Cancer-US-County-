@@ -163,7 +163,18 @@ elif selected_tab == "Machine Learning Model":
                 y='y'
               )
 
-            final_chart_train=line_chart_train+scatter_chart_train
+            final_chart_train=(line_chart_train+scatter_chart_train).properties(
+                                        title='Training Set',
+                                        width=600,
+                                        height=800
+                                    ).configure_title(
+                                        anchor='middle'
+                                    ).configure_legend(
+                                        orient='top'
+                                    ).configure_axis(
+                                        labelFontSize=12,
+                                        titleFontSize=14
+                                    )
 
 
             line_chart_test = alt.Chart(pd.DataFrame({'x':X_test, 'y': y_test_preds})).mark_line(opacity=1, color='blue').encode(
@@ -176,7 +187,18 @@ elif selected_tab == "Machine Learning Model":
                 y='y'
               )
 
-            final_chart_test=line_chart_test+scatter_chart_test
+            final_chart_test=(line_chart_test+scatter_chart_test).properties(
+                                title='Testing Set',
+                                width=600,
+                                height=800
+                            ).configure_title(
+                                anchor='middle'
+                            ).configure_legend(
+                                orient='top'
+                            ).configure_axis(
+                                labelFontSize=12,
+                                titleFontSize=14
+                            )
             
             mse_train_score = mse(y_train, y_train_preds, squared=True)
             mae_train_score = mae(y_train, y_train_preds)
@@ -206,10 +228,12 @@ elif selected_tab == "Machine Learning Model":
         if selected_sub_sub_tab == sub_sub_tab_titles[1]:
             X = data_for_ml_univariate['medIncome'].values
             y = data_for_ml_univariate['TARGET_deathRate'].values
-
+            
             ml_instance = ML()
             # Call the split_data method to split your data into training and testing sets
             X_train, X_test, y_train, y_test = ml_instance.split_data(X, y)
+            
+            ml_instance.train_linear_regression(X_train.reshape(-1, 1), y_train)
             
             # calculate baseline
             y_mean = y_train.mean()
@@ -222,39 +246,80 @@ elif selected_tab == "Machine Learning Model":
             st.write("    ")
             st.write("    ")
 
-            # Train the multilinear regression model
-            ml_instance.train_linear_regression(X_train, y_train)
+            y_train_preds = ml_instance.predict(X_train.reshape(-1, 1))
+            y_test_preds = ml_instance.predict(X_test.reshape(-1, 1))
 
-            y_train_preds = ml_instance.predict(X_train)
+            line_chart_train = alt.Chart(pd.DataFrame({'x':X_train, 'y': y_train_preds})).mark_line(opacity=1, color='blue').encode(
+                    x='x',
+                    y='y'
+                  )
+
+            scatter_chart_train = alt.Chart(pd.DataFrame({'x':X_train, 'y': y_train})).mark_circle(opacity=1, color='red').encode(
+                x='x',
+                y='y'
+              )
+
+            final_chart_train=(line_chart_train+scatter_chart_train).properties(
+                                        title='Training Set',
+                                        width=600,
+                                        height=800
+                                    ).configure_title(
+                                        anchor='middle'
+                                    ).configure_legend(
+                                        orient='top'
+                                    ).configure_axis(
+                                        labelFontSize=12,
+                                        titleFontSize=14
+                                    )
+
+
+            line_chart_test = alt.Chart(pd.DataFrame({'x':X_test, 'y': y_test_preds})).mark_line(opacity=1, color='blue').encode(
+                    x='x',
+                    y='y'
+                  )
+
+            scatter_chart_test = alt.Chart(pd.DataFrame({'x':X_test, 'y': y_test})).mark_circle(opacity=1, color='red').encode(
+                x='x',
+                y='y'
+              )
+
+            final_chart_test=(line_chart_test+scatter_chart_test).properties(
+                                title='Testing Set',
+                                width=600,
+                                height=800
+                            ).configure_title(
+                                anchor='middle'
+                            ).configure_legend(
+                                orient='top'
+                            ).configure_axis(
+                                labelFontSize=12,
+                                titleFontSize=14
+                            )
+            
             mse_train_score = mse(y_train, y_train_preds, squared=True)
             mae_train_score = mae(y_train, y_train_preds)
-            
-            y_test_preds = ml_instance.predict(X_test)
+
             mse_test_score = mse(y_test, y_test_preds, squared=True)
             mae_test_score = mae(y_test, y_test_preds)
 
-            y_train_preds=pd.DataFrame(y_train_preds)
-            y_train_preds=y_train_preds.rename(columns={0:"TARGET_deathRate_pred"})
-            y_train=pd.DataFrame(y_train)
-            # Resetting the index of y_train and y_train_preds DataFrames
-            y_train = y_train.reset_index(drop=True)
-            y_train_preds = y_train_preds.reset_index(drop=True)
-
+            st.write("Training chart")
+            # Display the chart
+            st.write("## Training Set")
+            st.altair_chart(final_chart_train, use_container_width=True)
+            
             st.write("MSE of Training: ", mse_train_score)
             st.write("MAE of Training: ", mae_train_score)
             st.write("    ")
-            st.write("    ")
-            y_test_preds=pd.DataFrame(y_test_preds)
-            y_test_preds=y_test_preds.rename(columns={0:"TARGET_deathRate_pred"})
-            y_test=pd.DataFrame(y_test)
-            y_test = y_test.reset_index(drop=True)
-            y_test_preds = y_test_preds.reset_index(drop=True)
+            st.write("    ")            
+
             st.write("Testing chart")
-            display_chart(X_test,y_test,y_test_preds)
+            
+            # Display the chart
+            st.write("## Testing Set")
+            st.altair_chart(final_chart_test, use_container_width=True)
 
             st.write("MSE of Testing: ", mse_test_score)
             st.write("MAE of Testing: ", mae_test_score)
-
     if selected_sub_tab == tab_titles[1]:
         X =data_for_ml_multivariate.drop(['TARGET_deathRate','avgDeathsPerYear','avgAnnCount','popEst2015','povertyPercent','MedianAgeMale',
             'MedianAgeFemale','PctPrivateCoverage','PctPrivateCoverageAlone',
