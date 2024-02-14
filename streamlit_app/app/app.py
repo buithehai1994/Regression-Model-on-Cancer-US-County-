@@ -172,7 +172,7 @@ elif selected_tab == "Machine Learning Model":
               )
 
             final_chart_train=(line_chart_train+scatter_chart_train).properties(
-                                        title='Training Set',
+                                        title='Poverty Percent',
                                         width=400,
                                         height=800
                                     ).configure_title(
@@ -267,7 +267,7 @@ elif selected_tab == "Machine Learning Model":
               )
 
             final_chart_train=(line_chart_train+scatter_chart_train).properties(
-                                        title='Training Set',
+                                        title='medIncome',
                                         width=400,
                                         height=800
                                     ).configure_title(
