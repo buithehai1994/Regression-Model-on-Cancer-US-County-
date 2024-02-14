@@ -277,8 +277,7 @@ elif selected_tab == "Machine Learning Model":
         st.write("MAE of Training: ", mae_train_score)
         st.write("    ")
         st.write("    ")
-        
-        reg.fit(X_test_scaled, y_test)
+
         y_test_preds = reg.predict(X_test_scaled)
         
         mse_test_score = mse(y_test, y_test_preds, squared=True)
