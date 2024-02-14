@@ -134,6 +134,9 @@ elif selected_tab == "Machine Learning Model":
             ml_instance = ML()
             # Call the split_data method to split your data into training and testing sets
             X_train, X_test, y_train, y_test = ml_instance.split_data(X, y)
+
+            X_train = X_train.reshape(-1, 1)
+            X_test = X_test.reshape(-1, 1)
             
             ml_instance.train_linear_regression(X_train, y_train)
             
@@ -148,14 +151,8 @@ elif selected_tab == "Machine Learning Model":
             st.write("    ")
             st.write("    ")
 
-            # Reshape X_train and X_test
-            X_train = X_train.reshape(-1, 1)
-            X_test = X_test.reshape(-1, 1)
-            reg = LinearRegression()
-            reg.fit(X_train, y_train)
-
-            y_train_preds = reg.predict(X_train)
-            y_test_preds = reg.predict(X_test)
+            y_train_preds = ml_instance.predict(X_train)
+            y_test_preds = ml_instance.predict(X_test)
 
             mse_train_score = mse(y_train, y_train_preds, squared=True)
             mae_train_score = mae(y_train, y_train_preds)
