@@ -395,7 +395,6 @@ elif selected_tab == "Machine Learning Model":
             'Actual Target': y_train['TARGET_deathRate'],
             'Predicted Values': y_train_preds['TARGET_deathRate_pred']
         })
-        st.write("Training chart")
 
         # Create a perfect prediction line
         perfect_prediction_line = alt.Chart(data).mark_line(color='green', point=True).encode(
@@ -427,13 +426,13 @@ elif selected_tab == "Machine Learning Model":
             labelFontSize=12,
             titleFontSize=14
         )
-        
+
+        st.write("Training chart")
         st.write("MSE of Training: ", mse_train_score)
         st.write("MAE of Training: ", mae_train_score)
         st.write("    ")
         st.write("    ")
 
-        st.write("Training chart")
         st.altair_chart(final_chart, use_container_width=True)
         # Test chart
         y_test_preds=pd.DataFrame(y_test_preds)
