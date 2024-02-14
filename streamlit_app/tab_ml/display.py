@@ -104,6 +104,11 @@ def display_multiple_chart(X, y_true, y_preds):
     ).properties(
         title='True vs. Predicted values by Feature'
     )
-    chart=scatter_plot + line_chart
-    return chart
+    
+    # Combine scatter plot and line chart
+    combined_chart = scatter_plot | line_chart
+    
+    # Display the chart using Streamlit
+    st.altair_chart(combined_chart, use_container_width=True)
+
 
