@@ -227,10 +227,9 @@ elif selected_tab == "Machine Learning Model":
             
             # Display the chart
             st.markdown("<h1 style='font-size: 32px; font-weight: bold;margin-right: 100px;'>Testing set</h1>", unsafe_allow_html=True)
-            st.altair_chart(final_chart_test, use_container_width=True)
-
             st.write("MSE of Testing: ", mse_test_score)
             st.write("MAE of Testing: ", mae_test_score)
+            st.altair_chart(final_chart_test, use_container_width=True)
 
         if selected_sub_sub_tab == sub_sub_tab_titles[1]:
             X = data_for_ml_univariate['medIncome'].values
@@ -422,11 +421,12 @@ elif selected_tab == "Machine Learning Model":
         )
         
         st.markdown("<h1 style='font-size: 32px; font-weight: bold;margin-right: 100px;'>Training Set</h1>", unsafe_allow_html=True)
+        st.write("MSE of Training: ", mse_train_score)
+        st.write("MAE of Training: ", mae_train_score)
         st.altair_chart(final_chart, use_container_width=True)
         st.write("    ")
         st.write("    ")
-        st.write("MSE of Training: ", mse_train_score)
-        st.write("MAE of Training: ", mae_train_score)
+        
     
         # Test chart
         y_test_preds=pd.DataFrame(y_test_preds)
