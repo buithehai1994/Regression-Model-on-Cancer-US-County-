@@ -33,7 +33,7 @@ class Encoding:
         self.data=self.data.drop('PctSomeCol18_24',axis=1)
         self.data['PctEmployed16_Over'] = self.data['PctEmployed16_Over'].fillna(self.data['PctEmployed16_Over'].mean())
         self.data['PctPrivateCoverageAlone'] = self.data['PctPrivateCoverageAlone'].fillna(self.data['PctPrivateCoverageAlone'].mean())
-        self.data=self.data[(df['TARGET_deathRate']<=240) & (self.data['TARGET_deathRate']>=120.2)]
+        self.data=self.data[(data['TARGET_deathRate']<=240) & (self.data['TARGET_deathRate']>=120.2)]
         return self.data
         
     @st.cache
