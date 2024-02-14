@@ -292,8 +292,6 @@ elif selected_tab == "Machine Learning Model":
             # Resetting the index of y_train and y_train_preds DataFrames
             y_train = y_train.reset_index(drop=True)
             y_train_preds = y_train_preds.reset_index(drop=True)
-            st.write("Training chart")
-            display_chart(X_train,y_train,y_train_preds)
 
             st.write("MSE of Training: ", mse_train_score)
             st.write("MAE of Training: ", mae_train_score)
@@ -424,6 +422,8 @@ elif selected_tab == "Machine Learning Model":
         st.write("    ")
         st.write("    ")
 
+        st.write("Training chart")
+        st.altair_chart(final_chart, use_container_width=True)
         # Test chart
         y_test_preds=pd.DataFrame(y_test_preds)
         y_test_preds=y_test_preds.rename(columns={0:"TARGET_deathRate_pred"})
@@ -436,7 +436,6 @@ elif selected_tab == "Machine Learning Model":
             'Actual Target': y_test['TARGET_deathRate'],
             'Predicted Values': y_test_preds['TARGET_deathRate_pred']
         })
-        st.write("Testing chart")
 
         # Create a perfect prediction line
         perfect_prediction_line = alt.Chart(data).mark_line(color='green', point=True).encode(
@@ -471,7 +470,9 @@ elif selected_tab == "Machine Learning Model":
         
         st.write("MSE of Testing: ", mse_test_score)
         st.write("MAE of Testing: ", mae_test_score)       
-        
+
+        st.write("Testing chart")
+        st.altair_chart(final_chart, use_container_width=True)
 elif selected_tab == "Ethical Consideration":
     pass
 elif selected_tab == "References":
