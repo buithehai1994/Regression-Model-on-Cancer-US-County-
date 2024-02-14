@@ -291,6 +291,7 @@ elif selected_tab == "Machine Learning Model":
         st.write("MAE of Testing: ", mae_test_score)
         st.write("    ")
         st.write("    ")
+        st.write(data_for_ml_multivariate)
         
 elif selected_tab == "Ethical Consideration":
     pass
