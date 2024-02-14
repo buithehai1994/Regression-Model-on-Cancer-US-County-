@@ -476,11 +476,12 @@ elif selected_tab == "Machine Learning Model":
             labelFontSize=12,
             titleFontSize=14
         )
+
+        st.write("Testing chart")
         
         st.write("MSE of Testing: ", mse_test_score)
         st.write("MAE of Testing: ", mae_test_score)       
 
-        st.write("Testing chart")
         st.altair_chart(final_chart, use_container_width=True)
 elif selected_tab == "Ethical Consideration":
     pass
