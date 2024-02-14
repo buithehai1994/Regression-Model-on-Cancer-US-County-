@@ -24,7 +24,7 @@ class Encoding:
         self.data['binnedInc'] = binnedInc_encoder.fit_transform(self.data['binnedInc'])
         return self.data
         
-    def multivarate_process(self):
+    def multivariate_process(self):
         if self.data is None:
             raise ValueError("No data available. Use set_data() to load data first.")
         
