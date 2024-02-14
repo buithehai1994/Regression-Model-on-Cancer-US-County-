@@ -263,7 +263,7 @@ elif selected_tab == "Machine Learning Model":
         st.write("    ")
     
         # Train the multilinear regression model
-        ml_instance.train_linear_regression(X_train_scaled, y_train_resampled)
+        ml_instance.train_linear_regression(X_train_scaled, y_train)
         y_train_preds = ml_instance.predict(X_train_scaled)
         
         mse_train_score = mse(y_train, y_train_preds, squared=True)
