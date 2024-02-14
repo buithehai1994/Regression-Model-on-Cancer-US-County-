@@ -248,7 +248,6 @@ elif selected_tab == "Machine Learning Model":
             )
 
             st.write("Testing chart")
-
             
             # Display the chart
             st.write("## Testing Set")
