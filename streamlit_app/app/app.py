@@ -79,7 +79,7 @@ def perform_encoding():
 def perform_encoding_and_multivariate():
     encoding = Encoding(data=data_from_tab_df)
     data_for_ml = encoding.label_encoding()
-    data_for_ml =encoding.multivarate_process()
+    data_for_ml =encoding.multivariate_process()
     return data_for_ml
     
 data_for_ml_univariate = perform_encoding()
