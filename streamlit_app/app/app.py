@@ -366,10 +366,15 @@ elif selected_tab == "Machine Learning Model":
         y_train_preds=reg.predict(X_train)
         mse_train_score = mse(y_train, y_train_preds, squared=True)
         mae_train_score = mae(y_train, y_train_preds)
-        
+
         # Predict on the testing set
         y_test_preds = reg.predict(X_test)
+        mse_test_score = mse(y_test, y_test_preds, squared=True)
+        mae_test_score = mae(y_test, y_test_preds)
+        
 
+
+        # Training chart
         y_train_preds=pd.DataFrame(y_train_preds)
         y_train_preds=y_train_preds.rename(columns={0:"TARGET_deathRate_pred"})
         y_train=pd.DataFrame(y_train)
@@ -382,7 +387,7 @@ elif selected_tab == "Machine Learning Model":
             'Predicted Values': y_train_preds['TARGET_deathRate_pred']
         })
         st.write("Training chart")
-        # display_multiple_chart(X_train, y_train, y_train_preds)
+
         # Create a perfect prediction line
         perfect_prediction_line = alt.Chart(data).mark_line(color='green', point=True).encode(
             x='Actual Target',
@@ -418,19 +423,54 @@ elif selected_tab == "Machine Learning Model":
         st.write("MAE of Training: ", mae_train_score)
         st.write("    ")
         st.write("    ")
-        
-        mse_test_score = mse(y_test, y_test_preds, squared=True)
-        mae_test_score = mae(y_test, y_test_preds)
-        
-        st.write("Training chart")
-        # display_multiple_chart(X_test, y_test, y_test_preds)
 
-        st.altair_chart(final_chart, use_container_width=True)
+        # Test chart
+        y_test_preds=pd.DataFrame(y_test_preds)
+        y_test_preds=y_test_preds.rename(columns={0:"TARGET_deathRate_pred"})
+        y_test=pd.DataFrame(y_test)
+        y_test = y_test.reset_index(drop=True)
+        y_test_preds = y_test_preds.reset_index(drop=True)
 
+        # Combine the actual and predicted values into a single DataFrame
+        data = pd.DataFrame({
+            'Actual Target': y_test['TARGET_deathRate'],
+            'Predicted Values': y_test_preds['TARGET_deathRate_pred']
+        })
+        st.write("Testing chart")
+
+        # Create a perfect prediction line
+        perfect_prediction_line = alt.Chart(data).mark_line(color='green', point=True).encode(
+            x='Actual Target',
+            y=alt.Y('Actual Target', scale=alt.Scale(domain=[100, data['Actual Target'].max()], nice=True)),
+            tooltip=['Actual Target', 'Predicted Values']
+        ).properties(
+            width=600,
+            height=800
+        )
+        
+        # Create scatter plot for predicted values
+        scatter_plot = alt.Chart(data).mark_circle(color='red', opacity=0.7).encode(
+            x='Actual Target',
+            y=alt.Y('Predicted Values', scale=alt.Scale(domain=[100, data['Predicted Values'].max()], nice=True)),
+            tooltip=['Actual Target', 'Predicted Values']
+        )
+
+        # Combine the charts
+        final_chart = (perfect_prediction_line + scatter_plot).properties(
+            title='Testing Set',
+            width=600,
+            height=800
+        ).configure_title(
+            anchor='middle'
+        ).configure_legend(
+            orient='top'
+        ).configure_axis(
+            labelFontSize=12,
+            titleFontSize=14
+        )
+        
         st.write("MSE of Testing: ", mse_test_score)
-        st.write("MAE of Testing: ", mae_test_score)
-        st.write("    ")
-        st.write("    ")
+        st.write("MAE of Testing: ", mae_test_score)       
         
 elif selected_tab == "Ethical Consideration":
     pass
