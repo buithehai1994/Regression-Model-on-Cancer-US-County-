@@ -106,3 +106,4 @@ def display_multiple_chart(X, y_true, y_preds):
     )
     chart=scatter_plot + line_chart
     return chart
+
