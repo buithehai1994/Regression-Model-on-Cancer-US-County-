@@ -156,6 +156,49 @@ elif selected_tab == "Machine Learning Model":
             y_train_preds = ml_instance.predict(X_train)
             y_test_preds = ml_instance.predict(X_test)
 
+            # Combine the actual and predicted values into a single DataFrame
+            train_data = pd.DataFrame({
+                'Actual Target': y_train,
+                'Predicted Values': y_train_preds
+            })
+            
+            test_data = pd.DataFrame({
+                'Actual Target': y_test,
+                'Predicted Values': y_test_preds
+            })
+
+            # Create a perfect prediction line
+            perfect_prediction_line = alt.Chart(train_data).mark_line(color='green', point=True).encode(
+                x='Actual Target',
+                y=alt.Y('Actual Target', scale=alt.Scale(domain=[100, train_data['Actual Target'].max()], nice=True)),
+                tooltip=['Actual Target', 'Predicted Values']
+            ).properties(
+                width=600,
+                height=400
+            )
+
+            # Create scatter plot for predicted values
+            scatter_plot = alt.Chart(train_data).mark_circle(color='red', opacity=0.7).encode(
+                x='Actual Target',
+                y=alt.Y('Predicted Values', scale=alt.Scale(domain=[100, train_data['Predicted Values'].max()], nice=True)),
+                tooltip=['Actual Target', 'Predicted Values']
+            )
+            
+            # Combine the charts
+            final_chart_train = (perfect_prediction_line + scatter_plot).properties(
+                title='Training Set',
+                width=600,
+                height=400
+            ).configure_title(
+                anchor='middle'
+            ).configure_legend(
+                orient='top'
+            ).configure_axis(
+                labelFontSize=12,
+                titleFontSize=14
+            )
+
+            
             mse_train_score = mse(y_train, y_train_preds, squared=True)
             mae_train_score = mae(y_train, y_train_preds)
 
@@ -163,15 +206,49 @@ elif selected_tab == "Machine Learning Model":
             mae_test_score = mae(y_test, y_test_preds)
 
             st.write("Training chart")
-            display_chart(X_train,y_train,y_train_preds)
+            # Display the chart
+            st.write("## Training Set")
+            st.altair_chart(final_chart_train, use_container_width=True)
+            
 
             st.write("MSE of Training: ", mse_train_score)
             st.write("MAE of Training: ", mae_train_score)
             st.write("    ")
-            st.write("    ")
+            st.write("    ")            
             
             st.write("Testing chart")
-            display_chart(X_test,y_test,y_test_preds)
+
+            # Create another chart for the testing set
+            perfect_prediction_line_test = alt.Chart(test_data).mark_line(color='green', point=True).encode(
+                x='Actual Target',
+                y=alt.Y('Actual Target', scale=alt.Scale(domain=[100, test_data['Actual Target'].max()], nice=True)),
+                tooltip=['Actual Target', 'Predicted Values']
+            ).properties(
+                width=600,
+                height=400
+            )
+            
+            scatter_plot_test = alt.Chart(test_data).mark_circle(color='red', opacity=0.7).encode(
+                x='Actual Target',
+                y=alt.Y('Predicted Values', scale=alt.Scale(domain=[100, test_data['Predicted Values'].max()], nice=True)),
+                tooltip=['Actual Target', 'Predicted Values']
+            )
+            
+            final_chart_test = (perfect_prediction_line_test + scatter_plot_test).properties(
+                title='Testing Set',
+                width=600,
+                height=400
+            ).configure_title(
+                anchor='middle'
+            ).configure_legend(
+                orient='top'
+            ).configure_axis(
+                labelFontSize=12,
+                titleFontSize=14
+            )
+            # Display the chart
+            st.write("## Testing Set")
+            st.altair_chart(final_chart_test, use_container_width=True)
 
             st.write("MSE of Testing: ", mse_test_score)
             st.write("MAE of Testing: ", mae_test_score)
