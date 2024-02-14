@@ -235,12 +235,12 @@ elif selected_tab == "Machine Learning Model":
             'MedianAgeFemale','PctPrivateCoverage','PctPrivateCoverageAlone',
             'PctEmpPrivCoverage','PctPublicCoverage','PctPublicCoverageAlone','PctOtherRace','PctWhite','PctHS25_Over','PctEmployed16_Over',
             'PctBachDeg18_24','PctBlack','PctAsian','Id','PctBachDeg25_Over','PctMarriedHouseholds',
-           'PctUnemployed16_Over','PercentMarried','binnedInc','Geography'],axis=1).values
+           'PctUnemployed16_Over','PercentMarried','binnedInc','Geography'],axis=1)
         
         y = data_for_ml_multivariate['TARGET_deathRate']
 
-        st.write(X)
-        st.write(y)
+        # st.write(X)
+        # st.write(y)
 
         from sklearn.model_selection import train_test_split
         # Split the data into training and testing sets (60% training, 40% testing)
