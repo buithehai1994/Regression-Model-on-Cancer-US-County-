@@ -84,13 +84,14 @@ def perform_encoding_and_multivariate():
     data_for_ml =encoding.multivariate_process()
     return data_for_ml
     
-def perform_encoding_and_feature_engineering():
-    data_from_ml =data_from_tab_df.feature_engineering_process()
+def perform_feature_engineering():
+    encoding = Encoding(data=data_from_tab_df)
+    data_from_ml =encoding.feature_engineering_process()
     return data_for_ml
     
 data_for_ml_univariate = perform_encoding()
 data_for_ml_multivariate= perform_encoding_and_multivariate()
-data_for_ml_feature_engineering= perform_encoding_and_feature_engineering()
+data_for_ml_feature_engineering= perform_feature_engineering()
 
 selected_tab = st.sidebar.radio("Navigation", ["Introduction", "Data", "EDA", "Encoding", "Machine Learning Model", "Feature Importance", "Deployment", "Ethical Consideration", "References", "GitHub"], key="navigation")
 
