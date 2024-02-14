@@ -79,6 +79,9 @@ def display_chart(X, y, y_preds):
     st.altair_chart(chart, use_container_width=True)
 
 def display_multiple_chart(X, y_true, y_preds):
+    print("Length of X:", len(X))
+    print("Length of y_true:", len(y_true))
+    print("Length of y_preds:", len(y_preds))
     # Combine features and true/predicted target values into a DataFrame
     df = pd.DataFrame({'Feature': X.flatten(), 'True': y_true, 'Predicted': y_preds})
     
