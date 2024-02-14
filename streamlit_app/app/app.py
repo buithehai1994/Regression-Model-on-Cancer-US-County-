@@ -265,7 +265,8 @@ elif selected_tab == "Machine Learning Model":
         # Train the linear regression model
         reg = LinearRegression()
         reg.fit(X_train_scaled, y_train)
-        
+
+        y_train_preds=reg.predict(X_train_scaled)
         mse_train_score = mse(y_train, y_train_preds, squared=True)
         mae_train_score = mae(y_train, y_train_preds)
 
