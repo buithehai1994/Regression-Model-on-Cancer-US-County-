@@ -138,7 +138,8 @@ elif selected_tab == "Machine Learning Model":
             X_train, X_test, y_train, y_test = ml_instance.split_data(X, y)
             
             ml_instance.train_linear_regression(X_train.reshape(-1, 1), y_train)
-            
+
+            st.write("#Baseline Model")
             # calculate baseline
             y_mean = y_train.mean()
             y_base = np.full(y_train.shape, y_mean)
