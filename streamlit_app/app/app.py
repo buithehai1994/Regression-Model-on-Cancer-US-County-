@@ -142,7 +142,7 @@ elif selected_tab == "Machine Learning Model":
         sub_sub_tab_titles = ["Introduction", "povertyPercent", "medIncome"]
         selected_sub_sub_tab = st.sidebar.radio("Dataset", sub_sub_tab_titles)
 
-        if selected_sub_sub_tab == sub_sub_tab_titles[0]
+        if selected_sub_sub_tab == sub_sub_tab_titles[0]:
             display_univariate_introduction()
         if selected_sub_sub_tab == sub_sub_tab_titles[1]:
             X = data_for_ml_univariate['povertyPercent'].values
