@@ -25,7 +25,7 @@ parent_dir = str(Path(current_dir).resolve().parents[0])
 sys.path.append(parent_dir)
 
 from tab_eda.display import display_summary_statistics,display_info,display_missing_values
-from tab_encoding.display import display_tab_df_encoding_explain, display_correlation_encoding_heatmap
+from tab_encoding.display import display_code_explanation, display_correlation_encoding_heatmap
 from tab_encoding.logics import Encoding
 from tab_ml.logics import ML
 from tab_ml.display import display_baseline_metrics,display_model_metrics,display_line_chart,display_scatter_chart,display_chart,display_multiple_chart,display_coefficients
@@ -96,7 +96,7 @@ data_for_ml_univariate = perform_encoding()
 data_for_ml_multivariate= perform_encoding_and_multivariate()
 data_for_ml_feature_engineering= perform_feature_engineering()
 
-selected_tab = st.sidebar.radio("Navigation", ["Introduction", "Data", "EDA", "Encoding", "Machine Learning Model", "Analysis", "Deployment", "Ethical Consideration", "GitHub"], key="navigation")
+selected_tab = st.sidebar.radio("Navigation", ["Introduction", "Data", "EDA", "Encoding Process", "Machine Learning Model", "Analysis", "Deployment", "Ethical Consideration", "GitHub"], key="navigation")
 
 # Add a title to the entire Streamlit application
 st.title("Regression Model on Cancer in US Counties")
@@ -131,6 +131,8 @@ elif selected_tab == "EDA":
         # Render the external content in an iframe
         st.write(f'<iframe src="{external_url}" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>', unsafe_allow_html=True)
 
+elif selected_tab=="Encoding Process"
+    display_code_explanation()
 elif selected_tab == "Machine Learning Model":
     tab_titles = ["Univariate", "Multvariate", "Multivariate with Feature Enginnering"]
 
