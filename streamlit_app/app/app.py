@@ -30,8 +30,8 @@ from tab_encoding.logics import Encoding
 from tab_ml.logics import ML
 from tab_ml.display import display_baseline_metrics,display_model_metrics,display_line_chart,display_scatter_chart,display_chart,display_multiple_chart,display_coefficients
 from tab_analysis.display import display_univariate_analysis
+from tab_intro.display import introduction
 from sklearn.linear_model import LinearRegression
-
 from sklearn.metrics import mean_squared_error as mse
 from sklearn.metrics import mean_absolute_error as mae
 
