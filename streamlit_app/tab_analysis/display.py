@@ -2,17 +2,15 @@ import streamlit as st
 
 def display_univariate_analysis():
     explanation_text = """
-    I. Experiment on univariate linear regression: medIncome and povertyPercent
+    **I. Experiment on univariate linear regression: medIncome and povertyPercent:**
     
-    1. Overview:
+    **1. Overview:**
     
     The goal of this experiment is to examine the relationship between wealth and cancer death rate (TARGET_deathRate). Therefore, I will choose two variables, namely medIncome and povertyPercent as independent variables and train two univariate linear regression models. 
     medianIncome variable represents the median income per US county while povertyPercent calculates the percent of the populace in poverty. As a result, these two independent variables should demonstrate the relationship between wealth and cancer rate.
     The results of this study may indicate a potential inequality in healthcare treatment between the rich and the poor. The costs of treatment or standard of living may be the reasons for this imparity. Despite the high fee for cancer treatment, the insurance fee is more affordable. A reasonable price insurance package with an effective mechanism for people with low incomes can be the solution to shorten the gap in cancer diagnosis and treatment. As a result, micro-insurance products, which offer coverage for poor people with little savings, should be promoted.
     
-    2. Analysis:
-
-    a. Univariate models (TARGET_deathRate and medIncome, TARGET_deathRate and povertyPercent):
+    **2. Analysis:**
     
     This experience will use Mean Square Error for assessing the performances of linear regression models. The mean of variables serves as a baseline for evaluation. First, the MSE scores of the two modes are smaller than that of the baseline. It means that the two models achieve improvement compared to the baseline. Second, Model 2 (using medIncome) has a lower testing MSE compared to Model 1 (using povertyPercent).  This suggests that Model 2 might be performing slightly better in terms of prediction accuracy on unseen data.
     Based on the Coefficient, the model shows the exact result as we predicted.  medIncome has a negative impact on TargetDeathRate while povertyPercent and TargetDeathRate show a positive correlation.
@@ -24,9 +22,9 @@ def display_univariate_analysis():
 
     However, it is good evidence of a link between wealth and cancer mortality. Many experts suggest that early diagnosis is essential in cancer treatment. As suggested above, this is an excellent opportunity for insurance companies. The cost of routine screening and insurance is much cheaper than cancer treatment. Their next step is to conduct more thorough surveys to obtain a broader picture of demography. Insurance companies should evaluate each specific class of customers and offer appropriate product packages.
     
-    II. Experiment on multivariate linear regression: 
+    **II. Experiment on multivariate linear regression:** 
     
-    1. Overview:
+    **1. Overview:**
     
     The objective of this experiment is to illustrate the relationship between the cancer death rate and other socioeconomic factors (as ‘incidenceRate', 'medIncome', 'studyPercap', 'MedianAge', 'Geography', 'AvgHouseholdSize', 'PctNoHS18_24', 'PctHS18_24', 'BirthRate' )
     
@@ -36,7 +34,7 @@ def display_univariate_analysis():
 
     The coefficient of the model shows that areas with higher median incomes tend to have lower cancer death rates.
     
-    2. Analysis:
+    **2. Analysis:**
 
     The negative coefficient for median income indicates that there is indeed a negative relationship between median income and cancer death rate, which is aligned with the findings of the first experiment. So, areas with higher median incomes tend to have lower cancer death rates, which aligns with what we would typically expect in terms of access to healthcare, better lifestyle choices, and other socioeconomic factors associated with higher income levels.
 
@@ -54,15 +52,15 @@ def display_univariate_analysis():
 
     My key learning from the experiment is the complex interplay between socio-economic and demographic factors and cancer death rates, thereby emphasizing the impact of developing strategies to reduce disparities and improve health outcomes for all communities.
 
-    III. Experiment on multivariate linear regression with feature engineering:
+    **III. Experiment on multivariate linear regression with feature engineering:**
 
-    1. Overview:
+    **1. Overview:**
     
     The objective of this experiment is to illustrate the relationship between the cancer death rate and using all other socioeconomic factors. In this part, other factors related to races will be include in the independent variables.
 
     In this part the variables are transformed by logarithm function before the regression test. The reason for transforming the data is that the data is not normally distributed. As a results, the log transformation will make it close to normal distribution.
     
-    2. Analysis:
+    **2. Analysis:**
 
     In this part, after transforming the variables, the model is overfitted. As a result, I will perform regularizations using Lasso, Ridge, and Elastic models. 
 
