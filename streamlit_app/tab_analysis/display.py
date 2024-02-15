@@ -82,5 +82,9 @@ def display_univariate_analysis():
 
     My key learning from the experiment is the connection between various socioeconomic factors and the target death rate. Those factors may affect the living conditions, people’s awareness and lifestyles, which may contribute greatly to the cancer risk.
 
+    **IV. Conclusion:**
+
+    The Ridge model's ability to strike a balance between bias and variance often makes it a preferred choice in situations where there's a risk of overfitting, as it introduces a penalty term to the loss function that shrinks the coefficients towards zero.
+    In this experiment, the Ridge model consistently outperforms other models across metrics like Mean Squared Error (MSE), Mean Absolute Error (MAE), and maintains a good balance between performance on the training and testing sets
     """
     st.markdown(explanation_text)
