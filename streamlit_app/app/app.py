@@ -131,7 +131,7 @@ elif selected_tab == "EDA":
         # Render the external content in an iframe
         st.write(f'<iframe src="{external_url}" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>', unsafe_allow_html=True)
 
-elif selected_tab=="Encoding Process"
+elif selected_tab=="Encoding Process":
     display_code_explanation()
 elif selected_tab == "Machine Learning Model":
     tab_titles = ["Univariate", "Multvariate", "Multivariate with Feature Enginnering"]
