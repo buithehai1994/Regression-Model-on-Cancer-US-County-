@@ -84,7 +84,7 @@ def display_univariate_analysis():
 
     **IV. Conclusion:**
 
-    The Ridge model's ability to strike a balance between bias and variance often makes it a preferred choice in situations where there's a risk of overfitting, as it introduces a penalty term to the loss function that shrinks the coefficients towards zero.
+    The Ridge model's ability to strike a balance between bias and variance often makes it a preferred choice in situations where there's a risk of overfitting, as it introduces a penalty term to the loss function, which helps to reduce the model's sensitivity to changes in the input data and mitigates overfitting.
     In this experiment, the **Ridge model** consistently outperforms other models across metrics like Mean Squared Error (MSE), Mean Absolute Error (MAE), and maintains a good balance between performance on the training and testing sets, making it the model of choice for the deployment phase.
     """
     st.markdown(explanation_text)
