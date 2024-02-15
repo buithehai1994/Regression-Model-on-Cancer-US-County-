@@ -231,7 +231,7 @@ elif selected_tab == "Machine Learning Model":
 
             coefs_list=list(ml_instance.coef())
             intercept=ml_instance.intercept()
-            factors_list=list(str('povertyPercent'))
+            factors_list=["povertyPercent"]
             
             display_coefficients(coefs_list,factors_list,intercept)
 
@@ -331,7 +331,7 @@ elif selected_tab == "Machine Learning Model":
 
             coefs_list=list(ml_instance.coef)
             intercept=ml_instance.intercept
-            factors_list=list(str('medIncome'))
+            factors_list=["medIncome"]
             
             display_coefficients(coefs_list,factors_list,intercept)
 
