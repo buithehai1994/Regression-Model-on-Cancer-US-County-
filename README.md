@@ -8,7 +8,7 @@ This project aims to predict cancer mortality rates in US counties using machine
 - `notebooks/`: Contains Jupyter notebooks for each part of the assignment.
   - `Part_A_Univariate_Linear_Regression.ipynb`
   - `Part_B_Multivariate_Linear_Regression.ipynb`
-  - `Part_C_Feature_Engineering_and_Alternative_Algorithms.ipynb`
+  - `Part_C_Experiment_On_Multivariate_Linear_Regression_With_Feature_Engineering.ipynb`
 - `EXPERIMENT REPORT`: Contains experiment reports in Word format.
   - `EXPERIMENT REPORT - Part A`
   - `EXPERIMENT REPORT - Part B`
