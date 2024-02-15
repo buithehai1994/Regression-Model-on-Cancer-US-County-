@@ -111,3 +111,29 @@ def display_multiple_chart(X, y_true, y_preds):
 
     # Display the chart using Streamlit
     st.altair_chart(combined_chart, use_container_width=True)
+
+def display_coefficients(coefs_list,factors_list,intercept):
+    # Create a DataFrame from the data
+    coef_df = pd.DataFrame({'Factors': factors_list, 'Coefficients': coefs_list})
+    
+    # Create a bar chart using Altair
+    chart = alt.Chart(coef_df).mark_bar().encode(
+        x='Factors',
+        y='Coefficients',
+        color=alt.condition(
+            alt.datum.Coefficients > 0,
+            alt.value('steelblue'),  # Positive coefficients in blue
+            alt.value('orange')      # Negative coefficients in orange
+        ),
+        tooltip=['Factors', 'Coefficients']
+    ).properties(
+        title='Multivariate linear regression Coefficients',width=800,
+        height=300
+    )
+    
+    # Display the chart using Streamlit
+    st.altair_chart(chart, use_container_width=True)
+
+    st.write("Intercept: "+str(float(intercept)))
+    for i in range(len(factors_list)):
+      st.write(str(factors_list[i])+": "+ "coef: " +str(coefs_list[i]))
