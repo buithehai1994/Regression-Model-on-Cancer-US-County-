@@ -27,7 +27,7 @@ from tab_eda.display import display_summary_statistics,display_info,display_miss
 from tab_encoding.display import display_tab_df_encoding_explain, display_correlation_encoding_heatmap
 from tab_encoding.logics import Encoding
 from tab_ml.logics import ML
-from tab_ml.display import display_baseline_metrics,display_model_metrics,display_line_chart,display_scatter_chart,display_chart,display_multiple_chart
+from tab_ml.display import display_baseline_metrics,display_model_metrics,display_line_chart,display_scatter_chart,display_chart,display_multiple_chart,display_coefficients
 from tab_analysis.display import display_univariate_analysis
 from sklearn.linear_model import LinearRegression
 
@@ -221,15 +221,21 @@ elif selected_tab == "Machine Learning Model":
             st.write("MAE of Training: ", mae_train_score)
             st.write("    ")
             st.write("    ")   
-            st.altair_chart(final_chart_train, use_container_width=True)
-
-           
+            st.altair_chart(final_chart_train, use_container_width=True)       
             
             # Display the chart
             st.markdown("<h1 style='font-size: 32px; font-weight: bold;margin-right: 100px;'>Testing set</h1>", unsafe_allow_html=True)
             st.write("MSE of Testing: ", mse_test_score)
             st.write("MAE of Testing: ", mae_test_score)
             st.altair_chart(final_chart_test, use_container_width=True)
+
+            coef=ml_instance.coef_
+            intercept=ml_instance.intercept_
+
+            coef=list(coef)
+            factors=list(X.columns)
+            
+            display_coefficients(coefs_list,factors_list,intercept)
 
         if selected_sub_sub_tab == sub_sub_tab_titles[1]:
             X = data_for_ml_univariate['medIncome'].values
@@ -309,7 +315,6 @@ elif selected_tab == "Machine Learning Model":
 
             mse_test_score = mse(y_test, y_test_preds, squared=True)
             mae_test_score = mae(y_test, y_test_preds)
-
             
             # Display the chart
             st.markdown("<h1 style='font-size: 32px; font-weight: bold;margin-right: 50px;'>Training set</h1>", unsafe_allow_html=True)
@@ -325,6 +330,14 @@ elif selected_tab == "Machine Learning Model":
             st.write("MSE of Testing: ", mse_test_score)
             st.write("MAE of Testing: ", mae_test_score)
             st.altair_chart(final_chart_test, use_container_width=True)
+
+            coef=ml_instance.coef_
+            intercept=ml_instance.intercept_
+
+            coef=list(coef)
+            factors=list(X.columns)
+            
+            display_coefficients(coefs_list,factors_list,intercept)
 
     if selected_sub_tab == tab_titles[1]:
         X =data_for_ml_multivariate.drop(['TARGET_deathRate','avgDeathsPerYear','avgAnnCount','popEst2015','povertyPercent','MedianAgeMale',
@@ -476,6 +489,14 @@ elif selected_tab == "Machine Learning Model":
         st.write("MSE of Testing: ", mse_test_score)
         st.write("MAE of Testing: ", mae_test_score)   
         st.altair_chart(final_chart, use_container_width=True)
+
+        coef=ml_instance.coef_
+        intercept=ml_instance.intercept_
+
+        coef=list(coef)
+        factors=list(X.columns)
+            
+        display_coefficients(coefs_list,factors_list,intercept)
    
     if selected_sub_tab == tab_titles[2]:
         X =data_for_ml_feature_engineering.drop(['TARGET_deathRate','avgDeathsPerYear','avgAnnCount','popEst2015','povertyPercent','MedianAgeMale',
@@ -622,6 +643,14 @@ elif selected_tab == "Machine Learning Model":
         st.write("MSE of Testing: ", mse_test_score)
         st.write("MAE of Testing: ", mae_test_score)       
         st.altair_chart(final_chart, use_container_width=True)
+
+        coef=ml_instance.coef_
+        intercept=ml_instance.intercept_
+
+        coef=list(coef)
+        factors=list(X.columns)
+        
+        display_coefficients(coefs_list,factors_list,intercept)
 
 elif selected_tab == "Analysis":
     display_univariate_analysis()
