@@ -44,6 +44,8 @@ import streamlit.components.v1 as components
 import warnings
 from sklearn.exceptions import ConvergenceWarning
 
+from sklearn.linear_model import Lasso, Ridge, ElasticNet
+
 with warnings.catch_warnings():
     # Suppress warnings related to feature names in Logistic Regression
     warnings.simplefilter("ignore", category=ConvergenceWarning)
