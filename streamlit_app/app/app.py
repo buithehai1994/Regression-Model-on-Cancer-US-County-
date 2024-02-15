@@ -229,9 +229,9 @@ elif selected_tab == "Machine Learning Model":
             st.write("MAE of Testing: ", mae_test_score)
             st.altair_chart(final_chart_test, use_container_width=True)
 
-            coef=ml_instance.coef
-            intercept=ml_instance.intercept
-            factors=list(str('povertyPercent'))
+            coef=list(ml_instance.coef())
+            intercept=ml_instance.intercept()
+            factors_list=list(str('povertyPercent'))
             
             display_coefficients(coefs_list,factors_list,intercept)
 
@@ -329,9 +329,9 @@ elif selected_tab == "Machine Learning Model":
             st.write("MAE of Testing: ", mae_test_score)
             st.altair_chart(final_chart_test, use_container_width=True)
 
-            coef=ml_instance.coef
+            coefs_list=list(ml_instance.coef)
             intercept=ml_instance.intercept
-            factors=list(str('medIncome'))
+            factors_list=list(str('medIncome'))
             
             display_coefficients(coefs_list,factors_list,intercept)
 
@@ -343,7 +343,7 @@ elif selected_tab == "Machine Learning Model":
            'PctUnemployed16_Over','PercentMarried','binnedInc','Geography'],axis=1)
         
         y = data_for_ml_multivariate['TARGET_deathRate']
-        factors=list(X.columns)
+        factors_list=list(X.columns)
 
         # st.write(X)
         # st.write(y)
@@ -487,7 +487,7 @@ elif selected_tab == "Machine Learning Model":
         st.write("MAE of Testing: ", mae_test_score)   
         st.altair_chart(final_chart, use_container_width=True)
 
-        coef=ml_instance.coef
+        coef=list(ml_instance.coef)
         intercept=ml_instance.intercept
             
         display_coefficients(coefs_list,factors_list,intercept)
@@ -501,7 +501,7 @@ elif selected_tab == "Machine Learning Model":
         
         y = data_for_ml_feature_engineering['TARGET_deathRate']
 
-        factors=list(X.columns)
+        factors_list=list(X.columns)
 
         from sklearn.model_selection import train_test_split
         # Split the data into training and testing sets (60% training, 40% testing)
@@ -640,7 +640,7 @@ elif selected_tab == "Machine Learning Model":
         st.write("MAE of Testing: ", mae_test_score)       
         st.altair_chart(final_chart, use_container_width=True)
 
-        coef=ml_instance.coef
+        coefs_list=list(ml_instance.coef)
         intercept=ml_instance.intercept
         display_coefficients(coefs_list,factors_list,intercept)
 
