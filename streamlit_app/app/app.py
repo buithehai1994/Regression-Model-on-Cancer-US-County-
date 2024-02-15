@@ -493,7 +493,7 @@ elif selected_tab == "Machine Learning Model":
         display_coefficients(coefs_list,factors_list,intercept)
    
     if selected_sub_tab == tab_titles[2]:
-        sub_tab_titles=["Lasso","Ridge","Elastic Net"]
+        sub_tab_titles=["Not Regularization", "Lasso","Ridge","Elastic Net"]
  
         selected_sub_sub_tab = st.sidebar.radio("Regularization", sub_tab_titles)
         
@@ -522,8 +522,134 @@ elif selected_tab == "Machine Learning Model":
         y_base = np.full(y_train.shape, y_mean)
         mse_score = mse(y_train, y_base, squared=True)
         mae_score = mae(y_train, y_base)
-        
+
         if selected_sub_sub_tab == sub_tab_titles[0]:
+            st.write("<h1 style='font-size: 32px; font-weight: bold;'>Baseline Model</h1>", unsafe_allow_html=True)
+            st.write("MSE of Baseline: ", mse_score)
+            st.write("MAE of Baseline: ", mae_score)
+            
+            st.write("    ")
+            st.write("    ")
+            
+            # Train the ElasticNet regression model
+            reg = LinearRegression()
+            reg.fit(X_train, y_train)
+        
+            y_train_preds = reg.predict(X_train)
+            mse_train_score = mse(y_train, y_train_preds, squared=True)
+            mae_train_score = mae(y_train, y_train_preds)
+        
+            # Predict on the testing set
+            y_test_preds = reg.predict(X_test)
+            mse_test_score = mse(y_test, y_test_preds, squared=True)
+            mae_test_score = mae(y_test, y_test_preds)
+        
+            # Training chart
+            y_train_preds = pd.DataFrame(y_train_preds)
+            y_train_preds = y_train_preds.rename(columns={0: "TARGET_deathRate_pred"})
+            y_train = pd.DataFrame(y_train)
+            y_train = y_train.reset_index(drop=True)
+            y_train_preds = y_train_preds.reset_index(drop=True)
+        
+            # Combine the actual and predicted values into a single DataFrame
+            data = pd.DataFrame({
+                'Actual Target': y_train['TARGET_deathRate'],
+                'Predicted Values': y_train_preds['TARGET_deathRate_pred']
+            })
+        
+            # Create a perfect prediction line
+            perfect_prediction_line = alt.Chart(data).mark_line(color='green', point=True).encode(
+                x='Actual Target',
+                y=alt.Y('Actual Target', scale=alt.Scale(domain=[100, data['Actual Target'].max()], nice=True)),
+                tooltip=['Actual Target', 'Predicted Values']
+            ).properties(
+                width=200,
+                height=800
+            )
+        
+            # Create scatter plot for predicted values
+            scatter_plot = alt.Chart(data).mark_circle(color='red', opacity=0.7).encode(
+                x='Actual Target',
+                y=alt.Y('Predicted Values', scale=alt.Scale(domain=[100, data['Predicted Values'].max()], nice=True)),
+                tooltip=['Actual Target', 'Predicted Values']
+            )
+        
+            # Combine the charts
+            final_chart = (perfect_prediction_line + scatter_plot).properties(
+                title='Training Set',
+                width=200,
+                height=800
+            ).configure_title(
+                anchor='middle'
+            ).configure_legend(
+                orient='top'
+            ).configure_axis(
+                labelFontSize=12,
+                titleFontSize=14
+            )
+            st.markdown("<h1 style='font-size: 32px; font-weight: bold;margin-right: 100px;'>Training Set</h1>",
+                        unsafe_allow_html=True)
+            st.write("MSE of Training: ", mse_train_score)
+            st.write("MAE of Training: ", mae_train_score)
+            st.write("    ")
+            st.write("    ")
+            st.altair_chart(final_chart, use_container_width=True)
+        
+            # Test chart
+            st.markdown("<h1 style='font-size: 32px; font-weight: bold;margin-right: 100px;'>Testing set</h1>",
+                        unsafe_allow_html=True)
+            y_test_preds = pd.DataFrame(y_test_preds)
+            y_test_preds = y_test_preds.rename(columns={0: "TARGET_deathRate_pred"})
+            y_test = pd.DataFrame(y_test)
+            y_test = y_test.reset_index(drop=True)
+            y_test_preds = y_test_preds.reset_index(drop=True)
+        
+            # Combine the actual and predicted values into a single DataFrame
+            data = pd.DataFrame({
+                'Actual Target': y_test['TARGET_deathRate'],
+                'Predicted Values': y_test_preds['TARGET_deathRate_pred']
+            })
+        
+            # Create a perfect prediction line
+            perfect_prediction_line = alt.Chart(data).mark_line(color='green', point=True).encode(
+                x='Actual Target',
+                y=alt.Y('Actual Target', scale=alt.Scale(domain=[100, data['Actual Target'].max()], nice=True)),
+                tooltip=['Actual Target', 'Predicted Values']
+            ).properties(
+                width=200,
+                height=800
+            )
+        
+            # Create scatter plot for predicted values
+            scatter_plot = alt.Chart(data).mark_circle(color='red', opacity=0.7).encode(
+                x='Actual Target',
+                y=alt.Y('Predicted Values', scale=alt.Scale(domain=[100, data['Predicted Values'].max()], nice=True)),
+                tooltip=['Actual Target', 'Predicted Values']
+            )
+        
+            # Combine the charts
+            final_chart = (perfect_prediction_line + scatter_plot).properties(
+                title='Testing Set',
+                width=200,
+                height=800
+            ).configure_title(
+                anchor='middle'
+            ).configure_legend(
+                orient='top'
+            ).configure_axis(
+                labelFontSize=12,
+                titleFontSize=14
+            )
+        
+            st.write("MSE of Testing: ", mse_test_score)
+            st.write("MAE of Testing: ", mae_test_score)
+            st.altair_chart(final_chart, use_container_width=True)
+        
+            coefs_list = list(reg.coef_)
+            intercept = reg.intercept_
+            display_coefficients(coefs_list, factors_list, intercept)
+
+        if selected_sub_sub_tab == sub_tab_titles[1]:
             st.write("<h1 style='font-size: 32px; font-weight: bold;'>Baseline Model</h1>", unsafe_allow_html=True)
             st.write("MSE of Baseline: ", mse_score)
             st.write("MAE of Baseline: ", mae_score)
@@ -649,7 +775,7 @@ elif selected_tab == "Machine Learning Model":
             intercept = reg.intercept_
             display_coefficients(coefs_list, factors_list, intercept)
 
-        if selected_sub_sub_tab == sub_tab_titles[1]:
+        if selected_sub_sub_tab == sub_tab_titles[2]:
             st.write("<h1 style='font-size: 32px; font-weight: bold;'>Baseline Model</h1>", unsafe_allow_html=True)
             st.write("MSE of Baseline: ", mse_score)
             st.write("MAE of Baseline: ", mae_score)
@@ -775,7 +901,7 @@ elif selected_tab == "Machine Learning Model":
             intercept = reg.intercept_
             display_coefficients(coefs_list, factors_list, intercept)
             
-        if selected_sub_sub_tab == sub_tab_titles[2]:
+        if selected_sub_sub_tab == sub_tab_titles[3]:
             st.write("<h1 style='font-size: 32px; font-weight: bold;'>Baseline Model</h1>", unsafe_allow_html=True)
             st.write("MSE of Baseline: ", mse_score)
             st.write("MAE of Baseline: ", mae_score)
