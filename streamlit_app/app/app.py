@@ -1036,4 +1036,6 @@ elif selected_tab == "Ethical Consideration":
 elif selected_tab == "References":
     pass
 elif selected_tab == "GitHub":
-    pass
+    st.write("For more information, refer to the GitHub repository:")
+    st.markdown("[GitHub Repository](https://github.com/buithehai1994/Regression-Model-on-Cancer-US-County-)")
+
