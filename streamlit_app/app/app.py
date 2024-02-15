@@ -103,7 +103,7 @@ st.title("Regression Model on Cancer in US Counties")
 
 # Display content based on selected sidebar tab
 if selected_tab =="Introduction":
-    pass
+    introduction()
 elif selected_tab == "Data":
     st.sidebar.header("Data")
     st.write(dataset.head())
