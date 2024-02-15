@@ -231,7 +231,7 @@ elif selected_tab == "Machine Learning Model":
 
             coef=ml_instance.coef
             intercept=ml_instance.intercept
-            factors=list(X.columns)
+            factors=list(str('povertyPercent'))
             
             display_coefficients(coefs_list,factors_list,intercept)
 
@@ -331,7 +331,7 @@ elif selected_tab == "Machine Learning Model":
 
             coef=ml_instance.coef
             intercept=ml_instance.intercept
-            factors=list(X.columns)
+            factors=list(str('medIncome'))
             
             display_coefficients(coefs_list,factors_list,intercept)
 
@@ -343,6 +343,7 @@ elif selected_tab == "Machine Learning Model":
            'PctUnemployed16_Over','PercentMarried','binnedInc','Geography'],axis=1)
         
         y = data_for_ml_multivariate['TARGET_deathRate']
+        factors=list(X.columns)
 
         # st.write(X)
         # st.write(y)
@@ -488,7 +489,6 @@ elif selected_tab == "Machine Learning Model":
 
         coef=ml_instance.coef
         intercept=ml_instance.intercept
-        factors=list(X.columns)
             
         display_coefficients(coefs_list,factors_list,intercept)
    
@@ -500,6 +500,8 @@ elif selected_tab == "Machine Learning Model":
            'PercentMarried'],axis=1)
         
         y = data_for_ml_feature_engineering['TARGET_deathRate']
+
+        factors=list(X.columns)
 
         from sklearn.model_selection import train_test_split
         # Split the data into training and testing sets (60% training, 40% testing)
@@ -640,8 +642,6 @@ elif selected_tab == "Machine Learning Model":
 
         coef=ml_instance.coef
         intercept=ml_instance.intercept
-        factors=list(X.columns)
-        
         display_coefficients(coefs_list,factors_list,intercept)
 
 elif selected_tab == "Analysis":
