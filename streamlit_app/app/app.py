@@ -488,7 +488,7 @@ elif selected_tab == "Machine Learning Model":
         st.altair_chart(final_chart, use_container_width=True)
 
         coefs_list=list(reg.coef_)
-        intercept=reg.intercept()
+        intercept=reg.intercept_
             
         display_coefficients(coefs_list,factors_list,intercept)
    
@@ -641,7 +641,7 @@ elif selected_tab == "Machine Learning Model":
         st.altair_chart(final_chart, use_container_width=True)
 
         coefs_list=list(reg.coef_)
-        intercept=reg.intercept()
+        intercept=reg.intercept_
         display_coefficients(coefs_list,factors_list,intercept)
 
 elif selected_tab == "Analysis":
