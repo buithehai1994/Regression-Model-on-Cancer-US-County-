@@ -229,8 +229,8 @@ elif selected_tab == "Machine Learning Model":
             st.write("MAE of Testing: ", mae_test_score)
             st.altair_chart(final_chart_test, use_container_width=True)
 
-            coef=ml_instance.coef_
-            intercept=ml_instance.intercept_
+            coef=ml_instance.coef
+            intercept=ml_instance.intercept
 
             coef=list(coef)
             factors=list(X.columns)
@@ -331,8 +331,8 @@ elif selected_tab == "Machine Learning Model":
             st.write("MAE of Testing: ", mae_test_score)
             st.altair_chart(final_chart_test, use_container_width=True)
 
-            coef=ml_instance.coef_
-            intercept=ml_instance.intercept_
+            coef=ml_instance.coef
+            intercept=ml_instance.intercept
 
             coef=list(coef)
             factors=list(X.columns)
@@ -490,8 +490,8 @@ elif selected_tab == "Machine Learning Model":
         st.write("MAE of Testing: ", mae_test_score)   
         st.altair_chart(final_chart, use_container_width=True)
 
-        coef=ml_instance.coef_
-        intercept=ml_instance.intercept_
+        coef=ml_instance.coef
+        intercept=ml_instance.intercept
 
         coef=list(coef)
         factors=list(X.columns)
@@ -644,8 +644,8 @@ elif selected_tab == "Machine Learning Model":
         st.write("MAE of Testing: ", mae_test_score)       
         st.altair_chart(final_chart, use_container_width=True)
 
-        coef=ml_instance.coef_
-        intercept=ml_instance.intercept_
+        coef=ml_instance.coef
+        intercept=ml_instance.intercept
 
         coef=list(coef)
         factors=list(X.columns)
