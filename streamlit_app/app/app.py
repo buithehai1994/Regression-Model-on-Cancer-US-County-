@@ -511,7 +511,7 @@ elif selected_tab == "Machine Learning Model":
         selected_sub_sub_tab = st.sidebar.radio("Dataset", sub_sub_tab_titles)
         if selected_sub_sub_tab==sub_sub_tab_titles[0]:
             display_multivariate_feature_engineering_introduction()
-        if selected_sub_sub_tab=sub_sub_tab_titles[1]
+        if selected_sub_sub_tab==sub_sub_tab_titles[1]
         sub_sub_sub_tab_titles=["Not Regularization", "Lasso","Ridge","Elastic Net"]
  
         selected_sub_sub_tab = st.sidebar.radio("Regularization", sub_sub_sub_tab_titles)
