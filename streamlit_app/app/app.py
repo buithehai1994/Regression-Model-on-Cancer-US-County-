@@ -231,8 +231,6 @@ elif selected_tab == "Machine Learning Model":
 
             coef=ml_instance.coef
             intercept=ml_instance.intercept
-
-            coef=list(coef)
             factors=list(X.columns)
             
             display_coefficients(coefs_list,factors_list,intercept)
@@ -333,8 +331,6 @@ elif selected_tab == "Machine Learning Model":
 
             coef=ml_instance.coef
             intercept=ml_instance.intercept
-
-            coef=list(coef)
             factors=list(X.columns)
             
             display_coefficients(coefs_list,factors_list,intercept)
@@ -492,8 +488,6 @@ elif selected_tab == "Machine Learning Model":
 
         coef=ml_instance.coef
         intercept=ml_instance.intercept
-
-        coef=list(coef)
         factors=list(X.columns)
             
         display_coefficients(coefs_list,factors_list,intercept)
@@ -646,8 +640,6 @@ elif selected_tab == "Machine Learning Model":
 
         coef=ml_instance.coef
         intercept=ml_instance.intercept
-
-        coef=list(coef)
         factors=list(X.columns)
         
         display_coefficients(coefs_list,factors_list,intercept)
