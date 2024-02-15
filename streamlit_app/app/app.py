@@ -96,7 +96,7 @@ data_for_ml_univariate = perform_encoding()
 data_for_ml_multivariate= perform_encoding_and_multivariate()
 data_for_ml_feature_engineering= perform_feature_engineering()
 
-selected_tab = st.sidebar.radio("Navigation", ["Introduction", "Data", "EDA", "Encoding", "Machine Learning Model", "Analysis", "Deployment", "Ethical Consideration", "References", "GitHub"], key="navigation")
+selected_tab = st.sidebar.radio("Navigation", ["Introduction", "Data", "EDA", "Encoding", "Machine Learning Model", "Analysis", "Deployment", "Ethical Consideration", "GitHub"], key="navigation")
 
 # Add a title to the entire Streamlit application
 st.title("Regression Model on Cancer in US Counties")
@@ -1034,8 +1034,6 @@ elif selected_tab == "Machine Learning Model":
 elif selected_tab == "Analysis":
     display_univariate_analysis()
 elif selected_tab == "Ethical Consideration":
-    pass
-elif selected_tab == "References":
     pass
 elif selected_tab == "GitHub":
     st.write("For more information, refer to the GitHub repository:")
