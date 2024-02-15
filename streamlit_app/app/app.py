@@ -329,8 +329,8 @@ elif selected_tab == "Machine Learning Model":
             st.write("MAE of Testing: ", mae_test_score)
             st.altair_chart(final_chart_test, use_container_width=True)
 
-            coefs_list=list(ml_instance.coef)
-            intercept=ml_instance.intercept
+            coefs_list=list(ml_instance.coef())
+            intercept=ml_instance.intercept()
             factors_list=["medIncome"]
             
             display_coefficients(coefs_list,factors_list,intercept)
