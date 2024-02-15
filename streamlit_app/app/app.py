@@ -30,7 +30,7 @@ from tab_encoding.logics import Encoding
 from tab_ml.logics import ML
 from tab_ml.display import display_baseline_metrics,display_model_metrics,display_line_chart,display_scatter_chart,display_chart,display_multiple_chart,display_coefficients
 from tab_analysis.display import display_univariate_analysis
-from tab_intro.display import introduction
+from tab_intro.display import introduction,display_univariate_introduction
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error as mse
 from sklearn.metrics import mean_absolute_error as mae
@@ -139,10 +139,12 @@ elif selected_tab == "Machine Learning Model":
     selected_sub_tab = st.sidebar.radio("Dataset", tab_titles)
     
     if selected_sub_tab == tab_titles[0]:
-        sub_sub_tab_titles = ["povertyPercent", "medIncome"]
+        sub_sub_tab_titles = ["Introduction", "povertyPercent", "medIncome"]
         selected_sub_sub_tab = st.sidebar.radio("Dataset", sub_sub_tab_titles)
 
-        if selected_sub_sub_tab == sub_sub_tab_titles[0]:
+        if selected_sub_sub_tab == sub_sub_tab_titles[0]
+            display_univariate_introduction()
+        if selected_sub_sub_tab == sub_sub_tab_titles[1]:
             X = data_for_ml_univariate['povertyPercent'].values
             y = data_for_ml_univariate['TARGET_deathRate'].values
             
@@ -242,7 +244,7 @@ elif selected_tab == "Machine Learning Model":
             
             display_coefficients(coefs_list,factors_list,intercept)
 
-        if selected_sub_sub_tab == sub_sub_tab_titles[1]:
+        if selected_sub_sub_tab == sub_sub_tab_titles[2]:
             X = data_for_ml_univariate['medIncome'].values
             y = data_for_ml_univariate['TARGET_deathRate'].values
             
