@@ -96,3 +96,13 @@ class ML:
         if self.trained_model is None:
             raise ValueError("Model not trained. Please train the model first.")
         return self.trained_model.predict(X)
+
+    def coef(self):
+        if self.trained_model is None:
+            raise ValueError("Model not loaded. Please load the model first.")
+        return self.trained_model.coef_
+
+    def intercept(self):
+        if self.trained_model is None:
+            raise ValueError("Model not loaded. Please load the model first.")
+        return self.trained_model.intercept_
