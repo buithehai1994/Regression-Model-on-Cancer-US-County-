@@ -98,8 +98,10 @@ data_for_ml_feature_engineering= perform_feature_engineering()
 
 selected_tab = st.sidebar.radio("Navigation", ["Introduction", "Data", "EDA", "Encoding", "Machine Learning Model", "Analysis", "Deployment", "Ethical Consideration", "References", "GitHub"], key="navigation")
 
-# Display content based on selected sidebar tab
+# Add a title to the entire Streamlit application
+st.title("Regression Model on Cancer in US Counties")
 
+# Display content based on selected sidebar tab
 if selected_tab =="Introduction":
     pass
 elif selected_tab == "Data":
