@@ -1036,7 +1036,8 @@ elif selected_tab == "Machine Learning Model":
 elif selected_tab == "Analysis":
     display_univariate_analysis()
 elif selected_tab == "Ethical Consideration":
-    pass
+    # Display the text
+    st.write("The dataset used in this analysis contains critical information about various demographic and health-related factors. Given the sensitive nature of this data, including personal health information, it's imperative that we consider ethical implications throughout our analysis. Ethical considerations include ensuring the privacy and confidentiality of individuals' health data, mitigating biases that may influence predictions, and promoting fairness and transparency in our methodologies. By prioritizing ethical considerations, we aim to build trust and integrity in our findings and ultimately contribute to responsible and equitable healthcare practices.")
 elif selected_tab == "GitHub":
     st.write("For more information, refer to the GitHub repository:")
     st.markdown("[GitHub Repository](https://github.com/buithehai1994/Regression-Model-on-Cancer-US-County-)")
