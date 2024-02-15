@@ -1,4 +1,4 @@
-# Cancer Mortality Prediction Project README
+# Regression Model on Cancer Mortality Project README
 
 ## Overview:
 This project aims to predict cancer mortality rates in US counties using machine learning techniques. The dataset used for this project contains various demographic and medical features of US counties, consolidated from census data. The project is divided into four parts, each focusing on different aspects of regression modeling.
