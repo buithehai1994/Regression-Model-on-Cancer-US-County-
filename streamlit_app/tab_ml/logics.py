@@ -100,7 +100,8 @@ class ML:
     def coef(self):
         if self.trained_model is None:
             raise ValueError("Model not loaded. Please load the model first.")
-        return self.trained_model.coef_
+        list_coef=list(self.trained_model.coef_)
+        return list_coef
 
     def intercept(self):
         if self.trained_model is None:
