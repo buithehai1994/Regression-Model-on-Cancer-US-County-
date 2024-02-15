@@ -19,3 +19,7 @@ This project aims to predict cancer mortality rates in US counties using machine
 ## Instructions:
 1. Ensure you have Python and Jupyter Notebook installed on your system.
 2. Clone this repository to your local machine
+
+## For more information, please refer to the web app presentation of the project using the following link:
+
+[Marketing Campaign Web App](https://cancer-us-county.streamlit.app/)
