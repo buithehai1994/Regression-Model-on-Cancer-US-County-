@@ -23,3 +23,8 @@ This project aims to predict cancer mortality rates in US counties using machine
 ## For more information, please refer to the web app presentation of the project using the following link:
 
 [Regression-Model-on-Cancer-US-County](https://cancer-us-county.streamlit.app/)
+
+## Acknowledgments
+
+This project is based on the Northwind database and its documentation provided for educational purposes.
+(Dataset is from the **Master of Data Science and Innovation** course of University of Technology Sydney, and it is the asset of TD School)
