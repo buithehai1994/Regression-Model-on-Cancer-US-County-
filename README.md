@@ -26,5 +26,5 @@ This project aims to predict cancer mortality rates in US counties using machine
 
 ## Acknowledgments
 
-This project is based on the Northwind database and its documentation provided for educational purposes.
+This project is based on the dataset consolidated from census data in the USA and its documentation provided for educational purposes.
 (Dataset is from the **Master of Data Science and Innovation** course of University of Technology Sydney, and it is the asset of TD School)
