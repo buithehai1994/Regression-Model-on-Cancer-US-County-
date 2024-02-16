@@ -1,4 +1,5 @@
-﻿TARGET_deathRate," Dependent variable. Mean per capita (100,000) cancer mortalities(a)"
+﻿Vairiable,Descriptions
+TARGET_deathRate," Dependent variable. Mean per capita (100,000) cancer mortalities(a)"
 avgAnnCount, Mean number of reported cases of cancer diagnosed annually(a)
 avgDeathsPerYear, Mean number of reported mortalities due to cancer(a)
 incidenceRate," Mean per capita (100,000) cancer diagoses(a)"
