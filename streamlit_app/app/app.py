@@ -109,7 +109,7 @@ if selected_tab =="Introduction":
     st.write(dictionary)
 elif selected_tab == "Data":
     st.sidebar.header("Data")
-    st.write(dataset.head())
+    st.write(dataset.print_df())
 elif selected_tab == "EDA":
     st.sidebar.header("EDA")
 
