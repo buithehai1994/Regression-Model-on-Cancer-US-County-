@@ -22,4 +22,4 @@ This project aims to predict cancer mortality rates in US counties using machine
 
 ## For more information, please refer to the web app presentation of the project using the following link:
 
-[Marketing Campaign Web App](https://cancer-us-county.streamlit.app/)
+[Regression-Model-on-Cancer-US-County](https://cancer-us-county.streamlit.app/)
