@@ -33,3 +33,9 @@ class Dataset:
             return self.data.head()
         else:
             return "No data available"
+
+    def print_df(self):
+        if self.data is not None:
+            return self.data
+        else:
+            return "No data available"
