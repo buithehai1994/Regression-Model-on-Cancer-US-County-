@@ -63,9 +63,11 @@ current_dir = os.path.dirname(__file__)
 
 training_set_path=Path(__file__).resolve().parent.parent.parent  / "Dataset" / "cancer_us_county-training.csv"
 testing_set_path=Path(__file__).resolve().parent.parent.parent  / "Dataset" / "cancer_us_county-testing.csv"
+dictionary_set_path=Path(__file__).resolve().parent.parent.parent  / "Dataset" / "Dictionary.csv"
 
 df_train=pd.read_csv(training_set_path)
 df_test=pd.read_csv(testing_set_path)
+dictionary=pd.read_csv(dictionary_set_path)
 
 dataset=pd.concat([df_train,df_test],axis=0)
 
@@ -104,6 +106,7 @@ st.title("Regression Model on Cancer in US Counties")
 # Display content based on selected sidebar tab
 if selected_tab =="Introduction":
     introduction()
+    st.write(dictionary)
 elif selected_tab == "Data":
     st.sidebar.header("Data")
     st.write(dataset.head())
