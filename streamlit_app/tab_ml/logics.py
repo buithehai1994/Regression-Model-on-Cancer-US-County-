@@ -17,16 +17,19 @@ class ML:
         self.smote = SMOTE(random_state=42)
         self.scaler = StandardScaler()
 
+    @st.cache(allow_output_mutation=True)
     def split_data(self, X, y):
         # Split the data into training and testing sets (60% training, 40% testing)
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
         return X_train, X_test, y_train, y_test
-        
+
+    @st.cache(allow_output_mutation=True)
     def oversample_data(self, X_train, y_train):
         # Apply SMOTE to balance the class distribution in the training set
         X_train_resampled, y_train_resampled = self.smote.fit_resample(X_train, y_train)
         return X_train_resampled, y_train_resampled
-    
+
+    @st.cache(allow_output_mutation=True)
     def scale_data(self, X_train,X_test,X_val):
         # Scale the data
         X_train_scaled = self.scaler.fit_transform(X_train)
@@ -37,6 +40,7 @@ class ML:
         with open(model_path, 'rb') as file:
             self.trained_model = pickle.load(file)
 
+    @st.cache(allow_output_mutation=True)
     def calculate_model_metrics(self, X, y):
 
         # Ensure X is a DataFrame and y is a Series
@@ -56,6 +60,7 @@ class ML:
     
         return {"MSE score": mse_score, "MAE score": mae_score}
 
+    @st.cache(allow_output_mutation=True)
     def calculate_baseline_metrics(self, y):
         # Convert y to a Pandas Series if it's a DataFrame
         if isinstance(y, pd.DataFrame):
@@ -69,15 +74,18 @@ class ML:
         return "MSE score:", mse_score
         return "MAE score:", mae_score
 
+    @st.cache(allow_output_mutation=True)
     def calculate_confusion_matrix(self, y_true, y_pred):
         return confusion_matrix(y_true, y_pred)
 
+    @st.cache(allow_output_mutation=True)
     def calculate_accuracy(self, X,y_true):
         
         # Use the loaded model for predictions and evaluation
         predictions = self.trained_model.predict(X)
         return accuracy_score(y_true, predictions)
 
+    @st.cache(allow_output_mutation=True)
     def calculate_roc_curve(self, X, y):
         if hasattr(self.trained_model, "decision_function"):
             y_scores = self.trained_model.decision_function(X)
