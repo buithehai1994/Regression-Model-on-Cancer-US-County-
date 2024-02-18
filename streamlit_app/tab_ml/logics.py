@@ -40,7 +40,7 @@ class ML:
         with open(model_path, 'rb') as file:
             self.trained_model = pickle.load(file)
 
-    @st.cache_data(allow_output_mutation=True)
+    @st.cache_resource
     def calculate_model_metrics(self, X, y):
 
         # Ensure X is a DataFrame and y is a Series
@@ -74,18 +74,18 @@ class ML:
         return "MSE score:", mse_score
         return "MAE score:", mae_score
 
-    @st.cache_data(allow_output_mutation=True)
+    @st.cache_resource
     def calculate_confusion_matrix(self, y_true, y_pred):
         return confusion_matrix(y_true, y_pred)
 
-    @st.cache_data(allow_output_mutation=True)
+    @st.cache_resource
     def calculate_accuracy(self, X,y_true):
         
         # Use the loaded model for predictions and evaluation
         predictions = self.trained_model.predict(X)
         return accuracy_score(y_true, predictions)
 
-    @st.cache_data(allow_output_mutation=True)
+    @st.cache_resource
     def calculate_roc_curve(self, X, y):
         if hasattr(self.trained_model, "decision_function"):
             y_scores = self.trained_model.decision_function(X)
