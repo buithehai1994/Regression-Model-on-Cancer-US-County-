@@ -18,7 +18,7 @@ class ML:
         self.scaler = StandardScaler()
 
     @st.cache_data
-    def split_data(self, X, y):
+    def split_data(_self, X, y):
         # Split the data into training and testing sets (60% training, 40% testing)
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
         return X_train, X_test, y_train, y_test
