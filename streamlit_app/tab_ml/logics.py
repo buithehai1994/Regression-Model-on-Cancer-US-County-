@@ -17,19 +17,19 @@ class ML:
         self.smote = SMOTE(random_state=42)
         self.scaler = StandardScaler()
 
-    @st.cache_data(allow_output_mutation=True)
+    @st.cache_data
     def split_data(self, X, y):
         # Split the data into training and testing sets (60% training, 40% testing)
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
         return X_train, X_test, y_train, y_test
 
-    @st.cache_data(allow_output_mutation=True)
+    @st.cache_data
     def oversample_data(self, X_train, y_train):
         # Apply SMOTE to balance the class distribution in the training set
         X_train_resampled, y_train_resampled = self.smote.fit_resample(X_train, y_train)
         return X_train_resampled, y_train_resampled
 
-    @st.cache_data(allow_output_mutation=True)
+    @st.cache_data
     def scale_data(self, X_train,X_test,X_val):
         # Scale the data
         X_train_scaled = self.scaler.fit_transform(X_train)
@@ -60,7 +60,7 @@ class ML:
     
         return {"MSE score": mse_score, "MAE score": mae_score}
 
-    @st.cache_data(allow_output_mutation=True)
+    @st.cache_data
     def calculate_baseline_metrics(self, y):
         # Convert y to a Pandas Series if it's a DataFrame
         if isinstance(y, pd.DataFrame):
