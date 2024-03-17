@@ -10,7 +10,7 @@ import openpyxl
 import base64
 import imblearn
 # import ydata_profiling
-from streamlit_pandas_profiling import st_profile_report
+# from streamlit_pandas_profiling import st_profile_report
 import dataprep
 import re
 from bs4 import BeautifulSoup
