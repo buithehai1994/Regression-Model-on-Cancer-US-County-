@@ -1,5 +1,7 @@
 # Regression Model on Cancer Mortality Project README
 
+![Cancer Mortality](https://github.com/buithehai1994/Regression-Model-on-Cancer-US-County-/blob/main/cancer.PNG)
+
 ## Overview:
 This project aims to predict cancer mortality rates in US counties using machine learning techniques. The dataset used for this project contains various demographic and medical features of US counties, consolidated from census data. The project is divided into four parts, each focusing on different aspects of regression modeling.
 
